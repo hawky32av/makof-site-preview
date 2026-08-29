@@ -1,0 +1,639 @@
+/* Максимально простой личный стиль: без ощущения SaaS/шаблона */
+:root {
+  --bg: #fbf8f2;
+  --surface: #fffdf9;
+  --surface-strong: #fffdf9;
+  --text: #25211d;
+  --muted: #6f675f;
+  --line: #ddd4c8;
+  --accent: #a95f3d;
+  --accent-dark: #8e4f32;
+  --accent-soft: #f2e8df;
+  --shadow: none;
+  --radius-lg: 6px;
+  --radius-md: 4px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.container {
+  width: min(calc(100% - 48px), 1120px);
+}
+
+.site-header {
+  position: static;
+  background: var(--bg);
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  min-height: 72px;
+  gap: 24px;
+}
+
+.brand-mark {
+  display: none;
+}
+
+.brand {
+  gap: 0;
+}
+
+.brand-copy {
+  gap: 1px;
+}
+
+.brand-copy strong {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.brand-copy span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.nav {
+  gap: 24px;
+}
+
+.nav a {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--text);
+}
+
+.button {
+  min-height: 46px;
+  padding: 0 19px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.button:hover {
+  transform: none;
+}
+
+.button-small {
+  min-height: 38px;
+  padding-inline: 14px;
+  border-radius: 4px;
+  background: var(--text);
+  color: #fff;
+}
+
+.button-primary {
+  background: var(--text);
+  color: #fff;
+  box-shadow: none;
+}
+
+.button-primary:hover {
+  background: #3b342e;
+  box-shadow: none;
+}
+
+.button-secondary {
+  border: 1px solid var(--line);
+  background: transparent;
+}
+
+.hero {
+  padding: 70px 0 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+  gap: clamp(38px, 6vw, 72px);
+  align-items: end;
+}
+
+.hero-copy {
+  padding: 20px 0 74px;
+}
+
+.eyebrow {
+  display: block;
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 720px;
+  margin: 18px 0 22px;
+  font-size: clamp(48px, 5.3vw, 70px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+h1 span {
+  color: var(--text);
+}
+
+.hero-lead {
+  max-width: 620px;
+  color: #5f5750;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.hero-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hero-portrait {
+  min-height: 530px;
+  align-self: end;
+}
+
+.hero-portrait::before,
+.hero-portrait::after {
+  display: none;
+}
+
+.hero-portrait-image {
+  width: min(100%, 440px);
+  filter: none;
+}
+
+.hero-result-badge {
+  right: 0;
+  bottom: 26px;
+  display: block;
+  width: auto;
+  max-width: 175px;
+  padding: 10px 0 10px 14px;
+  border: 0;
+  border-left: 2px solid var(--accent);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.hero-result-badge strong {
+  display: block;
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.hero-result-badge span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.proof-strip {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.proof-item {
+  min-height: 86px;
+  padding: 18px 24px;
+  border-right: 1px solid var(--line);
+}
+
+.proof-item:first-child {
+  padding-left: 0;
+}
+
+.proof-item strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.proof-item span {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.results-section,
+.preparation-section {
+  padding: 92px 0;
+  background: var(--bg);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.75fr);
+  gap: 64px;
+}
+
+.section-kicker {
+  margin-bottom: 11px;
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.section-heading h2,
+.preparation-intro h2 {
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(36px, 4.2vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+}
+
+.section-heading > p,
+.preparation-intro p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.score-intro {
+  margin-top: 42px;
+  gap: 8px;
+}
+
+.score-intro span,
+.score-intro p {
+  font-size: 12px;
+}
+
+.score-intro span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.score-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 8px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.score {
+  min-width: auto;
+  min-height: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 18px 26px 18px 0;
+  margin-right: 26px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.score:last-child {
+  margin-right: 0;
+}
+
+.score strong {
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.score span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.score-primary strong {
+  color: var(--text);
+}
+
+.score:hover {
+  background: transparent;
+  border-bottom-color: var(--accent);
+}
+
+.score.is-active {
+  background: transparent;
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.score.is-active strong {
+  color: var(--accent-dark);
+}
+
+.score.is-active span {
+  color: var(--muted);
+}
+
+.score-proof {
+  grid-template-columns: minmax(200px, 0.55fr) minmax(0, 1.45fr);
+  gap: 36px;
+  margin-top: 28px;
+  padding: 28px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.proof-copy {
+  padding: 8px 0;
+}
+
+.proof-eyebrow {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.proof-score-line strong {
+  color: var(--text);
+  font-size: 62px;
+  font-weight: 600;
+}
+
+.proof-score-line span,
+.proof-copy p {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.proof-image-placeholder {
+  min-height: 240px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #f7f2ea;
+}
+
+.goal-card {
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 26px;
+  margin-top: 52px;
+  padding: 26px 0 26px 24px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.goal-label {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.goal-copy h3 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.goal-copy p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.preparation-layout {
+  grid-template-columns: minmax(260px, 0.65fr) minmax(0, 1.35fr);
+  gap: clamp(48px, 7vw, 92px);
+}
+
+.preparation-intro {
+  position: static;
+}
+
+.preparation-flow {
+  border-top: 1px solid var(--line);
+}
+
+.preparation-step {
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 18px;
+  padding: 25px 0 27px;
+  border-bottom: 1px solid var(--line);
+}
+
+.step-number {
+  color: #9a8f84;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.preparation-step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.preparation-step p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.python-callout {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 44px;
+  padding: 24px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+}
+
+.python-callout-mark {
+  display: none;
+}
+
+.python-callout span {
+  margin-bottom: 6px;
+  color: var(--accent-dark);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.python-callout h3 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.python-callout p {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.stage-placeholder {
+  padding: 44px 0 80px;
+  background: var(--bg);
+}
+
+.stage-placeholder .container {
+  padding: 22px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+
+@media (max-width: 980px) {
+  .hero {
+    padding-top: 48px;
+  }
+
+  .hero-grid,
+  .section-heading,
+  .preparation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    padding-bottom: 20px;
+  }
+
+  .hero-portrait {
+    min-height: 0;
+    width: min(100%, 560px);
+    margin: 0 auto;
+  }
+
+  .section-heading,
+  .preparation-layout {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: min(calc(100% - 30px), 1120px);
+  }
+
+  .header-inner {
+    min-height: 64px;
+  }
+
+  .brand-copy span {
+    display: none;
+  }
+
+  .button-small {
+    min-height: 36px;
+    padding-inline: 10px;
+    font-size: 10px;
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 12vw, 54px);
+  }
+
+  .hero-lead {
+    font-size: 16px;
+  }
+
+  .hero-result-badge {
+    right: 0;
+    bottom: 12px;
+    max-width: 145px;
+  }
+
+  .proof-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-item,
+  .proof-item:first-child {
+    padding: 14px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .results-section,
+  .preparation-section {
+    padding: 66px 0;
+  }
+
+  .score-row {
+    gap: 0;
+  }
+
+  .score {
+    width: 50%;
+    margin: 0;
+    padding: 14px 10px 14px 0;
+  }
+
+  .score strong {
+    font-size: 36px;
+  }
+
+  .score-proof {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .goal-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 16px;
+  }
+
+  .goal-copy h3 {
+    font-size: 26px;
+  }
+
+  .preparation-step {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
+  }
+}
