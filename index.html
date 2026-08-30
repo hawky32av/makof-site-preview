@@ -11,16 +11,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .hero-expertise{max-width:680px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:7px 18px;color:var(--muted);font-size:13px;line-height:1.45}
-    .hero-expertise a{text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
+    .hero-expertise{max-width:760px;margin-top:28px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));color:#3d3d3d}
+    .hero-expertise a{position:relative;display:flex;align-items:flex-start;min-height:78px;padding:17px 18px;font-size:15px;font-weight:500;line-height:1.35;text-decoration:none;transition:background 160ms ease,color 160ms ease}
+    .hero-expertise a:first-child{padding-left:0}
+    .hero-expertise a+a{border-left:1px solid var(--line)}
+    .hero-expertise a::before{content:"";flex:0 0 auto;width:7px;height:7px;margin:6px 10px 0 0;background:var(--accent)}
+    .hero-expertise a:hover{background:var(--surface);color:var(--text)}
     .about-method{max-width:720px;margin:0;color:var(--muted);font-size:16px;line-height:1.7}
     .about-meta{max-width:720px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:#444;font-size:14px;line-height:1.5}
 
     /* Крупнее показываем реальные фото и документы. */
     .hero{overflow:clip}
     .hero-portrait{position:relative;z-index:2;overflow:visible}
-    .hero-portrait-image{width:min(122%,560px);max-width:none;margin-right:-48px}
-    .hero-portrait-image img{width:100%;max-width:none}
+    .hero-portrait-image{position:relative;width:min(122%,560px);max-width:none;margin-right:-48px;isolation:isolate}
+    .hero-portrait-image::before{content:"";position:absolute;z-index:-2;left:12%;right:-3%;top:13%;bottom:0;background:#f4eee7;border:1px solid #eadfd4}
+    .hero-portrait-image::after{content:"";position:absolute;z-index:-1;left:12%;right:-3%;bottom:0;height:5px;background:var(--accent)}
+    .hero-portrait-image img{position:relative;z-index:1;width:100%;max-width:none}
 
     .credentials-layout{grid-template-columns:1fr;gap:48px}
     .credential-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;border-top:0}
@@ -71,7 +77,9 @@
     }
 
     @media(max-width:720px){
-      .hero-expertise{display:grid;gap:7px}
+      .hero-expertise{grid-template-columns:1fr;margin-top:24px}
+      .hero-expertise a{min-height:0;padding:13px 0;font-size:14px}
+      .hero-expertise a+a{border-left:0;border-top:1px solid var(--line)}
       .hero .proof-strip{margin-top:0}
       .hero-portrait{margin-bottom:0;justify-content:flex-start}
       .hero-portrait-image{width:min(125%,470px);margin-left:-14px;margin-right:0}
@@ -128,7 +136,7 @@
 
           <div class="hero-expertise" aria-label="Квалификация преподавателя">
             <a href="#credentials">ИТМО · высшее педагогическое образование</a>
-            <span>72 часа подготовки экспертов предметной комиссии</span>
+            <a href="#credentials">72 часа подготовки экспертов предметной комиссии</a>
             <a href="#book">Автор учебника по Python для ЕГЭ</a>
           </div>
 
