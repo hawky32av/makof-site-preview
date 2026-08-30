@@ -51,7 +51,11 @@
   z-index: 1;
 }
 
-/* Touch carousels: native swipe on phones and tablets. */
+/* Shared carousel presentation. Touch devices keep native swipe. */
+.review-slider,
+.achievement-carousel {
+  min-width: 0;
+}
 .review-slides,
 .achievement-track {
   -webkit-overflow-scrolling: touch;
@@ -62,15 +66,7 @@
 .achievement-track::-webkit-scrollbar {
   display: none;
 }
-.review-slides.is-dragging,
-.achievement-track.is-dragging {
-  cursor: grabbing;
-  scroll-snap-type: none !important;
-}
 
-.review-slider {
-  overflow: hidden;
-}
 .review-slides {
   display: flex;
   gap: 12px;
@@ -100,13 +96,6 @@
   height: auto;
   border: 1px solid var(--line);
 }
-.review-controls,
-.achievement-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
 
 .achievement-track {
   overflow-x: auto !important;
@@ -118,52 +107,100 @@
   scroll-snap-stop: always;
 }
 
+.review-controls,
+.achievement-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 .carousel-desktop-arrow {
   display: none;
 }
 
-/* Desktop: familiar explicit prev/next controls instead of drag-only interaction. */
+/* Desktop carousel: stable viewport + explicit navigation, no drag/scroll UI. */
 @media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
   .review-slider,
   .achievement-carousel {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    overflow: visible;
   }
 
   .review-controls,
   .achievement-controls {
-    order: -1;
     justify-content: flex-end;
+    min-height: 42px;
   }
   .review-controls {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
   }
   .achievement-controls {
-    margin: 0 0 18px;
+    margin: 0 0 20px;
   }
 
   .review-slides,
   .achievement-track {
-    overflow-x: hidden !important;
+    overflow: visible !important;
     scroll-snap-type: none !important;
+    scroll-behavior: auto;
     cursor: default;
+    transition: transform 260ms cubic-bezier(.2,.7,.2,1);
+    will-change: transform;
+  }
+
+  .review-slider::after,
+  .achievement-carousel::after {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    top: 58px;
+    right: -1px;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .review-slider {
+    overflow: hidden;
+  }
+  .review-slides {
+    gap: 0;
+  }
+  .review-slide,
+  .review-slide.is-active {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .achievement-carousel {
+    overflow: hidden;
+  }
+  .achievement-track {
+    gap: 18px;
+  }
+  .achievement-track .achievement-item {
+    flex: 0 0 calc((100% - 54px) / 4);
   }
 
   .carousel-desktop-arrow {
     display: inline-grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 42px;
     padding: 0;
     border: 1px solid var(--line-strong);
-    border-radius: 4px;
+    border-radius: 0;
     background: #fff;
     color: var(--text);
     font: inherit;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 1;
     cursor: pointer;
-    transition: background 160ms ease, color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+    transition: background 150ms ease, color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  }
+  .carousel-desktop-arrow + .carousel-desktop-arrow {
+    margin-left: -1px;
   }
   .carousel-desktop-arrow:hover:not(:disabled) {
     background: var(--text);
@@ -171,25 +208,35 @@
     color: #fff;
   }
   .carousel-desktop-arrow:disabled {
-    opacity: .28;
+    opacity: .24;
     cursor: default;
   }
   .carousel-desktop-arrow:focus-visible {
+    position: relative;
+    z-index: 2;
     outline: 2px solid var(--accent);
-    outline-offset: 3px;
+    outline-offset: 2px;
   }
 
   .review-counter,
   .achievement-counter {
-    min-width: 64px;
+    min-width: 58px;
+    margin-right: 4px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
     font-variant-numeric: tabular-nums;
   }
 }
 
+/* Phones/tablets: swipe remains the primary control; no desktop arrows. */
 @media (max-width: 1024px), (hover: none), (pointer: coarse) {
   .review-slides,
   .achievement-track {
     cursor: grab;
+  }
+  .carousel-desktop-arrow {
+    display: none !important;
   }
 }
 
