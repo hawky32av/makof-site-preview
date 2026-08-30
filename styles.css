@@ -18,22 +18,17 @@
   border: 1px solid var(--line);
 }
 
-/* Hero portrait: light editorial outline instead of a filled backdrop. */
+/* Hero portrait: a quiet vertical field behind the figure. */
 .hero .hero-portrait-image::before {
-  left: 12%;
-  right: -4%;
-  top: 10%;
-  bottom: 6%;
-  background: transparent;
-  border: 1px solid #ddd1c5;
+  left: 34%;
+  right: -7%;
+  top: 5%;
+  bottom: 0;
+  background: #f6f1eb;
+  border: 0;
 }
 .hero .hero-portrait-image::after {
-  left: 22%;
-  right: auto;
-  bottom: 2px;
-  width: 112px;
-  height: 4px;
-  background: var(--accent);
+  display: none;
 }
 
 @media (max-width: 720px) {
@@ -47,14 +42,9 @@
     height: 360px;
   }
   .hero .hero-portrait-image::before {
-    left: 10%;
-    right: 0;
-    top: 11%;
-    bottom: 6%;
-  }
-  .hero .hero-portrait-image::after {
-    left: 18%;
-    width: 82px;
-    height: 4px;
+    left: 28%;
+    right: -2%;
+    top: 6%;
+    bottom: 0;
   }
 }
