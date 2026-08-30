@@ -372,3 +372,33 @@
 }
 
 /* Carousel behavior lives in index.html; this file controls only presentation. */
+
+
+/* Legal links and compact signup form. */
+#trial .signup-form > .alfacrm-frame {
+  margin-top: 0;
+}
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+}
+.footer-legal a {
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+.footer-legal a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+@media (max-width: 720px) {
+  .footer-legal {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
