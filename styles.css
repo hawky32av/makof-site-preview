@@ -36,7 +36,10 @@
   display: none;
 }
 
-/* About portrait: same visual logic, adapted for the left-side composition. */
+/* About portrait: same visual logic, with less dead space above the portrait. */
+#about {
+  padding-top: 64px;
+}
 #about .about-photo-wrap {
   position: relative;
   isolation: isolate;
@@ -97,6 +100,16 @@
   height: 7px;
   margin-top: .48em;
   background: var(--accent);
+}
+
+/* The embedded form should occupy its real visual footprint, not a 620px reserve. */
+#trial .alfacrm-frame {
+  height: 500px;
+  min-height: 0;
+  margin-top: 20px;
+}
+#trial .alfacrm-fallback {
+  margin-top: 8px;
 }
 
 /* Shared carousel presentation. Touch devices keep native swipe. */
@@ -166,16 +179,23 @@
   display: none;
 }
 
-/* Desktop carousel: stable viewport + explicit navigation, no drag/scroll UI. */
+/* Desktop carousel: fixed navigation row above a stable image viewport. */
 @media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  #about .about-photo-wrap {
+    margin-top: -28px;
+  }
+
   .review-slider,
   .achievement-carousel {
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow: visible;
   }
 
   .review-controls,
   .achievement-controls {
+    order: -1;
     justify-content: flex-end;
     min-height: 42px;
   }
@@ -188,6 +208,7 @@
 
   .review-slides,
   .achievement-track {
+    order: 0;
     overflow: visible !important;
     scroll-snap-type: none !important;
     scroll-behavior: auto;
@@ -293,6 +314,9 @@
 
 /* Phones/tablets: swipe remains the primary control; no desktop arrows. */
 @media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  #about {
+    padding-top: 72px;
+  }
   .review-slides,
   .achievement-track {
     cursor: grab;
@@ -306,6 +330,9 @@
 }
 
 @media (max-width: 720px) {
+  #about {
+    padding-top: 56px;
+  }
   .book-cover,
   .book-spread {
     max-width: 280px;
@@ -329,6 +356,9 @@
   }
   #trial .trial-gift-list li {
     font-size: 18px;
+  }
+  #trial .alfacrm-frame {
+    height: 540px;
   }
 }
 
