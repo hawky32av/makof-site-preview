@@ -15,9 +15,59 @@
     .hero-expertise a{text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
     .about-method{max-width:720px;margin:0;color:var(--muted);font-size:16px;line-height:1.7}
     .about-meta{max-width:720px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:#444;font-size:14px;line-height:1.5}
+
+    /* Документы показываем в их естественной горизонтальной пропорции. */
+    .credential-documents{grid-template-columns:1fr 1fr;align-items:start}
+    .document-preview img,
+    .document-preview-large img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto;object-fit:contain;background:#fff}
+
+    /* Подарок после пробного. */
+    .trial-gift{max-width:540px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--line);color:#343434;font-size:15px;line-height:1.65}
+    .trial-gift strong{color:var(--accent);font-weight:600}
+
+    /* Карусель дипломов. */
     .achievements-section{padding-top:72px;padding-bottom:72px}
     .achievements-heading{margin-bottom:32px}
-    @media(max-width:720px){.hero-expertise{display:grid;gap:7px}.achievements-section{padding-top:60px;padding-bottom:60px}}
+    .achievement-carousel{position:relative;min-width:0}
+    .achievement-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:0 0 4px}
+    .achievement-track::-webkit-scrollbar{display:none}
+    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start}
+    .achievement-controls{display:flex;align-items:center;gap:12px;margin-top:22px}
+    .achievement-arrow{width:46px;height:46px;padding:0;border:1px solid var(--line-strong);border-radius:4px;background:#fff;font-size:21px;cursor:pointer}
+    .achievement-arrow:hover{background:var(--surface)}
+    .achievement-counter{min-width:62px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Финальный CTA теперь по центру и заметнее. */
+    .final-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
+    .final-copy{max-width:900px}
+    .final-copy p{margin:22px auto 0}
+    .final-action{justify-self:auto;margin-top:34px}
+    .final-action .button{min-width:280px;min-height:56px;padding:14px 28px;font-size:16px}
+
+    /* На широком экране фото в «Обо мне» опирается на нижнюю линию секции. */
+    @media(min-width:981px){
+      #about{padding-bottom:0}
+      #about .about-layout{align-items:end}
+      #about .about-copy{padding-bottom:104px}
+      #about .about-photo-wrap{align-self:end}
+    }
+
+    @media(max-width:980px){
+      .achievement-track .achievement-item{flex-basis:calc((100% - 18px)/2)}
+    }
+
+    @media(max-width:720px){
+      .hero-expertise{display:grid;gap:7px}
+      .hero .proof-strip{margin-top:0}
+      .hero-portrait{margin-bottom:0}
+      .hero-portrait-image img{margin-bottom:0}
+      .credential-documents{grid-template-columns:1fr;gap:24px}
+      .achievements-section{padding-top:60px;padding-bottom:60px}
+      .achievement-track{gap:12px}
+      .achievement-track .achievement-item{flex-basis:min(82vw,290px)}
+      .final-action{width:100%;max-width:420px}
+      .final-action .button{width:100%}
+    }
   </style>
 </head>
 <body>
@@ -94,6 +144,7 @@
                 <button class="text-link" type="button" data-lightbox-src="assets/credentials/itmo-diploma.png" data-lightbox-alt="Диплом Университета ИТМО">Открыть скан диплома</button>
               </div>
             </article>
+
             <article class="credential-copy">
               <span class="credential-index">02</span>
               <div>
@@ -102,6 +153,7 @@
                 <button class="text-link" type="button" data-lightbox-src="assets/credentials/ege-expert-training.png" data-lightbox-alt="Удостоверение о подготовке экспертов предметной комиссии по информатике">Открыть удостоверение</button>
               </div>
             </article>
+
             <article class="credential-copy">
               <span class="credential-index">03</span>
               <div>
@@ -114,10 +166,12 @@
 
           <div class="credential-documents" aria-label="Сканы документов">
             <button class="document-preview document-preview-large" type="button" data-lightbox-src="assets/credentials/itmo-diploma.png" data-lightbox-alt="Диплом Университета ИТМО">
-              <img src="assets/credentials/itmo-diploma.png" alt="Скан диплома Университета ИТМО"><span>Диплом ИТМО</span>
+              <img src="assets/credentials/itmo-diploma.png" alt="Скан диплома Университета ИТМО">
+              <span>Диплом ИТМО</span>
             </button>
             <button class="document-preview" type="button" data-lightbox-src="assets/credentials/ege-expert-training.png" data-lightbox-alt="Удостоверение о подготовке экспертов предметной комиссии по информатике">
-              <img src="assets/credentials/ege-expert-training.png" alt="Скан удостоверения о подготовке экспертов предметной комиссии"><span>ФИПИ · подготовка экспертов · 72 часа</span>
+              <img src="assets/credentials/ege-expert-training.png" alt="Скан удостоверения о подготовке экспертов предметной комиссии">
+              <span>ФИПИ · подготовка экспертов · 72 часа</span>
             </button>
           </div>
         </div>
@@ -130,6 +184,7 @@
           <div><span class="section-kicker">Результаты</span><h2>Баллы учеников, которые можно проверить</h2></div>
           <p>Выберите результат — ниже откроется скрин подтверждения. Для нескольких учеников рядом указал, сколько длилась подготовка.</p>
         </div>
+
         <div class="score-intro"><span>Выберите балл</span><p>Скрин откроется под списком.</p></div>
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
           <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
@@ -139,10 +194,12 @@
           <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
         </div>
+
         <div class="score-proof" id="score-proof" hidden aria-live="polite">
           <div class="proof-copy"><span class="proof-eyebrow">Подтверждение</span><div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div><p id="proof-note">Подготовка с сентября до экзамена.</p></div>
           <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
         </div>
+
         <div class="goal-note"><strong>Как ставим цель</strong><p>Сначала смотрим стартовый уровень и балл, который нужен для поступления. Подготовка на уверенные 75–80 и подготовка на 90+ требуют разного объёма работы — это учитываем с самого начала.</p></div>
       </div>
     </section>
@@ -150,6 +207,7 @@
     <section class="section learning-section" id="learning">
       <div class="container">
         <div class="section-heading learning-heading"><div><span class="section-kicker">Обучение изнутри</span><h2>Как выглядит подготовка</h2></div><p>Реальные кадры с занятий и скриншоты личного кабинета: разбор задач, практика, прогресс и записи занятий.</p></div>
+
         <div class="learning-browser">
           <div class="learning-tabs" role="tablist" aria-label="Примеры обучения">
             <button class="learning-tab is-active" type="button" data-learning-image="assets/learning/lesson-1.png" data-learning-title="Фрагмент занятия" data-learning-text="Разбираем новую тему на задачах и сразу проверяем, понятна ли логика решения." aria-selected="true"><span>01</span>Занятие</button>
@@ -159,6 +217,7 @@
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-progress.png" data-learning-title="Прогресс" data-learning-text="По выполнению заданий и пробникам видно, какие темы уже держатся уверенно, а к каким стоит вернуться." aria-selected="false"><span>05</span>Прогресс</button>
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-records.png" data-learning-title="Записи занятий" data-learning-text="Если занятие пропущено или тему хочется повторить, запись и материалы остаются доступны." aria-selected="false"><span>06</span>Записи</button>
           </div>
+
           <div class="learning-stage" aria-live="polite">
             <button class="learning-image-button" type="button" id="learning-lightbox-button" data-lightbox-src="assets/learning/lesson-1.png" data-lightbox-alt="Фрагмент занятия"><img id="learning-image" src="assets/learning/lesson-1.png" alt="Фрагмент занятия"></button>
             <div class="learning-caption"><span>Что здесь происходит</span><h3 id="learning-title">Фрагмент занятия</h3><p id="learning-text">Разбираем новую тему на задачах и сразу проверяем, понятна ли логика решения.</p></div>
@@ -198,21 +257,46 @@
     <section class="section section--soft" id="reviews">
       <div class="container">
         <div class="section-heading reviews-head"><div><span class="section-kicker">Отзывы</span><h2>Что пишут после занятий и экзамена</h2></div><p>Отзывы оставил скриншотами — без пересказа и сокращений.</p></div>
+
         <div class="reviews-group">
           <h3>Ученики</h3>
-          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"><img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"><img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"><img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
+          <div class="review-slider" data-review-slider>
+            <div class="review-slides"><img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"><img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"><img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"><img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></div>
+            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
+          </div>
         </div>
+
         <div class="reviews-group">
           <h3>Родители</h3>
-          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"><img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"><img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"><img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
+          <div class="review-slider" data-review-slider>
+            <div class="review-slides"><img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"><img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"><img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"><img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></div>
+            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="trial">
       <div class="container trial-layout">
-        <div class="trial-copy"><span class="section-kicker">Бесплатное пробное</span><h2>Бесплатное пробное занятие</h2><p class="trial-lead">Познакомимся, решим несколько заданий и посмотрим, как ученику удобнее строить подготовку.</p><ul class="trial-list"><li>Решим несколько заданий и покажу, как объясняю материал.</li><li>Посмотрим сильные места и пробелы.</li><li>Покажу, как проходят занятия и самостоятельная работа.</li></ul></div>
-        <div class="signup-form" id="signup-form"><span class="section-kicker">Запись</span><h2>Записаться на пробное занятие</h2><p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p><iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" width="100%" height="100%" frameborder="0" scrolling="no" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe><p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" target="_blank" rel="noopener">откройте её отдельно</a>.</p></div>
+        <div class="trial-copy">
+          <span class="section-kicker">Бесплатное пробное</span>
+          <h2>Бесплатное пробное занятие</h2>
+          <p class="trial-lead">Познакомимся, решим несколько заданий и посмотрим, как ученику удобнее строить подготовку.</p>
+          <ul class="trial-list">
+            <li>Решим несколько заданий и покажу, как объясняю материал.</li>
+            <li>Посмотрим сильные места и пробелы.</li>
+            <li>Покажу, как проходят занятия и самостоятельная работа.</li>
+          </ul>
+          <p class="trial-gift"><strong>Подарок после пробного:</strong> мой учебник «Основы программирования для ЕГЭ: Python 3 с нуля» и конспект-шпаргалка по ЕГЭ-2026.</p>
+        </div>
+
+        <div class="signup-form" id="signup-form">
+          <span class="section-kicker">Запись</span>
+          <h2>Записаться на пробное занятие</h2>
+          <p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p>
+          <iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" width="100%" height="100%" frameborder="0" scrolling="no" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe>
+          <p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" target="_blank" rel="noopener">откройте её отдельно</a>.</p>
+        </div>
       </div>
     </section>
 
@@ -223,21 +307,30 @@
     <section class="section achievements-section" id="achievements">
       <div class="container">
         <div class="section-heading achievements-heading"><div><span class="section-kicker">Достижения</span><h2>Дополнительные дипломы и сертификаты</h2></div><p>Победы в профессиональных конкурсах и олимпиадах по информатике, ФГОС и методике преподавания.</p></div>
-        <div class="achievement-gallery">
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/Диплом_RS_338_213172.jpg" data-lightbox-alt="Диплом за I место в конкурсе Искусственный интеллект в образовании"><img src="assets/achievements/Диплом_RS_338_213172.jpg" alt="Диплом за I место в конкурсе Искусственный интеллект в образовании" loading="lazy"><span>«Искусственный интеллект в образовании» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/olympiad_diploma_2359_participant.jpg" data-lightbox-alt="Диплом победителя олимпиады Алгоритмы и структуры данных"><img src="assets/achievements/olympiad_diploma_2359_participant.jpg" alt="Диплом победителя олимпиады Алгоритмы и структуры данных" loading="lazy"><span>«Алгоритмы и структуры данных» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/7691998.jpg" data-lightbox-alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ"><img src="assets/achievements/7691998.jpg" alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ" loading="lazy"><span>«Структура и содержание КИМ ЕГЭ по информатике и ИКТ»</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/1787771425_8956.jpg" data-lightbox-alt="Диплом за I место по предметно-методической работе преподавателя информатики"><img src="assets/achievements/1787771425_8956.jpg" alt="Диплом за I место по предметно-методической работе преподавателя информатики" loading="lazy"><span>«Предметно-методическая работа преподавателя информатики» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/5314562.jpg" data-lightbox-alt="Диплом за I место по ИКТ-компетентности учителя среднего общего образования"><img src="assets/achievements/5314562.jpg" alt="Диплом за I место по ИКТ-компетентности учителя среднего общего образования" loading="lazy"><span>«ИКТ-компетентность учителя среднего общего образования» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/84095.jpeg" data-lightbox-alt="Диплом за I место по ИКТ-компетентности педагога в условиях ФГОС"><img src="assets/achievements/84095.jpeg" alt="Диплом за I место по ИКТ-компетентности педагога в условиях ФГОС" loading="lazy"><span>«ИКТ-компетентность педагога в условиях ФГОС» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/5314622.jpg" data-lightbox-alt="Диплом за I место по психолого-педагогической компетентности педагога в соответствии с ФГОС"><img src="assets/achievements/5314622.jpg" alt="Диплом за I место по психолого-педагогической компетентности педагога в соответствии с ФГОС" loading="lazy"><span>«Психолого-педагогическая компетентность педагога в соответствии с ФГОС» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/1787769122_72944.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Ключевые особенности ФГОС"><img src="assets/achievements/1787769122_72944.jpg" alt="Диплом за I место в олимпиаде Ключевые особенности ФГОС" loading="lazy"><span>«Ключевые особенности ФГОС» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/diplom.jpg" data-lightbox-alt="Диплом за I место по профессиональному стандарту педагога в условиях современного образования"><img src="assets/achievements/diplom.jpg" alt="Диплом за I место по профессиональному стандарту педагога в условиях современного образования" loading="lazy"><span>«Профессиональный стандарт педагога в условиях современного образования» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/diplom_author_1120507.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Современные средства оценивания результатов обучения"><img src="assets/achievements/diplom_author_1120507.jpg" alt="Диплом за I место в олимпиаде Современные средства оценивания результатов обучения" loading="lazy"><span>«Современные средства оценивания результатов обучения» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/VP100-634258D357556.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Современные подходы к обучению"><img src="assets/achievements/VP100-634258D357556.jpg" alt="Диплом за I место в олимпиаде Современные подходы к обучению" loading="lazy"><span>«Современные подходы к обучению» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/umn1-385442.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Мотивация — основное условие успешного обучения"><img src="assets/achievements/umn1-385442.jpg" alt="Диплом за I место в олимпиаде Мотивация — основное условие успешного обучения" loading="lazy"><span>«Мотивация — основное условие успешного обучения» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию"><img src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию" loading="lazy"><span>«Требования ФГОС к среднему общему образованию» · I место</span></button>
-          <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/author.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Основные педагогические понятия"><img src="assets/achievements/author.jpg" alt="Диплом за I место в олимпиаде Основные педагогические понятия" loading="lazy"><span>«Основные педагогические понятия» · I место</span></button>
+
+        <div class="achievement-carousel" data-achievement-carousel>
+          <div class="achievement-track" data-achievement-track>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/Диплом_RS_338_213172.jpg" data-lightbox-alt="Диплом за I место в конкурсе Искусственный интеллект в образовании"><img src="assets/achievements/Диплом_RS_338_213172.jpg" alt="Диплом за I место в конкурсе Искусственный интеллект в образовании" loading="lazy"><span>«Искусственный интеллект в образовании» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/olympiad_diploma_2359_participant.jpg" data-lightbox-alt="Диплом победителя олимпиады Алгоритмы и структуры данных"><img src="assets/achievements/olympiad_diploma_2359_participant.jpg" alt="Диплом победителя олимпиады Алгоритмы и структуры данных" loading="lazy"><span>«Алгоритмы и структуры данных» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/7691998.jpg" data-lightbox-alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ"><img src="assets/achievements/7691998.jpg" alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ" loading="lazy"><span>«Структура и содержание КИМ ЕГЭ по информатике и ИКТ»</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/1787771425_8956.jpg" data-lightbox-alt="Диплом за I место по предметно-методической работе преподавателя информатики"><img src="assets/achievements/1787771425_8956.jpg" alt="Диплом за I место по предметно-методической работе преподавателя информатики" loading="lazy"><span>«Предметно-методическая работа преподавателя информатики» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/5314562.jpg" data-lightbox-alt="Диплом за I место по ИКТ-компетентности учителя среднего общего образования"><img src="assets/achievements/5314562.jpg" alt="Диплом за I место по ИКТ-компетентности учителя среднего общего образования" loading="lazy"><span>«ИКТ-компетентность учителя среднего общего образования» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/84095.jpeg" data-lightbox-alt="Диплом за I место по ИКТ-компетентности педагога в условиях ФГОС"><img src="assets/achievements/84095.jpeg" alt="Диплом за I место по ИКТ-компетентности педагога в условиях ФГОС" loading="lazy"><span>«ИКТ-компетентность педагога в условиях ФГОС» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/5314622.jpg" data-lightbox-alt="Диплом за I место по психолого-педагогической компетентности педагога в соответствии с ФГОС"><img src="assets/achievements/5314622.jpg" alt="Диплом за I место по психолого-педагогической компетентности педагога в соответствии с ФГОС" loading="lazy"><span>«Психолого-педагогическая компетентность педагога в соответствии с ФГОС» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/1787769122_72944.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Ключевые особенности ФГОС"><img src="assets/achievements/1787769122_72944.jpg" alt="Диплом за I место в олимпиаде Ключевые особенности ФГОС" loading="lazy"><span>«Ключевые особенности ФГОС» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/diplom.jpg" data-lightbox-alt="Диплом за I место по профессиональному стандарту педагога в условиях современного образования"><img src="assets/achievements/diplom.jpg" alt="Диплом за I место по профессиональному стандарту педагога в условиях современного образования" loading="lazy"><span>«Профессиональный стандарт педагога в условиях современного образования» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/diplom_author_1120507.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Современные средства оценивания результатов обучения"><img src="assets/achievements/diplom_author_1120507.jpg" alt="Диплом за I место в олимпиаде Современные средства оценивания результатов обучения" loading="lazy"><span>«Современные средства оценивания результатов обучения» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/VP100-634258D357556.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Современные подходы к обучению"><img src="assets/achievements/VP100-634258D357556.jpg" alt="Диплом за I место в олимпиаде Современные подходы к обучению" loading="lazy"><span>«Современные подходы к обучению» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/umn1-385442.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Мотивация — основное условие успешного обучения"><img src="assets/achievements/umn1-385442.jpg" alt="Диплом за I место в олимпиаде Мотивация — основное условие успешного обучения" loading="lazy"><span>«Мотивация — основное условие успешного обучения» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию"><img src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию" loading="lazy"><span>«Требования ФГОС к среднему общему образованию» · I место</span></button>
+            <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/author.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Основные педагогические понятия"><img src="assets/achievements/author.jpg" alt="Диплом за I место в олимпиаде Основные педагогические понятия" loading="lazy"><span>«Основные педагогические понятия» · I место</span></button>
+          </div>
+
+          <div class="achievement-controls">
+            <button class="achievement-arrow" type="button" data-achievement-prev aria-label="Предыдущие дипломы">←</button>
+            <span class="achievement-counter" data-achievement-counter>1 / 14</span>
+            <button class="achievement-arrow" type="button" data-achievement-next aria-label="Следующие дипломы">→</button>
+          </div>
         </div>
       </div>
     </section>
@@ -257,7 +350,10 @@
     </section>
 
     <section class="final-section" id="contact">
-      <div class="container final-inner"><div class="final-copy"><span class="section-kicker">Начать</span><h2>Проще всего познакомиться на бесплатном пробном</h2><p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и подходит ли ученику такой формат.</p></div><div class="final-action"><a class="button button-primary" href="#signup-form">Записаться на пробное</a></div></div>
+      <div class="container final-inner">
+        <div class="final-copy"><span class="section-kicker">Начать</span><h2>Проще всего познакомиться на бесплатном пробном</h2><p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и подходит ли ученику такой формат.</p></div>
+        <div class="final-action"><a class="button button-primary" href="#signup-form">Записаться на пробное</a></div>
+      </div>
     </section>
   </main>
 
@@ -271,12 +367,17 @@
     const proofScore = document.getElementById('proof-score');
     const proofNote = document.getElementById('proof-note');
     const proofImage = document.getElementById('proof-image');
+
     scoreButtons.forEach((button) => {
       button.addEventListener('click', () => {
         scoreButtons.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-expanded', 'false'); });
-        button.classList.add('is-active'); button.setAttribute('aria-expanded', 'true');
-        proofScore.textContent = button.dataset.score; proofNote.textContent = button.dataset.note;
-        proofImage.src = button.dataset.image; proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`; proof.hidden = false;
+        button.classList.add('is-active');
+        button.setAttribute('aria-expanded', 'true');
+        proofScore.textContent = button.dataset.score;
+        proofNote.textContent = button.dataset.note;
+        proofImage.src = button.dataset.image;
+        proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
+        proof.hidden = false;
       });
     });
 
@@ -285,13 +386,18 @@
     const learningTitle = document.getElementById('learning-title');
     const learningText = document.getElementById('learning-text');
     const learningLightboxButton = document.getElementById('learning-lightbox-button');
+
     learningTabs.forEach((button) => {
       button.addEventListener('click', () => {
         learningTabs.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-selected', 'false'); });
-        button.classList.add('is-active'); button.setAttribute('aria-selected', 'true');
-        learningImage.src = button.dataset.learningImage; learningImage.alt = button.dataset.learningTitle;
-        learningTitle.textContent = button.dataset.learningTitle; learningText.textContent = button.dataset.learningText;
-        learningLightboxButton.dataset.lightboxSrc = button.dataset.learningImage; learningLightboxButton.dataset.lightboxAlt = button.dataset.learningTitle;
+        button.classList.add('is-active');
+        button.setAttribute('aria-selected', 'true');
+        learningImage.src = button.dataset.learningImage;
+        learningImage.alt = button.dataset.learningTitle;
+        learningTitle.textContent = button.dataset.learningTitle;
+        learningText.textContent = button.dataset.learningText;
+        learningLightboxButton.dataset.lightboxSrc = button.dataset.learningImage;
+        learningLightboxButton.dataset.lightboxAlt = button.dataset.learningTitle;
       });
     });
 
@@ -300,23 +406,76 @@
       const counter = slider.querySelector('[data-review-counter]');
       const prev = slider.querySelector('[data-review-prev]');
       const next = slider.querySelector('[data-review-next]');
-      let current = 0; let startX = null;
-      function show(index) { current = (index + slides.length) % slides.length; slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current)); counter.textContent = `${current + 1} / ${slides.length}`; }
-      prev.addEventListener('click', () => show(current - 1)); next.addEventListener('click', () => show(current + 1));
+      let current = 0;
+      let startX = null;
+
+      function show(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+        counter.textContent = `${current + 1} / ${slides.length}`;
+      }
+
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
       slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive: true });
-      slider.addEventListener('touchend', (event) => { if (startX === null) return; const delta = event.changedTouches[0].clientX - startX; if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1)); startX = null; }, { passive: true });
+      slider.addEventListener('touchend', (event) => {
+        if (startX === null) return;
+        const delta = event.changedTouches[0].clientX - startX;
+        if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1));
+        startX = null;
+      }, { passive: true });
+    });
+
+    document.querySelectorAll('[data-achievement-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('[data-achievement-track]');
+      const items = Array.from(track.querySelectorAll('.achievement-item'));
+      const prev = carousel.querySelector('[data-achievement-prev]');
+      const next = carousel.querySelector('[data-achievement-next]');
+      const counter = carousel.querySelector('[data-achievement-counter]');
+
+      function itemStep() {
+        if (!items.length) return 0;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        return items[0].getBoundingClientRect().width + gap;
+      }
+
+      function currentIndex() {
+        const step = itemStep();
+        if (!step) return 0;
+        return Math.max(0, Math.min(items.length - 1, Math.round(track.scrollLeft / step)));
+      }
+
+      function updateCounter() {
+        counter.textContent = `${currentIndex() + 1} / ${items.length}`;
+      }
+
+      prev.addEventListener('click', () => track.scrollBy({ left: -itemStep(), behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left: itemStep(), behavior: 'smooth' }));
+      track.addEventListener('scroll', () => window.requestAnimationFrame(updateCounter), { passive: true });
+      window.addEventListener('resize', updateCounter, { passive: true });
+      updateCounter();
     });
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = lightbox.querySelector('.lightbox-close');
-    function closeLightbox() { lightbox.hidden = true; document.body.classList.remove('lightbox-open'); lightboxImage.src = ''; }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.classList.remove('lightbox-open');
+      lightboxImage.src = '';
+    }
+
     document.addEventListener('click', (event) => {
       const trigger = event.target.closest('[data-lightbox-src]');
       if (!trigger) return;
-      lightboxImage.src = trigger.dataset.lightboxSrc; lightboxImage.alt = trigger.dataset.lightboxAlt || '';
-      lightbox.hidden = false; document.body.classList.add('lightbox-open'); lightboxClose.focus();
+      lightboxImage.src = trigger.dataset.lightboxSrc;
+      lightboxImage.alt = trigger.dataset.lightboxAlt || '';
+      lightbox.hidden = false;
+      document.body.classList.add('lightbox-open');
+      lightboxClose.focus();
     });
+
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !lightbox.hidden) closeLightbox(); });
