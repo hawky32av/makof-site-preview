@@ -407,49 +407,6 @@
 
     const desktopCarouselQuery = window.matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)');
 
-    function enableMouseDrag(track) {
-      if (desktopCarouselQuery.matches) return;
-      let dragging = false;
-      let startX = 0;
-      let startScroll = 0;
-      let moved = false;
-      let suppressClickUntil = 0;
-
-      track.addEventListener('pointerdown', (event) => {
-        if (event.pointerType !== 'mouse' || event.button !== 0) return;
-        dragging = true;
-        moved = false;
-        startX = event.clientX;
-        startScroll = track.scrollLeft;
-        track.classList.add('is-dragging');
-        track.setPointerCapture(event.pointerId);
-      });
-
-      track.addEventListener('pointermove', (event) => {
-        if (!dragging) return;
-        const delta = event.clientX - startX;
-        if (Math.abs(delta) > 5) moved = true;
-        track.scrollLeft = startScroll - delta;
-      });
-
-      function finishDrag(event) {
-        if (!dragging) return;
-        dragging = false;
-        track.classList.remove('is-dragging');
-        if (moved) suppressClickUntil = performance.now() + 250;
-        if (track.hasPointerCapture && track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
-      }
-
-      track.addEventListener('pointerup', finishDrag);
-      track.addEventListener('pointercancel', finishDrag);
-      track.addEventListener('click', (event) => {
-        if (performance.now() < suppressClickUntil) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }, true);
-    }
-
     function nearestSlideIndex(track, items) {
       if (!items.length) return 0;
       const gap = parseFloat(getComputedStyle(track).gap) || 0;
@@ -475,30 +432,51 @@
       const next = makeCarouselArrow('→', 'Следующий отзыв');
       controls.prepend(prev);
       controls.append(next);
+      let desktopIndex = 0;
       let raf = 0;
 
-      function updateCounter(forcedIndex = null) {
-        const index = forcedIndex === null ? nearestSlideIndex(track, slides) : forcedIndex;
+      function renderDesktop() {
+        desktopIndex = Math.max(0, Math.min(desktopIndex, slides.length - 1));
+        const x = slides[desktopIndex]?.offsetLeft || 0;
+        track.style.transform = `translate3d(${-x}px,0,0)`;
+        counter.textContent = `${desktopIndex + 1} / ${slides.length}`;
+        prev.disabled = desktopIndex === 0;
+        next.disabled = desktopIndex === slides.length - 1;
+      }
+
+      function renderTouch() {
+        track.style.transform = '';
+        const index = nearestSlideIndex(track, slides);
         counter.textContent = `${index + 1} / ${slides.length}`;
-        prev.disabled = index <= 0;
-        next.disabled = index >= slides.length - 1;
       }
 
-      function goTo(index) {
-        const target = Math.max(0, Math.min(index, slides.length - 1));
-        track.scrollTo({ left: slides[target].offsetLeft, behavior: 'smooth' });
-        updateCounter(target);
+      function syncMode() {
+        if (desktopCarouselQuery.matches) {
+          track.scrollLeft = 0;
+          renderDesktop();
+        } else {
+          renderTouch();
+        }
       }
 
-      prev.addEventListener('click', () => goTo(nearestSlideIndex(track, slides) - 1));
-      next.addEventListener('click', () => goTo(nearestSlideIndex(track, slides) + 1));
+      prev.addEventListener('click', () => {
+        if (!desktopCarouselQuery.matches) return;
+        desktopIndex -= 1;
+        renderDesktop();
+      });
+      next.addEventListener('click', () => {
+        if (!desktopCarouselQuery.matches) return;
+        desktopIndex += 1;
+        renderDesktop();
+      });
       track.addEventListener('scroll', () => {
+        if (desktopCarouselQuery.matches) return;
         cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => updateCounter());
+        raf = requestAnimationFrame(renderTouch);
       }, { passive: true });
-      window.addEventListener('resize', () => updateCounter(), { passive: true });
-      enableMouseDrag(track);
-      updateCounter();
+      window.addEventListener('resize', syncMode, { passive: true });
+      if (desktopCarouselQuery.addEventListener) desktopCarouselQuery.addEventListener('change', syncMode);
+      syncMode();
     });
 
     document.querySelectorAll('[data-achievement-carousel]').forEach((carousel) => {
@@ -510,64 +488,67 @@
       const next = makeCarouselArrow('→', 'Следующие дипломы');
       controls.prepend(prev);
       controls.append(next);
+      let desktopPage = 0;
       let raf = 0;
 
-      function visibleCount() {
+      function touchVisibleCount() {
         if (window.matchMedia('(max-width: 720px)').matches) return 1;
-        if (window.matchMedia('(max-width: 1024px)').matches) return 2;
-        return 4;
+        return 2;
       }
 
-      function pageStarts() {
-        const size = visibleCount();
+      function desktopPageStarts() {
+        const size = 4;
         const maxStart = Math.max(0, items.length - size);
         const starts = [];
         for (let i = 0; i < items.length; i += size) starts.push(Math.min(i, maxStart));
         return [...new Set(starts)];
       }
 
-      function nearestPageIndex() {
-        const starts = pageStarts();
+      function renderDesktop() {
+        const starts = desktopPageStarts();
+        desktopPage = Math.max(0, Math.min(desktopPage, starts.length - 1));
+        const start = starts[desktopPage] || 0;
+        const x = items[start]?.offsetLeft || 0;
+        track.style.transform = `translate3d(${-x}px,0,0)`;
+        counter.textContent = `${desktopPage + 1} / ${starts.length}`;
+        prev.disabled = desktopPage === 0;
+        next.disabled = desktopPage === starts.length - 1;
+      }
+
+      function renderTouch() {
+        track.style.transform = '';
         const first = nearestSlideIndex(track, items);
-        let best = 0;
-        let bestDistance = Infinity;
-        starts.forEach((start, index) => {
-          const distance = Math.abs(start - first);
-          if (distance < bestDistance) {
-            bestDistance = distance;
-            best = index;
-          }
-        });
-        return best;
-      }
-
-      function updateCounter(forcedPage = null) {
-        const starts = pageStarts();
-        const page = forcedPage === null ? nearestPageIndex() : Math.max(0, Math.min(forcedPage, starts.length - 1));
-        const start = starts[page] || 0;
-        const end = Math.min(start + visibleCount(), items.length);
+        const end = Math.min(first + touchVisibleCount(), items.length);
         counter.textContent = `${end} / ${items.length}`;
-        prev.disabled = page <= 0;
-        next.disabled = page >= starts.length - 1;
       }
 
-      function goToPage(page) {
-        const starts = pageStarts();
-        const targetPage = Math.max(0, Math.min(page, starts.length - 1));
-        const start = starts[targetPage] || 0;
-        track.scrollTo({ left: items[start]?.offsetLeft || 0, behavior: 'smooth' });
-        updateCounter(targetPage);
+      function syncMode() {
+        if (desktopCarouselQuery.matches) {
+          track.scrollLeft = 0;
+          renderDesktop();
+        } else {
+          renderTouch();
+        }
       }
 
-      prev.addEventListener('click', () => goToPage(nearestPageIndex() - 1));
-      next.addEventListener('click', () => goToPage(nearestPageIndex() + 1));
+      prev.addEventListener('click', () => {
+        if (!desktopCarouselQuery.matches) return;
+        desktopPage -= 1;
+        renderDesktop();
+      });
+      next.addEventListener('click', () => {
+        if (!desktopCarouselQuery.matches) return;
+        desktopPage += 1;
+        renderDesktop();
+      });
       track.addEventListener('scroll', () => {
+        if (desktopCarouselQuery.matches) return;
         cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => updateCounter());
+        raf = requestAnimationFrame(renderTouch);
       }, { passive: true });
-      window.addEventListener('resize', () => updateCounter(), { passive: true });
-      enableMouseDrag(track);
-      updateCounter();
+      window.addEventListener('resize', syncMode, { passive: true });
+      if (desktopCarouselQuery.addEventListener) desktopCarouselQuery.addEventListener('change', syncMode);
+      syncMode();
     });
 
     const lightbox = document.getElementById('lightbox');
