@@ -211,6 +211,7 @@
 
   .review-slider {
     overflow: hidden;
+    max-width: 720px;
   }
   .review-slides {
     gap: 0;
@@ -219,9 +220,19 @@
   }
   .review-slide,
   .review-slide.is-active {
+    display: flex;
     flex: 0 0 100%;
     width: 100%;
     align-self: flex-start;
+    justify-content: center;
+  }
+  .review-slide img {
+    width: auto;
+    max-width: 100%;
+    max-height: min(68vh, 640px);
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
   }
 
   .achievement-carousel {
@@ -319,6 +330,15 @@
   #trial .trial-gift-list li {
     font-size: 18px;
   }
+}
+
+/* Lightbox follows the same rectangular control language as the rest of the site. */
+.lightbox-close {
+  border-radius: 0;
+}
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* Carousel behavior lives in index.html; this file controls only presentation. */
