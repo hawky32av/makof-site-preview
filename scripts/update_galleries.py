@@ -9,6 +9,11 @@ INDEX = ROOT / "index.html"
 STYLES = ROOT / "styles.css"
 REVIEWS = ROOT / "assets" / "reviews"
 ACHIEVEMENTS = ROOT / "assets" / "achievements"
+LEGAL_PAGES = {
+    ROOT / "privacy.html": "https://makof.ru/privacy.html",
+    ROOT / "consent.html": "https://makof.ru/consent.html",
+    ROOT / "offer.html": "https://makof.ru/offer.html",
+}
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
 
@@ -30,6 +35,83 @@ ACHIEVEMENT_ORDER = [
     "makov-dmitriy-gennadyevich12.pdf-page1of2.jpg",
     "author.jpg",
 ]
+
+SEO_BLOCK = '''  <!-- SITE-SEO:START -->
+  <link rel="canonical" href="https://makof.ru/">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#e86819">
+  <link rel="icon" href="assets/hero/hero.png" type="image/png">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Дмитрий Маков — подготовка к ЕГЭ по информатике">
+  <meta property="og:title" content="Дмитрий Маков — подготовка к ЕГЭ по информатике">
+  <meta property="og:description" content="Подготовка к ЕГЭ по информатике для 10–11 классов: от базы до 80+ баллов. Подтверждённые результаты учеников, Python с нуля и бесплатное пробное занятие.">
+  <meta property="og:url" content="https://makof.ru/">
+  <meta property="og:image" content="https://makof.ru/assets/hero/hero.png">
+  <meta property="og:image:alt" content="Дмитрий Маков — преподаватель информатики">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Дмитрий Маков — подготовка к ЕГЭ по информатике">
+  <meta name="twitter:description" content="Подготовка к ЕГЭ по информатике для 10–11 классов: от базы до 80+ баллов.">
+  <meta name="twitter:image" content="https://makof.ru/assets/hero/hero.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://makof.ru/#person",
+        "name": "Дмитрий Маков",
+        "url": "https://makof.ru/",
+        "jobTitle": "Преподаватель информатики",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Университет ИТМО"
+        },
+        "knowsAbout": [
+          "ЕГЭ по информатике",
+          "информатика",
+          "Python",
+          "программирование"
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://makof.ru/#ege-service",
+        "name": "Подготовка к ЕГЭ по информатике",
+        "serviceType": "Онлайн-подготовка к ЕГЭ по информатике",
+        "provider": {"@id": "https://makof.ru/#person"},
+        "areaServed": "RU",
+        "url": "https://makof.ru/"
+      }
+    ]
+  }
+  </script>
+  <!-- SITE-SEO:END -->'''
+
+METRIKA_BLOCK = '''  <!-- YANDEX-METRIKA:START -->
+  <script>
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=106373103', 'ym');
+
+    ym(106373103, 'init', {
+      ssr: true,
+      webvisor: true,
+      clickmap: true,
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  </script>
+  <!-- YANDEX-METRIKA:END -->'''
+
+METRIKA_NOSCRIPT = '''  <!-- YANDEX-METRIKA-NOSCRIPT:START -->
+  <noscript><div><img src="https://mc.yandex.ru/watch/106373103" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- YANDEX-METRIKA-NOSCRIPT:END -->'''
 
 
 def natural_key(path: Path):
@@ -132,6 +214,88 @@ def make_offer_link_plain(styles: str) -> str:
     )
 
 
+def upsert_marked_block(source: str, start_marker: str, end_marker: str, block: str, anchor: str, before: bool = True) -> str:
+    pattern = re.compile(
+        rf'\s*{re.escape(start_marker)}.*?{re.escape(end_marker)}\s*',
+        re.S,
+    )
+    if pattern.search(source):
+        return pattern.sub("\n" + block + "\n", source, count=1)
+    if anchor not in source:
+        raise RuntimeError(f"Anchor not found: {anchor}")
+    replacement = block + "\n\n" + anchor if before else anchor + "\n" + block
+    return source.replace(anchor, replacement, 1)
+
+
+def add_main_site_meta(source: str) -> str:
+    source = upsert_marked_block(
+        source,
+        "<!-- SITE-SEO:START -->",
+        "<!-- SITE-SEO:END -->",
+        SEO_BLOCK,
+        '  <link rel="preconnect" href="https://fonts.googleapis.com">',
+        before=True,
+    )
+    source = upsert_marked_block(
+        source,
+        "<!-- YANDEX-METRIKA:START -->",
+        "<!-- YANDEX-METRIKA:END -->",
+        METRIKA_BLOCK,
+        "</head>",
+        before=True,
+    )
+    source = upsert_marked_block(
+        source,
+        "<!-- YANDEX-METRIKA-NOSCRIPT:START -->",
+        "<!-- YANDEX-METRIKA-NOSCRIPT:END -->",
+        METRIKA_NOSCRIPT,
+        "<body>",
+        before=False,
+    )
+    return source
+
+
+def update_legal_page(path: Path, canonical_url: str) -> None:
+    source = path.read_text(encoding="utf-8")
+    source = re.sub(
+        r'<meta name="robots" content="[^"]*">',
+        '<meta name="robots" content="noindex,follow">',
+        source,
+        count=1,
+    )
+
+    canonical = f'  <link rel="canonical" href="{canonical_url}">\n  <meta name="theme-color" content="#e86819">\n  <link rel="icon" href="assets/hero/hero.png" type="image/png">'
+    source = upsert_marked_block(
+        source,
+        "<!-- LEGAL-SEO:START -->",
+        "<!-- LEGAL-SEO:END -->",
+        f'  <!-- LEGAL-SEO:START -->\n{canonical}\n  <!-- LEGAL-SEO:END -->',
+        '  <link rel="preconnect" href="https://fonts.googleapis.com">',
+        before=True,
+    )
+    source = upsert_marked_block(
+        source,
+        "<!-- YANDEX-METRIKA:START -->",
+        "<!-- YANDEX-METRIKA:END -->",
+        METRIKA_BLOCK,
+        "</head>",
+        before=True,
+    )
+
+    body_match = re.search(r'<body([^>]*)>', source)
+    if body_match:
+        source = upsert_marked_block(
+            source,
+            "<!-- YANDEX-METRIKA-NOSCRIPT:START -->",
+            "<!-- YANDEX-METRIKA-NOSCRIPT:END -->",
+            METRIKA_NOSCRIPT,
+            body_match.group(0),
+            before=False,
+        )
+
+    path.write_text(source, encoding="utf-8")
+
+
 def main():
     source = INDEX.read_text(encoding="utf-8")
 
@@ -143,15 +307,20 @@ def main():
     source = replace_review_group(source, "Родители", "parent", parent_files)
     source = replace_achievements(source, achievement_files)
     source = source.replace('class="footer-offer" href="offer.html"', 'href="offer.html"')
+    source = add_main_site_meta(source)
 
     INDEX.write_text(source, encoding="utf-8")
 
     styles = STYLES.read_text(encoding="utf-8")
     STYLES.write_text(make_offer_link_plain(styles), encoding="utf-8")
 
+    for path, canonical_url in LEGAL_PAGES.items():
+        update_legal_page(path, canonical_url)
+
     print(f"Student reviews: {len(student_files)}")
     print(f"Parent reviews: {len(parent_files)}")
     print(f"Achievements: {len(achievement_files)}")
+    print("SEO, canonical URLs and Yandex Metrika: updated")
 
 
 if __name__ == "__main__":
