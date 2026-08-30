@@ -1,0 +1,34 @@
+name: Remove duplicate signup heading
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-duplicate-signup-heading.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicate site heading
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '<div class="signup-form" id="signup-form"><span class="section-kicker">Запись</span><h2>Записаться на пробное занятие</h2><p>'
+          new = '<div class="signup-form" id="signup-form"><span class="section-kicker">Запись</span><p>'
+          assert s.count(old) == 1, f'Expected one match, found {s.count(old)}'
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+      - name: Commit cleanup
+        run: |
+          rm .github/workflows/remove-duplicate-signup-heading.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/remove-duplicate-signup-heading.yml
+          git commit -m "Remove duplicate signup heading"
+          git push
