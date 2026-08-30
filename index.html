@@ -16,17 +16,35 @@
   <link rel="stylesheet" href="sketch.css">
   <style>
     .proof-image { display:block; width:auto; max-width:min(100%,620px); height:auto; }
-    .about-section { padding:76px 0; border-bottom:1px solid var(--line); background:#fff; }
+    .about-section,
+    .reviews-section { padding:76px 0; border-bottom:1px solid var(--line); background:#fff; }
     .about-layout { display:grid; grid-template-columns:240px minmax(0,1fr); gap:54px; align-items:start; }
     .about-photo { display:block; width:100%; height:auto; }
-    .about-section h2 { margin:0; font-size:clamp(34px,4vw,48px); line-height:1.08; letter-spacing:-.035em; font-weight:600; }
+    .about-section h2,
+    .reviews-section h2 { margin:0; font-size:clamp(34px,4vw,48px); line-height:1.08; letter-spacing:-.035em; font-weight:600; }
     .about-lead { margin:18px 0 28px; max-width:660px; font-size:17px; line-height:1.65; }
     .about-facts { margin:0; padding:0; list-style:none; border-top:1px solid var(--line); }
     .about-facts li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; padding:18px 0; border-bottom:1px solid var(--line); }
     .about-facts strong { font-size:13px; font-weight:600; }
     .about-facts span { color:var(--muted); font-size:13px; line-height:1.6; }
-    @media (max-width:900px) { .about-layout { grid-template-columns:200px minmax(0,1fr); gap:32px; } }
-    @media (max-width:720px) { .about-section { padding:58px 0; } .about-layout { grid-template-columns:1fr; } .about-photo { width:min(100%,320px); } .about-facts li { grid-template-columns:1fr; gap:5px; } }
+    .reviews-head { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:54px; align-items:end; margin-bottom:36px; }
+    .reviews-head p { margin:0; max-width:560px; color:var(--muted); font-size:14px; line-height:1.7; }
+    .review-list { border-top:1px solid var(--line); }
+    .review-item { display:grid; grid-template-columns:170px minmax(0,1fr); gap:32px; padding:28px 0; border-bottom:1px solid var(--line); }
+    .review-meta { color:var(--muted); font-size:12px; line-height:1.6; }
+    .review-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; border:1px dashed #cfcfcf; color:#999; font-size:13px; text-align:center; padding:24px; }
+    @media (max-width:900px) {
+      .about-layout { grid-template-columns:200px minmax(0,1fr); gap:32px; }
+      .reviews-head { grid-template-columns:1fr; gap:18px; }
+    }
+    @media (max-width:720px) {
+      .about-section,
+      .reviews-section { padding:58px 0; }
+      .about-layout { grid-template-columns:1fr; }
+      .about-photo { width:min(100%,320px); }
+      .about-facts li { grid-template-columns:1fr; gap:5px; }
+      .review-item { grid-template-columns:1fr; gap:12px; }
+    }
   </style>
 </head>
 <body>
@@ -34,19 +52,14 @@
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Дмитрий Маков — на главную">
         <span class="brand-mark" aria-hidden="true">M</span>
-        <span class="brand-copy">
-          <strong>Дмитрий Маков</strong>
-          <span>преподаватель информатики</span>
-        </span>
+        <span class="brand-copy"><strong>Дмитрий Маков</strong><span>преподаватель информатики</span></span>
       </a>
-
       <nav class="nav" aria-label="Навигация по странице">
         <a href="#results">Результаты</a>
         <a href="#preparation">Подготовка</a>
         <a href="#about">Обо мне</a>
-        <a href="#next">Отзывы</a>
+        <a href="#reviews">Отзывы</a>
       </nav>
-
       <a class="button button-small" href="#trial">Бесплатное пробное</a>
     </div>
   </header>
@@ -58,27 +71,14 @@
           <div class="eyebrow">ЕГЭ по информатике · 10–11 класс</div>
           <h1>Подготовка к ЕГЭ<br><span>от основ до 80+ баллов</span></h1>
           <p class="hero-lead">Системная подготовка на весь учебный год: занятия, практика, домашняя работа и контроль прогресса.</p>
-          <div class="hero-actions" id="trial">
-            <a class="button button-primary" href="#next">Записаться на пробное</a>
-            <a class="button button-secondary" href="#next">Задать вопрос</a>
-          </div>
-          <p class="hero-note">Пробное занятие бесплатно</p>
+          <div class="hero-actions" id="trial"><a class="button button-primary" href="#next">Записаться на пробное</a></div>
         </div>
-
         <div class="hero-portrait" aria-label="Дмитрий Маков, преподаватель информатики">
           <div class="hero-portrait-image" role="img" aria-label="Дмитрий Маков с авторским учебником по программированию">
-            <img src="assets/hero/hero-01.webp" alt="">
-            <img src="assets/hero/hero-02.webp" alt="">
-            <img src="assets/hero/hero-03.webp" alt="">
-            <img src="assets/hero/hero-04.webp" alt="">
-            <img src="assets/hero/hero-05.webp" alt="">
-          </div>
-          <div class="hero-result-badge" aria-label="Лучший результат ученика — 100 баллов">
-            <strong>100</strong><span>лучший результат ЕГЭ</span>
+            <img src="assets/hero/hero-01.webp" alt=""><img src="assets/hero/hero-02.webp" alt=""><img src="assets/hero/hero-03.webp" alt=""><img src="assets/hero/hero-04.webp" alt=""><img src="assets/hero/hero-05.webp" alt="">
           </div>
         </div>
       </div>
-
       <div class="container proof-strip" aria-label="Ключевые факты о преподавателе">
         <div class="proof-item"><strong>81</strong><span>средний балл учеников 2026 года</span></div>
         <div class="proof-item"><strong>с 2019 года</strong><span>готовлю к экзаменам</span></div>
@@ -92,9 +92,7 @@
           <div><span class="section-kicker">Результаты</span><h2>Баллы моих учеников</h2></div>
           <p>Результат зависит от стартового уровня, срока подготовки и цели поступления.</p>
         </div>
-
         <div class="score-intro"><span>Нажмите на результат</span><p>Откроется подтверждение баллов ученика.</p></div>
-
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
           <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.webp" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="90" data-image="assets/results/result-90.webp" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
@@ -103,36 +101,17 @@
           <button class="score" type="button" data-score="75" data-image="assets/results/result-75.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="72" data-image="assets/results/result-72.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
         </div>
-
         <div class="score-proof" id="score-proof" hidden aria-live="polite">
-          <div class="proof-copy">
-            <span class="proof-eyebrow">Подтверждение результата</span>
-            <div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div>
-            <p id="proof-note">Подготовка с сентября до экзамена.</p>
-          </div>
-          <div>
-            <img class="proof-image" id="proof-image" src="assets/results/result-100.webp" alt="Подтверждение результата 100 баллов">
-          </div>
+          <div class="proof-copy"><span class="proof-eyebrow">Подтверждение результата</span><div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div><p id="proof-note">Подготовка с сентября до экзамена.</p></div>
+          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.webp" alt="Подтверждение результата 100 баллов"></div>
         </div>
-
-        <div class="goal-card">
-          <div class="goal-label">Важно</div>
-          <div class="goal-copy">
-            <h3>Цель — нужный балл для поступления</h3>
-            <p>Кому-то достаточно уверенных 70–80 баллов, кому-то нужны 90+, кто-то идёт за максимальным результатом. Сначала определяем цель и стартовый уровень, затем строим подготовку.</p>
-          </div>
-        </div>
+        <div class="goal-card"><div class="goal-copy"><h3>Цель — нужный балл для поступления</h3><p>Кому-то достаточно уверенных 70–80 баллов, кому-то нужны 90+, кто-то идёт за максимальным результатом. Сначала определяем цель и стартовый уровень, затем строим подготовку.</p></div></div>
       </div>
     </section>
 
     <section class="preparation-section" id="preparation">
       <div class="container preparation-layout">
-        <div class="preparation-intro">
-          <span class="section-kicker">Подготовка</span>
-          <h2>Как устроено обучение</h2>
-          <p>Ученик понимает, что изучает сейчас, где лежат материалы и что уже получается. Всё необходимое для подготовки собрано в одной системе.</p>
-        </div>
-
+        <div class="preparation-intro"><span class="section-kicker">Подготовка</span><h2>Как устроено обучение</h2><p>Ученик понимает, что изучает сейчас, где лежат материалы и что уже получается. Всё необходимое для подготовки собрано в одной системе.</p></div>
         <div class="preparation-flow" aria-label="Как устроена подготовка к ЕГЭ">
           <article class="preparation-step"><span class="step-number">01</span><div><h3>Занятия</h3><p>Разбираем темы ЕГЭ и сразу решаем задачи. Если для задания нужен Python, изучаем необходимые для него основы.</p></div></article>
           <article class="preparation-step"><span class="step-number">02</span><div><h3>Практика и домашняя работа</h3><p>После занятия ученик закрепляет тему самостоятельно. Задания подобраны под пройденный материал и постепенно усложняются.</p></div></article>
@@ -141,21 +120,14 @@
           <article class="preparation-step"><span class="step-number">05</span><div><h3>Пробники и контроль прогресса</h3><p>Регулярно проверяем текущий результат, разбираем ошибки и видим темы, к которым стоит вернуться.</p></div></article>
         </div>
       </div>
-
-      <div class="container python-callout">
-        <div class="python-callout-mark" aria-hidden="true">&lt;/&gt;</div>
-        <div><span>Можно начать с нуля</span><h3>Знать Python заранее не обязательно</h3><p>Если программирование пока вызывает сложности, нужную для ЕГЭ базу разбираем с самого начала.</p></div>
-      </div>
+      <div class="container python-callout"><div><span>Можно начать с нуля</span><h3>Знать Python заранее не обязательно</h3><p>Если программирование пока вызывает сложности, нужную для ЕГЭ базу разбираем с самого начала.</p></div></div>
     </section>
 
     <section class="about-section" id="about">
       <div class="container about-layout">
+        <div><img class="about-photo" id="about-photo" alt="Дмитрий Маков"></div>
         <div>
-          <img class="about-photo" id="about-photo" alt="Дмитрий Маков">
-        </div>
-        <div>
-          <span class="section-kicker">Обо мне</span>
-          <h2>Дмитрий Маков</h2>
+          <span class="section-kicker">Обо мне</span><h2>Дмитрий Маков</h2>
           <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление — подготовка школьников к ЕГЭ по информатике.</p>
           <ul class="about-facts">
             <li><strong>Образование</strong><span>Университет ИТМО, педагогическое направление в сфере IT.</span></li>
@@ -167,8 +139,22 @@
       </div>
     </section>
 
-    <section class="stage-placeholder" id="next" aria-label="Следующие разделы сайта">
-      <div class="container"><span>Следующий этап</span><p>Дальше можно собирать отзывы и блок бесплатного пробного занятия.</p></div>
+    <section class="reviews-section" id="reviews">
+      <div class="container">
+        <div class="reviews-head">
+          <div><span class="section-kicker">Отзывы</span><h2>Ученики и родители о занятиях</h2></div>
+          <p>В финальной версии здесь будут реальные скриншоты отзывов. Пока фиксируем саму структуру блока и его место на странице.</p>
+        </div>
+        <div class="review-list">
+          <div class="review-item"><div class="review-meta">Отзыв ученика<br>результат / подготовка</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
+          <div class="review-item"><div class="review-meta">Отзыв родителя<br>организация обучения</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
+          <div class="review-item"><div class="review-meta">Отзыв ученика<br>объяснение материала</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage-placeholder" id="next" aria-label="Следующий раздел сайта">
+      <div class="container"><span>Следующий этап</span><p>После отзывов — отдельный блок бесплатного пробного занятия.</p></div>
     </section>
   </main>
 
@@ -178,42 +164,17 @@
     const proofScore = document.getElementById('proof-score');
     const proofNote = document.getElementById('proof-note');
     const proofImage = document.getElementById('proof-image');
-    const aboutPhoto = document.getElementById('about-photo');
-
-    async function base64Image(path) {
-      const response = await fetch(path, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`Не удалось загрузить ${path}`);
-      const base64 = (await response.text()).trim();
-      return `data:image/jpeg;base64,${base64}`;
-    }
-
-    base64Image('assets/about/about-photo.b64')
-      .then((src) => { aboutPhoto.src = src; })
-      .catch(() => { aboutPhoto.alt = ''; });
 
     scoreButtons.forEach((button) => {
-      button.addEventListener('click', async () => {
-        scoreButtons.forEach((item) => {
-          item.classList.remove('is-active');
-          item.setAttribute('aria-expanded', 'false');
-        });
+      button.addEventListener('click', () => {
+        scoreButtons.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-expanded', 'false'); });
         button.classList.add('is-active');
         button.setAttribute('aria-expanded', 'true');
         proofScore.textContent = button.dataset.score;
         proofNote.textContent = button.dataset.note;
+        proofImage.src = button.dataset.image;
+        proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
         proof.hidden = false;
-
-        try {
-          if (button.dataset.imageB64) {
-            proofImage.src = await base64Image(button.dataset.imageB64);
-          } else {
-            proofImage.src = button.dataset.image;
-          }
-          proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
-        } catch (error) {
-          proofImage.removeAttribute('src');
-          proofImage.alt = 'Не удалось загрузить подтверждение результата';
-        }
       });
     });
   </script>
