@@ -17,15 +17,16 @@
   <style>
     .proof-image { display:block; width:auto; max-width:min(100%,620px); height:auto; }
     .about-section { padding:76px 0; border-bottom:1px solid var(--line); background:#fff; }
-    .about-layout { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); gap:54px; align-items:start; }
+    .about-layout { display:grid; grid-template-columns:240px minmax(0,1fr); gap:54px; align-items:start; }
+    .about-photo { display:block; width:100%; height:auto; }
     .about-section h2 { margin:0; font-size:clamp(34px,4vw,48px); line-height:1.08; letter-spacing:-.035em; font-weight:600; }
-    .about-lead { margin:0 0 28px; max-width:660px; font-size:17px; line-height:1.65; }
+    .about-lead { margin:18px 0 28px; max-width:660px; font-size:17px; line-height:1.65; }
     .about-facts { margin:0; padding:0; list-style:none; border-top:1px solid var(--line); }
     .about-facts li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; padding:18px 0; border-bottom:1px solid var(--line); }
     .about-facts strong { font-size:13px; font-weight:600; }
     .about-facts span { color:var(--muted); font-size:13px; line-height:1.6; }
-    @media (max-width:900px) { .about-layout { grid-template-columns:1fr; gap:28px; } }
-    @media (max-width:720px) { .about-section { padding:58px 0; } .about-facts li { grid-template-columns:1fr; gap:5px; } }
+    @media (max-width:900px) { .about-layout { grid-template-columns:200px minmax(0,1fr); gap:32px; } }
+    @media (max-width:720px) { .about-section { padding:58px 0; } .about-layout { grid-template-columns:1fr; } .about-photo { width:min(100%,320px); } .about-facts li { grid-template-columns:1fr; gap:5px; } }
   </style>
 </head>
 <body>
@@ -97,7 +98,7 @@
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
           <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.webp" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="90" data-image="assets/results/result-90.webp" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="88" data-image-b64="assets/results/result-88-v2.b64" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="78" data-image="assets/results/result-78.webp" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="75" data-image="assets/results/result-75.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="72" data-image="assets/results/result-72.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
@@ -150,10 +151,11 @@
     <section class="about-section" id="about">
       <div class="container about-layout">
         <div>
-          <span class="section-kicker">Обо мне</span>
-          <h2>Дмитрий Маков</h2>
+          <img class="about-photo" id="about-photo" alt="Дмитрий Маков">
         </div>
         <div>
+          <span class="section-kicker">Обо мне</span>
+          <h2>Дмитрий Маков</h2>
           <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление — подготовка школьников к ЕГЭ по информатике.</p>
           <ul class="about-facts">
             <li><strong>Образование</strong><span>Университет ИТМО, педагогическое направление в сфере IT.</span></li>
@@ -176,9 +178,21 @@
     const proofScore = document.getElementById('proof-score');
     const proofNote = document.getElementById('proof-note');
     const proofImage = document.getElementById('proof-image');
+    const aboutPhoto = document.getElementById('about-photo');
+
+    async function base64Image(path) {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Не удалось загрузить ${path}`);
+      const base64 = (await response.text()).trim();
+      return `data:image/jpeg;base64,${base64}`;
+    }
+
+    base64Image('assets/about/about-photo.b64')
+      .then((src) => { aboutPhoto.src = src; })
+      .catch(() => { aboutPhoto.alt = ''; });
 
     scoreButtons.forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         scoreButtons.forEach((item) => {
           item.classList.remove('is-active');
           item.setAttribute('aria-expanded', 'false');
@@ -187,9 +201,19 @@
         button.setAttribute('aria-expanded', 'true');
         proofScore.textContent = button.dataset.score;
         proofNote.textContent = button.dataset.note;
-        proofImage.src = button.dataset.image;
-        proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
         proof.hidden = false;
+
+        try {
+          if (button.dataset.imageB64) {
+            proofImage.src = await base64Image(button.dataset.imageB64);
+          } else {
+            proofImage.src = button.dataset.image;
+          }
+          proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
+        } catch (error) {
+          proofImage.removeAttribute('src');
+          proofImage.alt = 'Не удалось загрузить подтверждение результата';
+        }
       });
     });
   </script>
