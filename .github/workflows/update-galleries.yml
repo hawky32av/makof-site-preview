@@ -5,6 +5,7 @@ on:
     paths:
       - "assets/reviews/**"
       - "assets/achievements/**"
+      - "favicon.svg"
       - "scripts/update_galleries.py"
       - ".github/workflows/update-galleries.yml"
   workflow_dispatch:
@@ -21,7 +22,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update generated site content
-        run: python scripts/update_galleries.py
+        run: |
+          python scripts/update_galleries.py
+          python - <<'PY'
+          from pathlib import Path
+
+          old = '<link rel="icon" href="assets/hero/hero.png" type="image/png">'
+          new = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
+          for filename in ("index.html", "privacy.html", "consent.html", "offer.html"):
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              path.write_text(text.replace(old, new), encoding="utf-8")
+          PY
 
       - name: Commit generated files
         run: |
