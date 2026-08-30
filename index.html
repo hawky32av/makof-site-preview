@@ -44,12 +44,10 @@
     .achievements-section{padding-top:72px;padding-bottom:72px}
     .achievements-heading{margin-bottom:32px}
     .achievement-carousel{position:relative;min-width:0}
-    .achievement-track{display:flex;gap:18px;overflow-x:hidden;scroll-snap-type:none;scroll-behavior:smooth;scrollbar-width:none;padding:0 0 4px}
+    .achievement-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain;padding:0 0 4px}
     .achievement-track::-webkit-scrollbar{display:none}
-    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4)}
-    .achievement-controls{display:flex;align-items:center;gap:12px;margin-top:22px}
-    .achievement-arrow{width:46px;height:46px;padding:0;border:1px solid var(--line-strong);border-radius:4px;background:#fff;font-size:21px;cursor:pointer}
-    .achievement-arrow:hover{background:var(--surface)}
+    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start;scroll-snap-stop:always}
+    .achievement-controls{display:flex;justify-content:center;align-items:center;margin-top:18px}
     .achievement-counter{min-width:62px;color:var(--muted);font-size:13px;text-align:center}
 
     /* Финальный CTA по центру и заметнее. */
@@ -87,7 +85,7 @@
       .credential-documents{grid-template-columns:1fr;gap:28px}
       .credential-copy{grid-template-columns:38px minmax(0,1fr);gap:12px}
       .achievements-section{padding-top:60px;padding-bottom:60px}
-      .achievement-track{gap:12px;overflow-x:hidden}
+      .achievement-track{gap:12px;overflow-x:auto}
       .achievement-track .achievement-item{flex-basis:100%}
       .trial-gift{padding-top:22px}
       .trial-gift span{font-size:21px}
@@ -289,11 +287,11 @@
         <div class="section-heading reviews-head"><div><span class="section-kicker">Отзывы</span><h2>Что пишут после занятий и экзамена</h2></div><p>Отзывы оставил скриншотами — без пересказа и сокращений.</p></div>
         <div class="reviews-group">
           <h3>Ученики</h3>
-          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"><img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"><img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"><img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
+          <div class="review-slider" data-review-slider><div class="review-slides" data-swipe-track><button class="review-slide" type="button" data-lightbox-src="assets/reviews/student-1.png" data-lightbox-alt="Отзыв ученика 1"><img src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/student-2.png" data-lightbox-alt="Отзыв ученика 2"><img src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/student-3.png" data-lightbox-alt="Отзыв ученика 3"><img src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/student-4.png" data-lightbox-alt="Отзыв ученика 4"><img src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></button></div><div class="review-controls"><span class="review-counter" data-review-counter>1 / 4</span></div></div>
         </div>
         <div class="reviews-group">
           <h3>Родители</h3>
-          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"><img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"><img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"><img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
+          <div class="review-slider" data-review-slider><div class="review-slides" data-swipe-track><button class="review-slide" type="button" data-lightbox-src="assets/reviews/parent-1.png" data-lightbox-alt="Отзыв родителя 1"><img src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/parent-2.png" data-lightbox-alt="Отзыв родителя 2"><img src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/parent-3.png" data-lightbox-alt="Отзыв родителя 3"><img src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"></button><button class="review-slide" type="button" data-lightbox-src="assets/reviews/parent-4.png" data-lightbox-alt="Отзыв родителя 4"><img src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></button></div><div class="review-controls"><span class="review-counter" data-review-counter>1 / 4</span></div></div>
         </div>
       </div>
     </section>
@@ -319,7 +317,7 @@
       <div class="container">
         <div class="section-heading achievements-heading"><div><span class="section-kicker">Достижения</span><h2>Дополнительные дипломы и сертификаты</h2></div><p>Победы в профессиональных конкурсах и олимпиадах по информатике, ФГОС и методике преподавания.</p></div>
         <div class="achievement-carousel" data-achievement-carousel>
-          <div class="achievement-track" data-achievement-track>
+          <div class="achievement-track" data-achievement-track data-swipe-track>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/Диплом_RS_338_213172.jpg" data-lightbox-alt="Диплом за I место в конкурсе Искусственный интеллект в образовании"><img src="assets/achievements/Диплом_RS_338_213172.jpg" alt="Диплом за I место в конкурсе Искусственный интеллект в образовании" loading="lazy"><span>«Искусственный интеллект в образовании» · I место</span></button>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/olympiad_diploma_2359_participant.jpg" data-lightbox-alt="Диплом победителя олимпиады Алгоритмы и структуры данных"><img src="assets/achievements/olympiad_diploma_2359_participant.jpg" alt="Диплом победителя олимпиады Алгоритмы и структуры данных" loading="lazy"><span>«Алгоритмы и структуры данных» · I место</span></button>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/7691998.jpg" data-lightbox-alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ"><img src="assets/achievements/7691998.jpg" alt="Сертификат по структуре и содержанию КИМ ЕГЭ по информатике и ИКТ" loading="lazy"><span>«Структура и содержание КИМ ЕГЭ по информатике и ИКТ»</span></button>
@@ -335,11 +333,7 @@
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию"><img src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию" loading="lazy"><span>«Требования ФГОС к среднему общему образованию» · I место</span></button>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/author.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Основные педагогические понятия"><img src="assets/achievements/author.jpg" alt="Диплом за I место в олимпиаде Основные педагогические понятия" loading="lazy"><span>«Основные педагогические понятия» · I место</span></button>
           </div>
-          <div class="achievement-controls">
-            <button class="achievement-arrow" type="button" data-achievement-prev aria-label="Предыдущие дипломы">←</button>
-            <span class="achievement-counter" data-achievement-counter>4 / 14</span>
-            <button class="achievement-arrow" type="button" data-achievement-next aria-label="Следующие дипломы">→</button>
-          </div>
+          <div class="achievement-controls"><span class="achievement-counter" data-achievement-counter>4 / 14</span></div>
         </div>
       </div>
     </section>
@@ -411,74 +405,100 @@
       if (canHoverLearning) button.addEventListener('mouseenter', () => activateLearningTab(button));
     });
 
-    document.querySelectorAll('[data-review-slider]').forEach((slider) => {
-      const slides = Array.from(slider.querySelectorAll('.review-slide'));
-      const counter = slider.querySelector('[data-review-counter]');
-      const prev = slider.querySelector('[data-review-prev]');
-      const next = slider.querySelector('[data-review-next]');
-      let current = 0;
-      let startX = null;
+    function enableMouseDrag(track) {
+      let dragging = false;
+      let startX = 0;
+      let startScroll = 0;
+      let moved = false;
+      let suppressClickUntil = 0;
 
-      function show(index) {
-        current = (index + slides.length) % slides.length;
-        slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
-        counter.textContent = `${current + 1} / ${slides.length}`;
+      track.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = event.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        const delta = event.clientX - startX;
+        if (Math.abs(delta) > 5) moved = true;
+        track.scrollLeft = startScroll - delta;
+      });
+
+      function finishDrag(event) {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('is-dragging');
+        if (moved) suppressClickUntil = performance.now() + 250;
+        if (track.hasPointerCapture && track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
       }
 
-      prev.addEventListener('click', () => show(current - 1));
-      next.addEventListener('click', () => show(current + 1));
-      slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive: true });
-      slider.addEventListener('touchend', (event) => {
-        if (startX === null) return;
-        const delta = event.changedTouches[0].clientX - startX;
-        if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1));
-        startX = null;
+      track.addEventListener('pointerup', finishDrag);
+      track.addEventListener('pointercancel', finishDrag);
+      track.addEventListener('click', (event) => {
+        if (performance.now() < suppressClickUntil) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+    }
+
+    function nearestSlideIndex(track, items) {
+      if (!items.length) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const step = items[0].getBoundingClientRect().width + gap;
+      return step ? Math.max(0, Math.min(items.length - 1, Math.round(track.scrollLeft / step))) : 0;
+    }
+
+    document.querySelectorAll('[data-review-slider]').forEach((slider) => {
+      const track = slider.querySelector('[data-swipe-track]');
+      const slides = Array.from(track.querySelectorAll('.review-slide'));
+      const counter = slider.querySelector('[data-review-counter]');
+      let raf = 0;
+
+      function updateCounter() {
+        const index = nearestSlideIndex(track, slides);
+        counter.textContent = `${index + 1} / ${slides.length}`;
+      }
+
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(updateCounter);
       }, { passive: true });
+      window.addEventListener('resize', updateCounter, { passive: true });
+      enableMouseDrag(track);
+      updateCounter();
     });
 
     document.querySelectorAll('[data-achievement-carousel]').forEach((carousel) => {
       const track = carousel.querySelector('[data-achievement-track]');
       const items = Array.from(track.querySelectorAll('.achievement-item'));
-      const prev = carousel.querySelector('[data-achievement-prev]');
-      const next = carousel.querySelector('[data-achievement-next]');
       const counter = carousel.querySelector('[data-achievement-counter]');
-      let pageIndex = 0;
+      let raf = 0;
 
-      function pageSize() {
+      function visibleCount() {
         if (window.matchMedia('(max-width: 720px)').matches) return 1;
         if (window.matchMedia('(max-width: 980px)').matches) return 2;
         return 4;
       }
 
-      function pageStarts() {
-        const size = pageSize();
-        if (items.length <= size) return [0];
-        const starts = [];
-        for (let i = 0; i < items.length; i += size) starts.push(Math.min(i, items.length - size));
-        return [...new Set(starts)];
+      function updateCounter() {
+        const first = nearestSlideIndex(track, items);
+        const end = Math.min(first + visibleCount(), items.length);
+        counter.textContent = `${end} / ${items.length}`;
       }
 
-      function itemStep() {
-        if (!items.length) return 0;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        return items[0].getBoundingClientRect().width + gap;
-      }
-
-      function showPage(index, smooth = true) {
-        const starts = pageStarts();
-        pageIndex = Math.max(0, Math.min(index, starts.length - 1));
-        const start = starts[pageIndex];
-        track.scrollTo({ left: start * itemStep(), behavior: smooth ? 'smooth' : 'auto' });
-        const visibleEnd = Math.min(start + pageSize(), items.length);
-        counter.textContent = `${visibleEnd} / ${items.length}`;
-        prev.disabled = pageIndex === 0;
-        next.disabled = pageIndex === starts.length - 1;
-      }
-
-      prev.addEventListener('click', () => showPage(pageIndex - 1));
-      next.addEventListener('click', () => showPage(pageIndex + 1));
-      window.addEventListener('resize', () => showPage(0, false), { passive: true });
-      showPage(0, false);
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(updateCounter);
+      }, { passive: true });
+      window.addEventListener('resize', updateCounter, { passive: true });
+      enableMouseDrag(track);
+      updateCounter();
     });
 
     const lightbox = document.getElementById('lightbox');
