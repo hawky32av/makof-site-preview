@@ -12,6 +12,25 @@ ACHIEVEMENTS = ROOT / "assets" / "achievements"
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".avif"}
 
+# Сохраняем привычный порядок уже опубликованных документов.
+# Все новые изображения автоматически добавляются после них.
+ACHIEVEMENT_ORDER = [
+    "Диплом_RS_338_213172.jpg",
+    "olympiad_diploma_2359_participant.jpg",
+    "7691998.jpg",
+    "1787771425_8956.jpg",
+    "5314562.jpg",
+    "84095.jpeg",
+    "5314622.jpg",
+    "1787769122_72944.jpg",
+    "diplom.jpg",
+    "diplom_author_1120507.jpg",
+    "VP100-634258D357556.jpg",
+    "umn1-385442.jpg",
+    "makov-dmitriy-gennadyevich12.pdf-page1of2.jpg",
+    "author.jpg",
+]
+
 
 def natural_key(path: Path):
     return [int(part) if part.isdigit() else part.lower() for part in re.split(r"(\d+)", path.name)]
@@ -22,6 +41,15 @@ def image_files(folder: Path):
         [p for p in folder.iterdir() if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS],
         key=natural_key,
     )
+
+
+def ordered_achievement_files(folder: Path):
+    files = image_files(folder)
+    by_name = {path.name: path for path in files}
+    ordered = [by_name[name] for name in ACHIEVEMENT_ORDER if name in by_name]
+    known = set(ACHIEVEMENT_ORDER)
+    ordered.extend(path for path in files if path.name not in known)
+    return ordered
 
 
 def review_button(path: Path, kind: str, number: int) -> str:
@@ -96,13 +124,12 @@ def replace_achievements(source: str, files: list[Path]) -> str:
 
 
 def make_offer_link_plain(styles: str) -> str:
-    styles = re.sub(
+    return re.sub(
         r'\n\.footer-legal \.footer-offer \{.*?\}\n\.footer-legal \.footer-offer:hover \{.*?\}\n',
         "\n",
         styles,
         flags=re.S,
     )
-    return styles
 
 
 def main():
@@ -110,7 +137,7 @@ def main():
 
     student_files = [p for p in image_files(REVIEWS) if p.stem.lower().startswith("student-")]
     parent_files = [p for p in image_files(REVIEWS) if p.stem.lower().startswith("parent-")]
-    achievement_files = image_files(ACHIEVEMENTS)
+    achievement_files = ordered_achievement_files(ACHIEVEMENTS)
 
     source = replace_review_group(source, "Ученики", "student", student_files)
     source = replace_review_group(source, "Родители", "parent", parent_files)
