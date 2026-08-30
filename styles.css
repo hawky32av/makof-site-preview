@@ -31,6 +31,26 @@
   display: none;
 }
 
+/* About portrait: same visual logic, adapted for the left-side composition. */
+#about .about-photo-wrap {
+  position: relative;
+  isolation: isolate;
+}
+#about .about-photo-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -10%;
+  right: 31%;
+  top: 7%;
+  bottom: 0;
+  background: #f6f1eb;
+}
+#about .about-photo {
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 720px) {
   .book-cover,
   .book-spread {
@@ -45,6 +65,12 @@
     left: 28%;
     right: -2%;
     top: 6%;
+    bottom: 0;
+  }
+  #about .about-photo-wrap::before {
+    left: -4%;
+    right: 34%;
+    top: 8%;
     bottom: 0;
   }
 }
