@@ -51,12 +51,11 @@
   z-index: 1;
 }
 
-/* Unified image carousels: swipe/drag, no arrows. */
+/* Touch carousels: native swipe on phones and tablets. */
 .review-slides,
 .achievement-track {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  cursor: grab;
   user-select: none;
 }
 .review-slides::-webkit-scrollbar,
@@ -103,11 +102,10 @@
 }
 .review-controls,
 .achievement-controls {
+  display: flex;
+  align-items: center;
   justify-content: center;
-}
-.review-arrow,
-.achievement-arrow {
-  display: none !important;
+  gap: 10px;
 }
 
 .achievement-track {
@@ -118,6 +116,81 @@
 .achievement-track .achievement-item {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+.carousel-desktop-arrow {
+  display: none;
+}
+
+/* Desktop: familiar explicit prev/next controls instead of drag-only interaction. */
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  .review-slider,
+  .achievement-carousel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review-controls,
+  .achievement-controls {
+    order: -1;
+    justify-content: flex-end;
+  }
+  .review-controls {
+    margin: 0 0 14px;
+  }
+  .achievement-controls {
+    margin: 0 0 18px;
+  }
+
+  .review-slides,
+  .achievement-track {
+    overflow-x: hidden !important;
+    scroll-snap-type: none !important;
+    cursor: default;
+  }
+
+  .carousel-desktop-arrow {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+  }
+  .carousel-desktop-arrow:hover:not(:disabled) {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+  }
+  .carousel-desktop-arrow:disabled {
+    opacity: .28;
+    cursor: default;
+  }
+  .carousel-desktop-arrow:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .review-counter,
+  .achievement-counter {
+    min-width: 64px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  .review-slides,
+  .achievement-track {
+    cursor: grab;
+  }
 }
 
 @media (max-width: 720px) {
