@@ -16,19 +16,46 @@
   <link rel="stylesheet" href="sketch.css">
 
   <style>
+    .hero-portrait-image{display:block}
+    .hero-portrait-image img{display:block;width:100%;height:auto;position:static;transform:none;opacity:1}
     .proof-image{display:block;width:auto;max-width:min(100%,620px);height:auto}
 
-    .about-section,.reviews-section{padding:76px 0;border-bottom:1px solid var(--line);background:#fff}
-    .about-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:54px;align-items:start}
+    .about-section,.reviews-section,.trial-section{
+      padding:76px 0;
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
+
+    .about-layout{
+      display:grid;
+      grid-template-columns:240px minmax(0,1fr);
+      gap:54px;
+      align-items:start;
+    }
+
     .about-photo{display:block;width:100%;height:auto}
-    .about-section h2,.reviews-section h2{margin:0;font-size:clamp(34px,4vw,48px);line-height:1.08;letter-spacing:-.035em;font-weight:600}
+
+    .about-section h2,.reviews-section h2,.trial-section h2{
+      margin:0;
+      font-size:clamp(34px,4vw,48px);
+      line-height:1.08;
+      letter-spacing:-.035em;
+      font-weight:600;
+    }
+
     .about-lead{margin:18px 0 28px;max-width:660px;font-size:17px;line-height:1.65}
     .about-facts{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
     .about-facts li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
     .about-facts strong{font-size:13px;font-weight:600}
     .about-facts span{color:var(--muted);font-size:13px;line-height:1.6}
 
-    .reviews-head{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:54px;align-items:end;margin-bottom:50px}
+    .reviews-head{
+      display:grid;
+      grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+      gap:54px;
+      align-items:end;
+      margin-bottom:50px;
+    }
     .reviews-head p{margin:0;max-width:560px;color:var(--muted);font-size:15px;line-height:1.7}
     .reviews-group{padding-top:30px;border-top:1px solid var(--line)}
     .reviews-group+.reviews-group{margin-top:58px}
@@ -43,12 +70,24 @@
     .review-arrow:hover{border-color:#999}
     .review-counter{min-width:48px;text-align:center;color:var(--muted);font-size:13px}
 
+    .trial-layout{
+      display:grid;
+      grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+      gap:64px;
+      align-items:start;
+    }
+    .trial-lead{margin:18px 0 0;max-width:620px;font-size:18px;line-height:1.65}
+    .trial-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    .trial-list li{padding:20px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.6}
+    .trial-action{margin-top:28px}
+
     @media(max-width:900px){
       .about-layout{grid-template-columns:200px minmax(0,1fr);gap:32px}
-      .reviews-head{grid-template-columns:1fr;gap:18px}
+      .reviews-head,.trial-layout{grid-template-columns:1fr;gap:24px}
     }
+
     @media(max-width:720px){
-      .about-section,.reviews-section{padding:58px 0}
+      .about-section,.reviews-section,.trial-section{padding:58px 0}
       .about-layout{grid-template-columns:1fr}
       .about-photo{width:min(100%,320px)}
       .about-facts li{grid-template-columns:1fr;gap:5px}
@@ -62,7 +101,6 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Дмитрий Маков — на главную">
-        <span class="brand-mark" aria-hidden="true">M</span>
         <span class="brand-copy"><strong>Дмитрий Маков</strong><span>преподаватель информатики</span></span>
       </a>
       <nav class="nav" aria-label="Навигация по странице">
@@ -82,11 +120,11 @@
           <div class="eyebrow">ЕГЭ по информатике · 10–11 класс</div>
           <h1>Подготовка к ЕГЭ<br><span>от основ до 80+ баллов</span></h1>
           <p class="hero-lead">Системная подготовка на весь учебный год: занятия, практика, домашняя работа и контроль прогресса.</p>
-          <div class="hero-actions" id="trial"><a class="button button-primary" href="#next">Записаться на пробное</a></div>
+          <div class="hero-actions"><a class="button button-primary" href="#trial">Записаться на пробное</a></div>
         </div>
-        <div class="hero-portrait" aria-label="Дмитрий Маков, преподаватель информатики">
-          <div class="hero-portrait-image" role="img" aria-label="Дмитрий Маков с авторским учебником по программированию">
-            <img src="assets/hero/hero-01.webp" alt=""><img src="assets/hero/hero-02.webp" alt=""><img src="assets/hero/hero-03.webp" alt=""><img src="assets/hero/hero-04.webp" alt=""><img src="assets/hero/hero-05.webp" alt="">
+        <div class="hero-portrait" aria-label="Фото преподавателя">
+          <div class="hero-portrait-image">
+            <img src="assets/hero/hero.png" alt="Дмитрий Маков с учебником">
           </div>
         </div>
       </div>
@@ -105,24 +143,37 @@
         </div>
         <div class="score-intro"><span>Нажмите на результат</span><p>Откроется подтверждение баллов ученика.</p></div>
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
-          <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.webp" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="90" data-image="assets/results/result-90.webp" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="78" data-image="assets/results/result-78.webp" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.webp" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
+          <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="90" data-image="assets/results/result-90.png" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="78" data-image="assets/results/result-78.png" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
         </div>
         <div class="score-proof" id="score-proof" hidden aria-live="polite">
-          <div class="proof-copy"><span class="proof-eyebrow">Подтверждение результата</span><div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div><p id="proof-note">Подготовка с сентября до экзамена.</p></div>
-          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.webp" alt="Подтверждение результата 100 баллов"></div>
+          <div class="proof-copy">
+            <span class="proof-eyebrow">Подтверждение результата</span>
+            <div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div>
+            <p id="proof-note">Подготовка с сентября до экзамена.</p>
+          </div>
+          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
         </div>
-        <div class="goal-card"><div class="goal-copy"><h3>Цель — нужный балл для поступления</h3><p>Кому-то достаточно уверенных 70–80 баллов, кому-то нужны 90+, кто-то идёт за максимальным результатом. Сначала определяем цель и стартовый уровень, затем строим подготовку.</p></div></div>
+        <div class="goal-card">
+          <div class="goal-copy">
+            <h3>Цель — нужный балл для поступления</h3>
+            <p>Кому-то достаточно уверенных 70–80 баллов, кому-то нужны 90+, кто-то идёт за максимальным результатом. Сначала определяем цель и стартовый уровень, затем строим подготовку.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="preparation-section" id="preparation">
       <div class="container preparation-layout">
-        <div class="preparation-intro"><span class="section-kicker">Подготовка</span><h2>Как устроено обучение</h2><p>Ученик понимает, что изучает сейчас, где лежат материалы и что уже получается. Всё необходимое для подготовки собрано в одной системе.</p></div>
+        <div class="preparation-intro">
+          <span class="section-kicker">Подготовка</span>
+          <h2>Как устроено обучение</h2>
+          <p>Ученик понимает, что изучает сейчас, где лежат материалы и что уже получается. Всё необходимое для подготовки собрано в одной системе.</p>
+        </div>
         <div class="preparation-flow" aria-label="Как устроена подготовка к ЕГЭ">
           <article class="preparation-step"><span class="step-number">01</span><div><h3>Занятия</h3><p>Разбираем темы ЕГЭ и сразу решаем задачи. Если для задания нужен Python, изучаем необходимые для него основы.</p></div></article>
           <article class="preparation-step"><span class="step-number">02</span><div><h3>Практика и домашняя работа</h3><p>После занятия ученик закрепляет тему самостоятельно. Задания подобраны под пройденный материал и постепенно усложняются.</p></div></article>
@@ -131,14 +182,17 @@
           <article class="preparation-step"><span class="step-number">05</span><div><h3>Пробники и контроль прогресса</h3><p>Регулярно проверяем текущий результат, разбираем ошибки и видим темы, к которым стоит вернуться.</p></div></article>
         </div>
       </div>
-      <div class="container python-callout"><div><span>Можно начать с нуля</span><h3>Знать Python заранее не обязательно</h3><p>Если программирование пока вызывает сложности, нужную для ЕГЭ базу разбираем с самого начала.</p></div></div>
+      <div class="container python-callout">
+        <div><span>Можно начать с нуля</span><h3>Знать Python заранее не обязательно</h3><p>Если программирование пока вызывает сложности, нужную для ЕГЭ базу разбираем с самого начала.</p></div>
+      </div>
     </section>
 
     <section class="about-section" id="about">
       <div class="container about-layout">
-        <div><img class="about-photo" id="about-photo" alt="Дмитрий Маков"></div>
+        <div><img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков"></div>
         <div>
-          <span class="section-kicker">Обо мне</span><h2>Дмитрий Маков</h2>
+          <span class="section-kicker">Обо мне</span>
+          <h2>Дмитрий Маков</h2>
           <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление — подготовка школьников к ЕГЭ по информатике.</p>
           <ul class="about-facts">
             <li><strong>Образование</strong><span>Университет ИТМО, педагогическое направление в сфере IT.</span></li>
@@ -161,10 +215,10 @@
           <h3>Отзывы учеников</h3>
           <div class="review-slider" data-review-slider>
             <div class="review-slides">
-              <img class="review-slide is-active" src="assets/reviews/student-1.webp" alt="Отзыв ученика 1" loading="lazy">
-              <img class="review-slide" src="assets/reviews/student-2.webp" alt="Отзыв ученика 2" loading="lazy">
-              <img class="review-slide" src="assets/reviews/student-3.webp" alt="Отзыв ученика 3" loading="lazy">
-              <img class="review-slide" src="assets/reviews/student-4.webp" alt="Отзыв ученика 4" loading="lazy">
+              <img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy">
             </div>
             <div class="review-controls">
               <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
@@ -178,10 +232,10 @@
           <h3>Отзывы родителей</h3>
           <div class="review-slider" data-review-slider>
             <div class="review-slides">
-              <img class="review-slide is-active" src="assets/reviews/parent-1.webp" alt="Отзыв родителя 1" loading="lazy">
-              <img class="review-slide" src="assets/reviews/parent-2.webp" alt="Отзыв родителя 2" loading="lazy">
-              <img class="review-slide" src="assets/reviews/parent-3.webp" alt="Отзыв родителя 3" loading="lazy">
-              <img class="review-slide" src="assets/reviews/parent-4.webp" alt="Отзыв родителя 4" loading="lazy">
+              <img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy">
             </div>
             <div class="review-controls">
               <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
@@ -193,55 +247,76 @@
       </div>
     </section>
 
-    <section class="stage-placeholder" id="next" aria-label="Следующий раздел сайта">
-      <div class="container"><span>Следующий этап</span><p>После отзывов — отдельный блок бесплатного пробного занятия.</p></div>
+    <section class="trial-section" id="trial">
+      <div class="container trial-layout">
+        <div>
+          <span class="section-kicker">Бесплатное пробное</span>
+          <h2>Можно просто попробовать</h2>
+          <p class="trial-lead">Познакомимся, порешаем задания по информатике и посмотрим, подходит ли ученику такой формат подготовки.</p>
+        </div>
+        <div>
+          <ul class="trial-list">
+            <li>Разберём несколько заданий ЕГЭ и покажу, как объясняю материал.</li>
+            <li>Покажу, как устроена подготовка и где ученик будет работать между занятиями.</li>
+            <li>После пробного можно спокойно решить, хочется ли продолжать занятия.</li>
+          </ul>
+          <div class="trial-action"><a class="button button-primary" href="#contact">Записаться на пробное</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage-placeholder" id="contact" aria-label="Следующий раздел сайта">
+      <div class="container"><span>Следующий этап</span><p>Дальше — контакты и финальный призыв записаться.</p></div>
     </section>
   </main>
 
   <script>
-    const scoreButtons=Array.from(document.querySelectorAll('.score[data-score]'));
-    const proof=document.getElementById('score-proof');
-    const proofScore=document.getElementById('proof-score');
-    const proofNote=document.getElementById('proof-note');
-    const proofImage=document.getElementById('proof-image');
+    const scoreButtons = Array.from(document.querySelectorAll('.score[data-score]'));
+    const proof = document.getElementById('score-proof');
+    const proofScore = document.getElementById('proof-score');
+    const proofNote = document.getElementById('proof-note');
+    const proofImage = document.getElementById('proof-image');
 
-    scoreButtons.forEach((button)=>{
-      button.addEventListener('click',()=>{
-        scoreButtons.forEach((item)=>{item.classList.remove('is-active');item.setAttribute('aria-expanded','false')});
+    scoreButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        scoreButtons.forEach((item) => {
+          item.classList.remove('is-active');
+          item.setAttribute('aria-expanded', 'false');
+        });
         button.classList.add('is-active');
-        button.setAttribute('aria-expanded','true');
-        proofScore.textContent=button.dataset.score;
-        proofNote.textContent=button.dataset.note;
-        proofImage.src=button.dataset.image;
-        proofImage.alt=`Подтверждение результата ${button.dataset.score} баллов`;
-        proof.hidden=false;
+        button.setAttribute('aria-expanded', 'true');
+        proofScore.textContent = button.dataset.score;
+        proofNote.textContent = button.dataset.note;
+        proofImage.src = button.dataset.image;
+        proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
+        proof.hidden = false;
       });
     });
 
-    document.querySelectorAll('[data-review-slider]').forEach((slider)=>{
-      const slides=Array.from(slider.querySelectorAll('.review-slide'));
-      const counter=slider.querySelector('[data-review-counter]');
-      const prev=slider.querySelector('[data-review-prev]');
-      const next=slider.querySelector('[data-review-next]');
-      let current=0;
-      let touchStartX=null;
+    document.querySelectorAll('[data-review-slider]').forEach((slider) => {
+      const slides = Array.from(slider.querySelectorAll('.review-slide'));
+      const counter = slider.querySelector('[data-review-counter]');
+      const prev = slider.querySelector('[data-review-prev]');
+      const next = slider.querySelector('[data-review-next]');
+      let current = 0;
 
-      function show(index){
-        current=(index+slides.length)%slides.length;
-        slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===current));
-        counter.textContent=`${current+1} / ${slides.length}`;
+      function show(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+        counter.textContent = `${current + 1} / ${slides.length}`;
       }
 
-      prev.addEventListener('click',()=>show(current-1));
-      next.addEventListener('click',()=>show(current+1));
-      slider.addEventListener('touchstart',(event)=>{touchStartX=event.changedTouches[0].clientX},{passive:true});
-      slider.addEventListener('touchend',(event)=>{
-        if(touchStartX===null)return;
-        const delta=event.changedTouches[0].clientX-touchStartX;
-        if(Math.abs(delta)>45)show(delta<0?current+1:current-1);
-        touchStartX=null;
-      },{passive:true});
-      show(0);
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+
+      let startX = null;
+      slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive:true });
+      slider.addEventListener('touchend', (event) => {
+        if (startX === null) return;
+        const delta = event.changedTouches[0].clientX - startX;
+        if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1));
+        startX = null;
+      }, { passive:true });
     });
   </script>
 </body>
