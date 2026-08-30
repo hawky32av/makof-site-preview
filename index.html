@@ -10,6 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-expertise{max-width:680px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:7px 18px;color:var(--muted);font-size:13px;line-height:1.45}
+    .hero-expertise a{text-decoration:underline;text-decoration-color:#cfcfcf;text-underline-offset:3px}
+    .about-method{max-width:720px;margin:0;color:var(--muted);font-size:16px;line-height:1.7}
+    .about-meta{max-width:720px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:#444;font-size:14px;line-height:1.5}
+    .achievements-section{padding-top:72px;padding-bottom:72px}
+    .achievements-heading{margin-bottom:32px}
+    @media(max-width:720px){.hero-expertise{display:grid;gap:7px}.achievements-section{padding-top:60px;padding-bottom:60px}}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">К содержанию</a>
@@ -41,7 +50,14 @@
         <div class="hero-copy">
           <span class="eyebrow">ЕГЭ по информатике · 10–11 класс</span>
           <h1>Подготовка к ЕГЭ по информатике <span>от базы до 80+ баллов</span></h1>
-          <p class="hero-lead">Разбираем темы по порядку, много решаем и регулярно проверяем прогресс. Если Python пока слабый, начнём с базы.</p>
+          <p class="hero-lead">Учимся решать задачи самостоятельно: разбираем тему, закрепляем её на практике, возвращаемся к ошибкам и регулярно пишем пробники. Python можно начать с нуля.</p>
+
+          <div class="hero-expertise" aria-label="Квалификация преподавателя">
+            <a href="#credentials">ИТМО · высшее педагогическое образование</a>
+            <span>72 часа подготовки экспертов предметной комиссии</span>
+            <a href="#book">Автор учебника по Python для ЕГЭ</a>
+          </div>
+
           <div class="hero-actions">
             <a class="button button-primary" href="#signup-form">Записаться на бесплатное пробное</a>
           </div>
@@ -54,7 +70,7 @@
         </div>
       </div>
 
-      <div class="container proof-strip" aria-label="Ключевые факты">
+      <div class="container proof-strip" aria-label="Ключевые результаты">
         <div class="proof-item">
           <strong>81 балл</strong>
           <span>средний результат моих учеников в 2026 году</span>
@@ -75,9 +91,9 @@
         <div class="section-heading credentials-heading">
           <div>
             <span class="section-kicker">Квалификация</span>
-            <h2>Образование и подготовка, которые можно проверить</h2>
+            <h2>Профильное образование и подготовка экспертов</h2>
           </div>
-          <p>Не прячу документы в конце страницы. Диплом и удостоверение можно открыть сразу и посмотреть в полном размере.</p>
+          <p>Диплом ИТМО и удостоверение о подготовке экспертов можно открыть и посмотреть в полном размере.</p>
         </div>
 
         <div class="credentials-layout">
@@ -85,8 +101,8 @@
             <article class="credential-copy">
               <span class="credential-index">01</span>
               <div>
-                <h3>Высшее образование — Университет ИТМО</h3>
-                <p>Педагогическое направление в сфере IT. Профильное образование связывает предметную подготовку с методикой преподавания.</p>
+                <h3>Высшее педагогическое образование — Университет ИТМО</h3>
+                <p>Бакалавриат по направлению 44.03.04 «Профессиональное обучение».</p>
                 <button class="text-link" type="button" data-lightbox-src="assets/credentials/itmo-diploma.jpg" data-lightbox-alt="Диплом Университета ИТМО">Открыть скан диплома</button>
               </div>
             </article>
@@ -94,8 +110,8 @@
             <article class="credential-copy">
               <span class="credential-index">02</span>
               <div>
-                <h3>Подготовка экспертов предметной комиссии</h3>
-                <p>Прошёл 72-часовую программу подготовки экспертов предметной комиссии по информатике.</p>
+                <h3>Подготовка экспертов предметной комиссии по информатике</h3>
+                <p>Прошёл программу повышения квалификации объёмом 72 часа.</p>
                 <button class="text-link" type="button" data-lightbox-src="assets/credentials/ege-expert-training.jpg" data-lightbox-alt="Удостоверение о подготовке экспертов предметной комиссии по информатике">Открыть удостоверение</button>
               </div>
             </article>
@@ -104,7 +120,7 @@
               <span class="credential-index">03</span>
               <div>
                 <h3>Автор учебника по Python для ЕГЭ</h3>
-                <p>«Основы программирования для ЕГЭ: Python 3 с нуля» — учебник для школьников, которым нужно разобраться с базой Python и применять её в экзаменационных задачах.</p>
+                <p>«Основы программирования для ЕГЭ: Python 3 с нуля» — учебник по базе Python, которая нужна школьнику для экзамена.</p>
                 <a class="text-link" href="#book">Посмотреть учебник</a>
               </div>
             </article>
@@ -124,32 +140,6 @@
       </div>
     </section>
 
-    <section class="book-section" id="book">
-      <div class="container book-layout">
-        <div class="book-cover">
-          <button type="button" class="plain-image-button" data-lightbox-src="assets/book/book-cover.png" data-lightbox-alt="Обложка учебника Основы программирования для ЕГЭ: Python 3 с нуля">
-            <img src="assets/book/book-cover.png" alt="Обложка учебника «Основы программирования для ЕГЭ: Python 3 с нуля»">
-          </button>
-        </div>
-        <div class="book-copy">
-          <span class="section-kicker">Учебник</span>
-          <h2>«Основы программирования для ЕГЭ: Python 3 с нуля»</h2>
-          <p class="book-lead">Написал его для ребят, которым нужно без лишнего усложнения разобраться с Python и перейти от базовых конструкций к задачам ЕГЭ.</p>
-          <ul class="book-points">
-            <li><strong>С нуля</strong><span>Базовые темы Python выстроены по порядку.</span></li>
-            <li><strong>С примерами</strong><span>Новые конструкции сразу разбираются на понятных задачах.</span></li>
-            <li><strong>С привязкой к ЕГЭ</strong><span>Материал помогает понять, где именно программирование понадобится на экзамене.</span></li>
-          </ul>
-        </div>
-        <div class="book-spread">
-          <button type="button" class="plain-image-button" data-lightbox-src="assets/book/book-page-1.png" data-lightbox-alt="Пример страницы учебника">
-            <img src="assets/book/book-page-1.png" alt="Пример страницы учебника">
-          </button>
-          <span>Пример страницы</span>
-        </div>
-      </div>
-    </section>
-
     <section class="section results-section" id="results">
       <div class="container">
         <div class="section-heading">
@@ -157,7 +147,7 @@
             <span class="section-kicker">Результаты</span>
             <h2>Баллы учеников, которые можно проверить</h2>
           </div>
-          <p>Нажмите на результат — ниже откроется его подтверждение. Контекст указываю только там, где он у меня точно есть.</p>
+          <p>Выберите результат — ниже откроется скрин подтверждения. Для нескольких учеников рядом указал, сколько длилась подготовка.</p>
         </div>
 
         <div class="score-intro">
@@ -195,30 +185,24 @@
       </div>
     </section>
 
-    <section class="tagline-section" aria-label="Главный принцип подготовки">
-      <div class="container">
-        <p class="tagline">На экзамене важно не просто «знать тему». <span>Нужно уметь стабильно решать задачи самому.</span></p>
-      </div>
-    </section>
-
     <section class="section learning-section" id="learning">
       <div class="container">
         <div class="section-heading learning-heading">
           <div>
-            <span class="section-kicker">Изнутри</span>
-            <h2>Как выглядит обучение на самом деле</h2>
+            <span class="section-kicker">Обучение изнутри</span>
+            <h2>Как выглядит подготовка</h2>
           </div>
-          <p>Здесь не макеты интерфейса, а места для реальных кадров с занятий и скриншотов курса. Выберите экран — справа появится короткое пояснение.</p>
+          <p>Реальные кадры с занятий и скриншоты личного кабинета: разбор задач, практика, прогресс и записи занятий.</p>
         </div>
 
         <div class="learning-browser">
           <div class="learning-tabs" role="tablist" aria-label="Примеры обучения">
             <button class="learning-tab is-active" type="button" data-learning-image="assets/learning/lesson-1.png" data-learning-title="Фрагмент занятия" data-learning-text="Разбираем новую тему на задачах и сразу проверяем, понятна ли логика решения." aria-selected="true"><span>01</span>Занятие</button>
-            <button class="learning-tab" type="button" data-learning-image="assets/learning/lesson-2.png" data-learning-title="Разбор задачи" data-learning-text="Сложные места разбираем на экране пошагово, а затем ученик решает похожую задачу сам." aria-selected="false"><span>02</span>Разбор задачи</button>
+            <button class="learning-tab" type="button" data-learning-image="assets/learning/lesson-2.png" data-learning-title="Разбор решения и ошибок" data-learning-text="Сложное место разбираем пошагово, после чего ученик пробует решить похожую задачу самостоятельно." aria-selected="false"><span>02</span>Разбор ошибки</button>
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-main.png" data-learning-title="Личный кабинет" data-learning-text="Записи, материалы, задания и тесты собраны в одном месте. К старой теме можно вернуться в любой момент." aria-selected="false"><span>03</span>Личный кабинет</button>
-            <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-task.png" data-learning-title="Практика" data-learning-text="После занятия остаются задания по пройденной теме, чтобы проверить, получается ли решать без подсказки." aria-selected="false"><span>04</span>Практика</button>
+            <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-task.png" data-learning-title="Домашняя практика" data-learning-text="После занятия остаются задания по пройденной теме, чтобы проверить, получается ли решать без подсказки." aria-selected="false"><span>04</span>Практика</button>
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-progress.png" data-learning-title="Прогресс" data-learning-text="По выполнению заданий и пробникам видно, какие темы уже держатся уверенно, а к каким стоит вернуться." aria-selected="false"><span>05</span>Прогресс</button>
-            <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-records.png" data-learning-title="Записи и материалы" data-learning-text="Если занятие пропущено или тему хочется повторить, запись и материалы остаются доступны." aria-selected="false"><span>06</span>Записи</button>
+            <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-records.png" data-learning-title="Записи занятий" data-learning-text="Если занятие пропущено или тему хочется повторить, запись и материалы остаются доступны." aria-selected="false"><span>06</span>Записи</button>
           </div>
 
           <div class="learning-stage" aria-live="polite">
@@ -239,41 +223,26 @@
       <div class="container preparation-layout">
         <div class="preparation-intro">
           <span class="section-kicker">Подготовка</span>
-          <h2>Что происходит по ходу обучения</h2>
-          <p>После визуальных примеров — коротко о самой логике работы. Она строится вокруг самостоятельного решения задач, а не только просмотра объяснений.</p>
+          <h2>Как устроена работа</h2>
+          <p>На занятии разбираем тему, между занятиями ученик закрепляет её самостоятельно, а пробники показывают, где ещё теряются баллы.</p>
         </div>
 
         <div class="preparation-flow" aria-label="Этапы подготовки">
           <article class="preparation-step">
             <span class="step-number">01</span>
-            <div>
-              <h3>Разбираем тему</h3>
-              <p>Объясняю материал на задачах ЕГЭ. Теории даю столько, сколько действительно нужно для решения.</p>
-            </div>
+            <div><h3>Разбираем тему</h3><p>Новая тема и задачи ЕГЭ на занятии.</p></div>
           </article>
-
           <article class="preparation-step">
             <span class="step-number">02</span>
-            <div>
-              <h3>Закрепляем самостоятельно</h3>
-              <p>После занятия остаётся ДЗ по пройденной теме. По нему видно, что уже получается без подсказки.</p>
-            </div>
+            <div><h3>Закрепляем самостоятельно</h3><p>После занятия — практика по пройденному материалу.</p></div>
           </article>
-
           <article class="preparation-step">
             <span class="step-number">03</span>
-            <div>
-              <h3>Возвращаемся к ошибкам</h3>
-              <p>Если ошибка повторяется, разбираем её отдельно и проверяем результат на похожей задаче.</p>
-            </div>
+            <div><h3>Разбираем ошибки</h3><p>Возвращаемся к заданиям, на которых регулярно теряются баллы.</p></div>
           </article>
-
           <article class="preparation-step">
             <span class="step-number">04</span>
-            <div>
-              <h3>Пишем пробники</h3>
-              <p>Они показывают текущий балл целиком и помогают понять, на какие темы лучше потратить время дальше.</p>
-            </div>
+            <div><h3>Пишем пробники</h3><p>Смотрим текущий результат и выбираем темы для повторения.</p></div>
           </article>
         </div>
       </div>
@@ -284,23 +253,36 @@
       </div>
     </section>
 
+    <section class="book-section" id="book">
+      <div class="container book-layout">
+        <div class="book-cover">
+          <button type="button" class="plain-image-button" data-lightbox-src="assets/book/book-cover.png" data-lightbox-alt="Обложка учебника Основы программирования для ЕГЭ: Python 3 с нуля">
+            <img src="assets/book/book-cover.png" alt="Обложка учебника «Основы программирования для ЕГЭ: Python 3 с нуля»">
+          </button>
+        </div>
+        <div class="book-copy">
+          <span class="section-kicker">Учебник</span>
+          <h2>«Основы программирования для ЕГЭ: Python 3 с нуля»</h2>
+          <p class="book-lead">Я написал его как самостоятельное дополнение к занятиям. В нём собрана база Python, которая нужна школьнику для ЕГЭ: объяснения, примеры и практика идут по порядку от самых основ.</p>
+        </div>
+        <div class="book-spread">
+          <button type="button" class="plain-image-button" data-lightbox-src="assets/book/book-page-1.png" data-lightbox-alt="Пример страницы учебника">
+            <img src="assets/book/book-page-1.png" alt="Пример страницы учебника">
+          </button>
+          <span>Пример страницы</span>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="about">
       <div class="container about-layout">
-        <div class="about-photo-wrap">
-          <img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков">
-        </div>
-
+        <div class="about-photo-wrap"><img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков"></div>
         <div class="about-copy">
           <span class="section-kicker">Обо мне</span>
           <h2>Дмитрий Маков</h2>
-          <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление сейчас — подготовка школьников к ЕГЭ по информатике.</p>
-
-          <ul class="about-facts">
-            <li><strong>Образование</strong><span>Университет ИТМО, педагогическое направление в сфере IT.</span></li>
-            <li><strong>Квалификация</strong><span>72-часовая программа подготовки экспертов предметной комиссии по информатике.</span></li>
-            <li><strong>Учебник</strong><span>Автор «Основ программирования для ЕГЭ: Python 3 с нуля».</span></li>
-            <li><strong>Специализация</strong><span>ЕГЭ по информатике и Python. Работаю и с сильной базой, и с началом с нуля.</span></li>
-          </ul>
+          <p class="about-lead">Преподаю информатику и программирование с 2019 года. Сейчас почти вся моя работа связана с подготовкой школьников к ЕГЭ по информатике.</p>
+          <p class="about-method">На занятиях мне важно быстро понять, где именно ученик перестаёт понимать решение. Поэтому мы много решаем вместе, а затем обязательно проверяем, получается ли сделать похожее задание самостоятельно.</p>
+          <div class="about-meta">ИТМО · ЕГЭ по информатике · Python · автор учебника</div>
         </div>
       </div>
     </section>
@@ -308,11 +290,8 @@
     <section class="section section--soft" id="reviews">
       <div class="container">
         <div class="section-heading reviews-head">
-          <div>
-            <span class="section-kicker">Отзывы</span>
-            <h2>Что пишут после занятий и экзамена</h2>
-          </div>
-          <p>Оставил отзывы скриншотами, без пересказа и сокращений. Можно перелистывать по одному.</p>
+          <div><span class="section-kicker">Отзывы</span><h2>Что пишут после занятий и экзамена</h2></div>
+          <p>Отзывы оставил скриншотами — без пересказа и сокращений.</p>
         </div>
 
         <div class="reviews-group">
@@ -324,11 +303,7 @@
               <img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy">
               <img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy">
             </div>
-            <div class="review-controls">
-              <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
-              <span class="review-counter" data-review-counter>1 / 4</span>
-              <button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button>
-            </div>
+            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
           </div>
         </div>
 
@@ -341,11 +316,7 @@
               <img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy">
               <img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy">
             </div>
-            <div class="review-controls">
-              <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
-              <span class="review-counter" data-review-counter>1 / 4</span>
-              <button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button>
-            </div>
+            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
           </div>
         </div>
       </div>
@@ -355,14 +326,12 @@
       <div class="container trial-layout">
         <div class="trial-copy">
           <span class="section-kicker">Бесплатное пробное</span>
-          <h2>Сначала можно просто прийти и посмотреть</h2>
-          <p class="trial-lead">На пробном познакомимся, немного порешаем и станет понятно, комфортно ли ученику со мной заниматься.</p>
-
+          <h2>Бесплатное пробное занятие</h2>
+          <p class="trial-lead">Познакомимся, решим несколько заданий и посмотрим, как ученику удобнее строить подготовку.</p>
           <ul class="trial-list">
-            <li>Разберём несколько заданий и я покажу, как объясняю материал.</li>
-            <li>Посмотрим, что сейчас даётся легко, а где уже есть пробелы.</li>
-            <li>Покажу материалы и работу между занятиями.</li>
-            <li>После занятия можно спокойно решить, продолжать ли подготовку.</li>
+            <li>Решим несколько заданий и покажу, как объясняю материал.</li>
+            <li>Посмотрим сильные места и пробелы.</li>
+            <li>Покажу, как проходят занятия и самостоятельная работа.</li>
           </ul>
         </div>
 
@@ -370,7 +339,6 @@
           <span class="section-kicker">Запись</span>
           <h2>Записаться на пробное занятие</h2>
           <p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p>
-
           <iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe>
           <p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" target="_blank" rel="noopener">откройте её отдельно</a>.</p>
         </div>
@@ -383,7 +351,7 @@
         <div class="guarantee-copy">
           <span class="section-kicker">Гарантия</span>
           <h2>Если занятия не подойдут, верну оплату за первый месяц</h2>
-          <p>Такое решение можно принять в течение первого месяца. Пробное помогает познакомиться заранее, но иногда понять всё окончательно получается только после нескольких занятий.</p>
+          <p>Если в течение первого месяца поймёте, что формат вам не подходит, верну оплату за этот месяц.</p>
         </div>
       </div>
     </section>
@@ -391,13 +359,9 @@
     <section class="section achievements-section" id="achievements">
       <div class="container">
         <div class="section-heading achievements-heading">
-          <div>
-            <span class="section-kicker">Документы и достижения</span>
-            <h2>Дополнительные грамоты, сертификаты и документы</h2>
-          </div>
-          <p>Основные документы уже показаны в начале. Здесь можно собрать остальные подтверждения и достижения без перегруза первого экрана.</p>
+          <div><span class="section-kicker">Достижения</span><h2>Ещё документы и достижения</h2></div>
+          <p>Грамоты, сертификаты и другие документы за годы преподавания.</p>
         </div>
-
         <div class="achievement-gallery">
           <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/achievement-1.jpg" data-lightbox-alt="Документ или достижение 1"><img src="assets/achievements/achievement-1.jpg" alt="Документ или достижение 1"><span>Документ 01</span></button>
           <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/achievement-2.jpg" data-lightbox-alt="Документ или достижение 2"><img src="assets/achievements/achievement-2.jpg" alt="Документ или достижение 2"><span>Документ 02</span></button>
@@ -414,7 +378,6 @@
           <h2>Что обычно спрашивают до старта</h2>
           <p>Коротко отвечаю на вещи, которые чаще всего обсуждаем перед началом занятий.</p>
         </div>
-
         <div class="faq-list">
           <details class="faq-item"><summary>Можно начинать, если почти не знаю Python?</summary><p>Да. Нужную для ЕГЭ базу можно пройти с нуля по ходу подготовки.</p></details>
           <details class="faq-item"><summary>Подойдёт ли подготовка при слабой школьной базе?</summary><p>Да. Сначала смотрим, что уже получается, и от этого выбираем темп. Слабый старт означает, что на базовые темы потребуется больше времени.</p></details>
@@ -431,7 +394,7 @@
         <div class="final-copy">
           <span class="section-kicker">Начать</span>
           <h2>Проще всего познакомиться на бесплатном пробном</h2>
-          <p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и удобно ли ученику работать в таком формате.</p>
+          <p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и подходит ли ученику такой формат.</p>
         </div>
         <div class="final-action"><a class="button button-primary" href="#signup-form">Записаться на пробное</a></div>
       </div>
