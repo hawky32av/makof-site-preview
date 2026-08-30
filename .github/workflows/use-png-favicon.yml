@@ -1,0 +1,62 @@
+name: Use PNG favicon
+
+on:
+  push:
+    paths:
+      - ".github/workflows/use-png-favicon.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Switch favicon references to PNG
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          html_files = [Path("index.html"), Path("privacy.html"), Path("consent.html"), Path("offer.html")]
+          favicon_html = '  <link rel="icon" href="favicon.png" type="image/png">\n  <link rel="apple-touch-icon" href="favicon.png">'
+
+          for path in html_files:
+              text = path.read_text(encoding="utf-8")
+              text = re.sub(
+                  r'\s*<link rel="icon" href="(?:favicon\.svg|assets/hero/hero\.png)" type="(?:image/svg\+xml|image/png)">\s*(?:<link rel="apple-touch-icon" href="favicon\.png">\s*)?',
+                  '\n' + favicon_html + '\n',
+                  text,
+                  count=1,
+              )
+              path.write_text(text, encoding="utf-8")
+
+          script = Path("scripts/update_galleries.py")
+          text = script.read_text(encoding="utf-8")
+          old_variants = [
+              '  <link rel="icon" href="assets/hero/hero.png" type="image/png">',
+              '  <link rel="icon" href="favicon.svg" type="image/svg+xml">',
+          ]
+          replacement = '  <link rel="icon" href="favicon.png" type="image/png">\\n  <link rel="apple-touch-icon" href="favicon.png">'
+          for old in old_variants:
+              text = text.replace(old, replacement)
+          script.write_text(text, encoding="utf-8")
+          PY
+
+          rm -f favicon.svg
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to update"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html privacy.html consent.html offer.html scripts/update_galleries.py favicon.svg
+          git commit -m "Use PNG favicon across site"
+          git pull --rebase origin main
+          git push
