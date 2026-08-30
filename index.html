@@ -16,14 +16,34 @@
   <link rel="stylesheet" href="sketch.css">
 
   <style>
+    html{scroll-behavior:smooth}
+
     .hero-portrait-image{display:block}
     .hero-portrait-image img{display:block;width:100%;height:auto;position:static;transform:none;opacity:1}
     .proof-image{display:block;width:auto;max-width:min(100%,620px);height:auto}
 
-    .about-section,.reviews-section,.trial-section{
+    .about-section,
+    .reviews-section,
+    .trial-section,
+    .guarantee-section,
+    .faq-section,
+    .contact-section{
       padding:76px 0;
       border-bottom:1px solid var(--line);
       background:#fff;
+    }
+
+    .about-section h2,
+    .reviews-section h2,
+    .trial-section h2,
+    .guarantee-section h2,
+    .faq-section h2,
+    .contact-section h2{
+      margin:0;
+      font-size:clamp(34px,4vw,48px);
+      line-height:1.08;
+      letter-spacing:-.035em;
+      font-weight:600;
     }
 
     .about-layout{
@@ -34,15 +54,6 @@
     }
 
     .about-photo{display:block;width:100%;height:auto}
-
-    .about-section h2,.reviews-section h2,.trial-section h2{
-      margin:0;
-      font-size:clamp(34px,4vw,48px);
-      line-height:1.08;
-      letter-spacing:-.035em;
-      font-weight:600;
-    }
-
     .about-lead{margin:18px 0 28px;max-width:660px;font-size:17px;line-height:1.65}
     .about-facts{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
     .about-facts li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
@@ -56,6 +67,7 @@
       align-items:end;
       margin-bottom:50px;
     }
+
     .reviews-head p{margin:0;max-width:560px;color:var(--muted);font-size:15px;line-height:1.7}
     .reviews-group{padding-top:30px;border-top:1px solid var(--line)}
     .reviews-group+.reviews-group{margin-top:58px}
@@ -68,32 +80,175 @@
     .review-controls{display:flex;align-items:center;gap:16px;margin-top:18px}
     .review-arrow{width:42px;height:42px;padding:0;border:1px solid #d8d8d8;background:#fff;color:#171717;font:400 22px/1 Arial,sans-serif;cursor:pointer}
     .review-arrow:hover{border-color:#999}
+    .review-arrow:focus-visible{outline:2px solid #222;outline-offset:3px}
     .review-counter{min-width:48px;text-align:center;color:var(--muted);font-size:13px}
 
-    .trial-layout{
+    .trial-layout,
+    .guarantee-layout,
+    .contact-layout{
       display:grid;
       grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
       gap:64px;
       align-items:start;
     }
-    .trial-lead{margin:18px 0 0;max-width:620px;font-size:18px;line-height:1.65}
-    .trial-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
-    .trial-list li{padding:20px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.6}
+
+    .trial-lead,
+    .guarantee-lead,
+    .contact-lead{
+      margin:18px 0 0;
+      max-width:620px;
+      font-size:18px;
+      line-height:1.65;
+    }
+
+    .trial-list,
+    .contact-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      border-top:1px solid var(--line);
+    }
+
+    .trial-list li,
+    .contact-list li{
+      padding:20px 0;
+      border-bottom:1px solid var(--line);
+      font-size:15px;
+      line-height:1.6;
+    }
+
     .trial-action{margin-top:28px}
+
+    .guarantee-note{
+      padding-top:4px;
+      max-width:650px;
+    }
+
+    .guarantee-note strong{
+      display:block;
+      margin-bottom:12px;
+      font-size:24px;
+      line-height:1.25;
+      font-weight:600;
+    }
+
+    .guarantee-note p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .faq-head{
+      display:grid;
+      grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+      gap:54px;
+      align-items:end;
+      margin-bottom:38px;
+    }
+
+    .faq-head p{
+      margin:0;
+      max-width:560px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .faq-list{
+      margin:0;
+      border-top:1px solid var(--line);
+    }
+
+    .faq-item{
+      border-bottom:1px solid var(--line);
+    }
+
+    .faq-item summary{
+      position:relative;
+      padding:22px 46px 22px 0;
+      cursor:pointer;
+      list-style:none;
+      font-size:17px;
+      font-weight:500;
+      line-height:1.45;
+    }
+
+    .faq-item summary::-webkit-details-marker{display:none}
+
+    .faq-item summary::after{
+      content:"+";
+      position:absolute;
+      top:20px;
+      right:2px;
+      font:400 24px/1 Arial,sans-serif;
+    }
+
+    .faq-item[open] summary::after{content:"−"}
+
+    .faq-item p{
+      margin:-3px 0 22px;
+      max-width:760px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    .contact-section{border-bottom:0}
+
+    .contact-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .contact-placeholder{
+      opacity:.65;
+      cursor:default;
+    }
+
+    .site-footer{
+      padding:28px 0 34px;
+      border-top:1px solid var(--line);
+      background:#fff;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
 
     @media(max-width:900px){
       .about-layout{grid-template-columns:200px minmax(0,1fr);gap:32px}
-      .reviews-head,.trial-layout{grid-template-columns:1fr;gap:24px}
+      .reviews-head,
+      .faq-head,
+      .trial-layout,
+      .guarantee-layout,
+      .contact-layout{grid-template-columns:1fr;gap:24px}
     }
 
     @media(max-width:720px){
-      .about-section,.reviews-section,.trial-section{padding:58px 0}
+      .about-section,
+      .reviews-section,
+      .trial-section,
+      .guarantee-section,
+      .faq-section,
+      .contact-section{padding:58px 0}
+
       .about-layout{grid-template-columns:1fr}
       .about-photo{width:min(100%,320px)}
       .about-facts li{grid-template-columns:1fr;gap:5px}
-      .reviews-head{margin-bottom:38px}
+      .reviews-head,.faq-head{margin-bottom:38px}
       .reviews-group+.reviews-group{margin-top:44px}
       .review-arrow{width:40px;height:40px}
+      .contact-actions{flex-direction:column;align-items:stretch}
+      .contact-actions .button{text-align:center}
+      .footer-inner{flex-direction:column;gap:6px}
     }
   </style>
 </head>
@@ -103,12 +258,15 @@
       <a class="brand" href="#top" aria-label="Дмитрий Маков — на главную">
         <span class="brand-copy"><strong>Дмитрий Маков</strong><span>преподаватель информатики</span></span>
       </a>
+
       <nav class="nav" aria-label="Навигация по странице">
         <a href="#results">Результаты</a>
         <a href="#preparation">Подготовка</a>
         <a href="#about">Обо мне</a>
         <a href="#reviews">Отзывы</a>
+        <a href="#faq">Вопросы</a>
       </nav>
+
       <a class="button button-small" href="#trial">Бесплатное пробное</a>
     </div>
   </header>
@@ -122,12 +280,15 @@
           <p class="hero-lead">Системная подготовка на весь учебный год: занятия, практика, домашняя работа и контроль прогресса.</p>
           <div class="hero-actions"><a class="button button-primary" href="#trial">Записаться на пробное</a></div>
         </div>
+
         <div class="hero-portrait" aria-label="Фото преподавателя">
           <div class="hero-portrait-image">
+            <!-- Положить изображение по пути assets/hero/hero.png -->
             <img src="assets/hero/hero.png" alt="Дмитрий Маков с учебником">
           </div>
         </div>
       </div>
+
       <div class="container proof-strip" aria-label="Ключевые факты о преподавателе">
         <div class="proof-item"><strong>81</strong><span>средний балл учеников 2026 года</span></div>
         <div class="proof-item"><strong>с 2019 года</strong><span>готовлю к экзаменам</span></div>
@@ -141,7 +302,9 @@
           <div><span class="section-kicker">Результаты</span><h2>Баллы моих учеников</h2></div>
           <p>Результат зависит от стартового уровня, срока подготовки и цели поступления.</p>
         </div>
+
         <div class="score-intro"><span>Нажмите на результат</span><p>Откроется подтверждение баллов ученика.</p></div>
+
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
           <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="90" data-image="assets/results/result-90.png" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
@@ -150,6 +313,7 @@
           <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
         </div>
+
         <div class="score-proof" id="score-proof" hidden aria-live="polite">
           <div class="proof-copy">
             <span class="proof-eyebrow">Подтверждение результата</span>
@@ -158,6 +322,7 @@
           </div>
           <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
         </div>
+
         <div class="goal-card">
           <div class="goal-copy">
             <h3>Цель — нужный балл для поступления</h3>
@@ -174,6 +339,7 @@
           <h2>Как устроено обучение</h2>
           <p>Ученик понимает, что изучает сейчас, где лежат материалы и что уже получается. Всё необходимое для подготовки собрано в одной системе.</p>
         </div>
+
         <div class="preparation-flow" aria-label="Как устроена подготовка к ЕГЭ">
           <article class="preparation-step"><span class="step-number">01</span><div><h3>Занятия</h3><p>Разбираем темы ЕГЭ и сразу решаем задачи. Если для задания нужен Python, изучаем необходимые для него основы.</p></div></article>
           <article class="preparation-step"><span class="step-number">02</span><div><h3>Практика и домашняя работа</h3><p>После занятия ученик закрепляет тему самостоятельно. Задания подобраны под пройденный материал и постепенно усложняются.</p></div></article>
@@ -182,6 +348,7 @@
           <article class="preparation-step"><span class="step-number">05</span><div><h3>Пробники и контроль прогресса</h3><p>Регулярно проверяем текущий результат, разбираем ошибки и видим темы, к которым стоит вернуться.</p></div></article>
         </div>
       </div>
+
       <div class="container python-callout">
         <div><span>Можно начать с нуля</span><h3>Знать Python заранее не обязательно</h3><p>Если программирование пока вызывает сложности, нужную для ЕГЭ базу разбираем с самого начала.</p></div>
       </div>
@@ -189,11 +356,16 @@
 
     <section class="about-section" id="about">
       <div class="container about-layout">
-        <div><img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков"></div>
+        <div>
+          <!-- Положить изображение по пути assets/about/about.jpg -->
+          <img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков">
+        </div>
+
         <div>
           <span class="section-kicker">Обо мне</span>
           <h2>Дмитрий Маков</h2>
           <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление — подготовка школьников к ЕГЭ по информатике.</p>
+
           <ul class="about-facts">
             <li><strong>Образование</strong><span>Университет ИТМО, педагогическое направление в сфере IT.</span></li>
             <li><strong>ЕГЭ</strong><span>Прошёл 72-часовую программу подготовки экспертов предметной комиссии по информатике.</span></li>
@@ -215,6 +387,7 @@
           <h3>Отзывы учеников</h3>
           <div class="review-slider" data-review-slider>
             <div class="review-slides">
+              <!-- Добавление нового отзыва: положить PNG в assets/reviews/ и добавить ещё один img -->
               <img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy">
               <img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy">
               <img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy">
@@ -254,21 +427,106 @@
           <h2>Можно просто попробовать</h2>
           <p class="trial-lead">Познакомимся, порешаем задания по информатике и посмотрим, подходит ли ученику такой формат подготовки.</p>
         </div>
+
         <div>
           <ul class="trial-list">
-            <li>Разберём несколько заданий ЕГЭ и покажу, как объясняю материал.</li>
-            <li>Покажу, как устроена подготовка и где ученик будет работать между занятиями.</li>
-            <li>После пробного можно спокойно решить, хочется ли продолжать занятия.</li>
+            <li><strong>Познакомимся.</strong> Обсудим цель, текущую подготовку и вопросы по экзамену.</li>
+            <li><strong>Порешаем.</strong> Разберём несколько заданий и покажу, как объясняю материал.</li>
+            <li><strong>Посмотрим формат.</strong> Покажу, как устроена подготовка и где ученик будет работать между занятиями.</li>
           </ul>
           <div class="trial-action"><a class="button button-primary" href="#contact">Записаться на пробное</a></div>
         </div>
       </div>
     </section>
 
-    <section class="stage-placeholder" id="contact" aria-label="Следующий раздел сайта">
-      <div class="container"><span>Следующий этап</span><p>Дальше — контакты и финальный призыв записаться.</p></div>
+    <section class="guarantee-section" id="guarantee">
+      <div class="container guarantee-layout">
+        <div>
+          <span class="section-kicker">Спокойный старт</span>
+          <h2>Первый месяц — без риска</h2>
+          <p class="guarantee-lead">Важно, чтобы ученику действительно подошёл формат занятий и было комфортно учиться.</p>
+        </div>
+
+        <div class="guarantee-note">
+          <strong>Если в течение первого месяца поймёте, что занятия вам не подходят — верну оплату за первый месяц.</strong>
+          <p>Можно сначала прийти на бесплатное пробное, познакомиться и уже после этого принимать решение о подготовке.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="faq-head">
+          <div><span class="section-kicker">Вопросы</span><h2>Часто спрашивают</h2></div>
+          <p>Коротко о том, что обычно важно ученикам и родителям перед началом подготовки.</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Можно прийти, если сейчас слабая база?</summary>
+            <p>Да. Стартовый уровень у учеников разный. В начале определяем, что уже получается, какие темы нужно восстановить и какой результат нужен для поступления.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Нужно ли заранее знать Python?</summary>
+            <p>Нет. Если программирование ещё не изучали или оно пока даётся сложно, нужную для ЕГЭ базу разбираем с самого начала.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Что делать, если пропустил занятие?</summary>
+            <p>Записи занятий и материалы сохраняются, поэтому к теме можно вернуться самостоятельно и затем задать вопросы по непонятным моментам.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Можно ли задавать вопросы между занятиями?</summary>
+            <p>Да. Во время самостоятельной работы можно написать в чат и получить помощь по заданию, если что-то не получается.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Подходит ли подготовка десятиклассникам?</summary>
+            <p>Да. В 10 классе можно идти спокойнее: сформировать базу, разобраться с программированием и постепенно перейти к полноценным заданиям ЕГЭ.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Что будет на бесплатном пробном?</summary>
+            <p>Познакомимся, обсудим цель подготовки, порешаем несколько заданий и посмотрим, насколько ученику подходит мой формат объяснения и работы.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container contact-layout">
+        <div>
+          <span class="section-kicker">Запись</span>
+          <h2>Приходите на бесплатное пробное</h2>
+          <p class="contact-lead">Напишите мне, расскажите, в каком классе ученик и какой результат нужен. Договоримся о пробном занятии и познакомимся.</p>
+        </div>
+
+        <div>
+          <ul class="contact-list">
+            <li>Пробное занятие бесплатно.</li>
+            <li>Можно начать с любого текущего уровня.</li>
+            <li>После пробного не нужно принимать решение сразу.</li>
+          </ul>
+
+          <div class="contact-actions">
+            <!-- Заменить # на реальную ссылку Telegram -->
+            <a class="button button-primary contact-placeholder" href="#" data-contact-placeholder>Написать в Telegram</a>
+            <!-- Заменить # на реальную ссылку VK -->
+            <a class="button button-secondary contact-placeholder" href="#" data-contact-placeholder>Написать во ВКонтакте</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Дмитрий Маков · подготовка к ЕГЭ по информатике</span>
+      <span>Онлайн · 10–11 класс</span>
+    </div>
+  </footer>
 
   <script>
     const scoreButtons = Array.from(document.querySelectorAll('.score[data-score]'));
@@ -283,6 +541,7 @@
           item.classList.remove('is-active');
           item.setAttribute('aria-expanded', 'false');
         });
+
         button.classList.add('is-active');
         button.setAttribute('aria-expanded', 'true');
         proofScore.textContent = button.dataset.score;
@@ -310,13 +569,20 @@
       next.addEventListener('click', () => show(current + 1));
 
       let startX = null;
-      slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive:true });
+      slider.addEventListener('touchstart', (event) => {
+        startX = event.touches[0].clientX;
+      }, { passive:true });
+
       slider.addEventListener('touchend', (event) => {
         if (startX === null) return;
         const delta = event.changedTouches[0].clientX - startX;
         if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1));
         startX = null;
       }, { passive:true });
+    });
+
+    document.querySelectorAll('[data-contact-placeholder]').forEach((link) => {
+      link.addEventListener('click', (event) => event.preventDefault());
     });
   </script>
 </body>
