@@ -362,6 +362,44 @@
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр изображения"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img id="lightbox-image" src="" alt=""></div>
 
   <script>
+    const header = document.querySelector('.site-header');
+
+    function scrollWithoutHash(selector, behavior = 'smooth') {
+      let target;
+      try {
+        target = document.querySelector(selector);
+      } catch (error) {
+        return false;
+      }
+      if (!target) return false;
+
+      const headerHeight = header ? header.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+      window.scrollTo({ top: Math.max(0, top), behavior });
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      return true;
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      const selector = link.getAttribute('href');
+      if (!selector || selector === '#') return;
+
+      link.addEventListener('click', (event) => {
+        const behavior = link.classList.contains('skip-link') ? 'auto' : 'smooth';
+        if (!scrollWithoutHash(selector, behavior)) return;
+        event.preventDefault();
+      });
+    });
+
+    if (window.location.hash) {
+      const initialHash = window.location.hash;
+      requestAnimationFrame(() => {
+        if (!scrollWithoutHash(initialHash, 'auto')) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      });
+    }
+
     const scoreButtons = Array.from(document.querySelectorAll('.score[data-score]'));
     const proof = document.getElementById('score-proof');
     const proofScore = document.getElementById('proof-score');
