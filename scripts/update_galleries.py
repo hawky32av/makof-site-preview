@@ -40,7 +40,7 @@ SEO_BLOCK = '''  <!-- SITE-SEO:START -->
   <link rel="canonical" href="https://makof.ru/">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="theme-color" content="#e86819">
-  <link rel="icon" href="assets/hero/hero.png" type="image/png">
+  <link rel="icon" href="favicon.png" type="image/png">\n  <link rel="apple-touch-icon" href="favicon.png">
 
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="website">
@@ -264,7 +264,7 @@ def update_legal_page(path: Path, canonical_url: str) -> None:
         count=1,
     )
 
-    canonical = f'  <link rel="canonical" href="{canonical_url}">\n  <meta name="theme-color" content="#e86819">\n  <link rel="icon" href="assets/hero/hero.png" type="image/png">'
+    canonical = f'  <link rel="canonical" href="{canonical_url}">\n  <meta name="theme-color" content="#e86819">\n  <link rel="icon" href="favicon.png" type="image/png">\n  <link rel="apple-touch-icon" href="favicon.png">'
     source = upsert_marked_block(
         source,
         "<!-- LEGAL-SEO:START -->",
