@@ -14,261 +14,47 @@
   <link rel="stylesheet" href="hero-photo.css">
   <link rel="stylesheet" href="simple.css">
   <link rel="stylesheet" href="sketch.css">
+
   <style>
-    .proof-image { display:block; width:auto; max-width:min(100%,620px); height:auto; }
+    .proof-image{display:block;width:auto;max-width:min(100%,620px);height:auto}
 
-    .about-section,
-    .reviews-section {
-      padding:76px 0;
-      border-bottom:1px solid var(--line);
-      background:#fff;
+    .about-section,.reviews-section{padding:76px 0;border-bottom:1px solid var(--line);background:#fff}
+    .about-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:54px;align-items:start}
+    .about-photo{display:block;width:100%;height:auto}
+    .about-section h2,.reviews-section h2{margin:0;font-size:clamp(34px,4vw,48px);line-height:1.08;letter-spacing:-.035em;font-weight:600}
+    .about-lead{margin:18px 0 28px;max-width:660px;font-size:17px;line-height:1.65}
+    .about-facts{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    .about-facts li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
+    .about-facts strong{font-size:13px;font-weight:600}
+    .about-facts span{color:var(--muted);font-size:13px;line-height:1.6}
+
+    .reviews-head{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:54px;align-items:end;margin-bottom:50px}
+    .reviews-head p{margin:0;max-width:560px;color:var(--muted);font-size:15px;line-height:1.7}
+    .reviews-group{padding-top:30px;border-top:1px solid var(--line)}
+    .reviews-group+.reviews-group{margin-top:58px}
+    .reviews-group h3{margin:0 0 22px;font-size:22px;line-height:1.25;font-weight:600}
+
+    .review-slider{max-width:820px}
+    .review-slides{display:block}
+    .review-slide{display:none;max-width:100%;width:auto;height:auto;margin:0}
+    .review-slide.is-active{display:block}
+    .review-controls{display:flex;align-items:center;gap:16px;margin-top:18px}
+    .review-arrow{width:42px;height:42px;padding:0;border:1px solid #d8d8d8;background:#fff;color:#171717;font:400 22px/1 Arial,sans-serif;cursor:pointer}
+    .review-arrow:hover{border-color:#999}
+    .review-counter{min-width:48px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media(max-width:900px){
+      .about-layout{grid-template-columns:200px minmax(0,1fr);gap:32px}
+      .reviews-head{grid-template-columns:1fr;gap:18px}
     }
-
-    .about-layout {
-      display:grid;
-      grid-template-columns:240px minmax(0,1fr);
-      gap:54px;
-      align-items:start;
-    }
-
-    .about-photo {
-      display:block;
-      width:100%;
-      height:auto;
-    }
-
-    .about-section h2,
-    .reviews-section h2 {
-      margin:0;
-      font-size:clamp(34px,4vw,48px);
-      line-height:1.08;
-      letter-spacing:-.035em;
-      font-weight:600;
-    }
-
-    .about-lead {
-      margin:18px 0 28px;
-      max-width:660px;
-      font-size:17px;
-      line-height:1.65;
-    }
-
-    .about-facts {
-      margin:0;
-      padding:0;
-      list-style:none;
-      border-top:1px solid var(--line);
-    }
-
-    .about-facts li {
-      display:grid;
-      grid-template-columns:150px minmax(0,1fr);
-      gap:24px;
-      padding:18px 0;
-      border-bottom:1px solid var(--line);
-    }
-
-    .about-facts strong {
-      font-size:13px;
-      font-weight:600;
-    }
-
-    .about-facts span {
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-    }
-
-    .reviews-head {
-      display:grid;
-      grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
-      gap:54px;
-      align-items:end;
-      margin-bottom:54px;
-    }
-
-    .reviews-head p {
-      margin:0;
-      max-width:560px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    .reviews-group {
-      padding-top:32px;
-      border-top:1px solid var(--line);
-    }
-
-    .reviews-group + .reviews-group {
-      margin-top:58px;
-    }
-
-    .reviews-group-head {
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:24px;
-      margin-bottom:24px;
-    }
-
-    .reviews-group h3 {
-      margin:0;
-      font-size:22px;
-      line-height:1.25;
-      font-weight:600;
-    }
-
-    .reviews-count {
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .reviews-grid {
-      columns:2;
-      column-gap:20px;
-    }
-
-    .review-shot {
-      display:block;
-      width:100%;
-      margin:0 0 20px;
-      padding:9px;
-      break-inside:avoid;
-      border:1px solid #e4e4e4;
-      background:#fff;
-      cursor:zoom-in;
-      text-align:left;
-      transition:border-color .16s ease, transform .16s ease;
-    }
-
-    .review-shot:hover {
-      border-color:#bdbdbd;
-      transform:translateY(-1px);
-    }
-
-    .review-shot:focus-visible {
-      outline:2px solid #222;
-      outline-offset:3px;
-    }
-
-    .review-shot img {
-      display:block;
-      width:100%;
-      height:auto;
-    }
-
-    .review-lightbox[hidden] {
-      display:none;
-    }
-
-    .review-lightbox {
-      position:fixed;
-      inset:0;
-      z-index:1000;
-      display:grid;
-      place-items:center;
-      padding:28px;
-    }
-
-    .review-lightbox-backdrop {
-      position:absolute;
-      inset:0;
-      background:rgba(20,20,20,.84);
-      cursor:zoom-out;
-    }
-
-    .review-lightbox-content {
-      position:relative;
-      z-index:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      max-width:min(1100px,94vw);
-      max-height:92vh;
-    }
-
-    .review-lightbox-image {
-      display:block;
-      max-width:100%;
-      max-height:88vh;
-      width:auto;
-      height:auto;
-      background:#fff;
-      box-shadow:0 16px 60px rgba(0,0,0,.28);
-    }
-
-    .review-lightbox-close {
-      position:absolute;
-      top:-18px;
-      right:-18px;
-      width:40px;
-      height:40px;
-      padding:0;
-      border:1px solid rgba(255,255,255,.45);
-      border-radius:50%;
-      background:#fff;
-      color:#111;
-      font:400 27px/1 Arial,sans-serif;
-      cursor:pointer;
-    }
-
-    @media (max-width:900px) {
-      .about-layout {
-        grid-template-columns:200px minmax(0,1fr);
-        gap:32px;
-      }
-
-      .reviews-head {
-        grid-template-columns:1fr;
-        gap:18px;
-      }
-    }
-
-    @media (max-width:720px) {
-      .about-section,
-      .reviews-section {
-        padding:58px 0;
-      }
-
-      .about-layout {
-        grid-template-columns:1fr;
-      }
-
-      .about-photo {
-        width:min(100%,320px);
-      }
-
-      .about-facts li {
-        grid-template-columns:1fr;
-        gap:5px;
-      }
-
-      .reviews-head {
-        margin-bottom:38px;
-      }
-
-      .reviews-group + .reviews-group {
-        margin-top:44px;
-      }
-
-      .reviews-grid {
-        columns:1;
-      }
-
-      .review-shot {
-        margin-bottom:14px;
-        padding:7px;
-      }
-
-      .review-lightbox {
-        padding:16px;
-      }
-
-      .review-lightbox-close {
-        top:-12px;
-        right:-8px;
-      }
+    @media(max-width:720px){
+      .about-section,.reviews-section{padding:58px 0}
+      .about-layout{grid-template-columns:1fr}
+      .about-photo{width:min(100%,320px)}
+      .about-facts li{grid-template-columns:1fr;gap:5px}
+      .reviews-head{margin-bottom:38px}
+      .reviews-group+.reviews-group{margin-top:44px}
+      .review-arrow{width:40px;height:40px}
     }
   </style>
 </head>
@@ -367,48 +153,45 @@
     <section class="reviews-section" id="reviews">
       <div class="container">
         <div class="reviews-head">
-          <div>
-            <span class="section-kicker">Отзывы</span>
-            <h2>Что говорят ученики и родители</h2>
-          </div>
-          <p>Реальные сообщения о занятиях и результатах. Оставляю отзывы в исходном виде, без переписывания.</p>
+          <div><span class="section-kicker">Отзывы</span><h2>Что говорят ученики и родители</h2></div>
+          <p>Реальные сообщения о занятиях и результатах. Отзывы можно просто перелистывать.</p>
         </div>
 
         <div class="reviews-group">
-          <div class="reviews-group-head">
-            <h3>Отзывы учеников</h3>
-            <span class="reviews-count">4 отзыва</span>
-          </div>
-          <div class="reviews-grid">
-            <button class="review-shot" type="button" data-review="assets/reviews/student-1.webp" aria-label="Открыть отзыв ученика 1 крупно"><img src="assets/reviews/student-1.webp" alt="Отзыв ученика о подготовке к ЕГЭ по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/student-2.webp" aria-label="Открыть отзыв ученика 2 крупно"><img src="assets/reviews/student-2.webp" alt="Отзыв ученика о подготовке к ЕГЭ по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/student-3.webp" aria-label="Открыть отзыв ученика 3 крупно"><img src="assets/reviews/student-3.webp" alt="Отзыв ученика о занятиях по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/student-4.webp" aria-label="Открыть отзыв ученика 4 крупно"><img src="assets/reviews/student-4.webp" alt="Отзыв ученика о занятиях" loading="lazy"></button>
+          <h3>Отзывы учеников</h3>
+          <div class="review-slider" data-review-slider>
+            <div class="review-slides">
+              <img class="review-slide is-active" src="assets/reviews/student-1.webp" alt="Отзыв ученика 1" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-2.webp" alt="Отзыв ученика 2" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-3.webp" alt="Отзыв ученика 3" loading="lazy">
+              <img class="review-slide" src="assets/reviews/student-4.webp" alt="Отзыв ученика 4" loading="lazy">
+            </div>
+            <div class="review-controls">
+              <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
+              <span class="review-counter" data-review-counter>1 / 4</span>
+              <button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button>
+            </div>
           </div>
         </div>
 
         <div class="reviews-group">
-          <div class="reviews-group-head">
-            <h3>Отзывы родителей</h3>
-            <span class="reviews-count">4 отзыва</span>
-          </div>
-          <div class="reviews-grid">
-            <button class="review-shot" type="button" data-review="assets/reviews/parent-1.webp" aria-label="Открыть отзыв родителя 1 крупно"><img src="assets/reviews/parent-1.webp" alt="Отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/parent-2.webp" aria-label="Открыть отзыв родителя 2 крупно"><img src="assets/reviews/parent-2.webp" alt="Отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/parent-3.webp" aria-label="Открыть отзыв родителя 3 крупно"><img src="assets/reviews/parent-3.webp" alt="Отзыв родителя о занятиях по информатике" loading="lazy"></button>
-            <button class="review-shot" type="button" data-review="assets/reviews/parent-4.webp" aria-label="Открыть отзыв родителя 4 крупно"><img src="assets/reviews/parent-4.webp" alt="Подробный отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy"></button>
+          <h3>Отзывы родителей</h3>
+          <div class="review-slider" data-review-slider>
+            <div class="review-slides">
+              <img class="review-slide is-active" src="assets/reviews/parent-1.webp" alt="Отзыв родителя 1" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-2.webp" alt="Отзыв родителя 2" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-3.webp" alt="Отзыв родителя 3" loading="lazy">
+              <img class="review-slide" src="assets/reviews/parent-4.webp" alt="Отзыв родителя 4" loading="lazy">
+            </div>
+            <div class="review-controls">
+              <button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button>
+              <span class="review-counter" data-review-counter>1 / 4</span>
+              <button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <div class="review-lightbox" id="review-lightbox" hidden aria-modal="true" role="dialog" aria-label="Просмотр отзыва">
-      <div class="review-lightbox-backdrop" data-review-close></div>
-      <div class="review-lightbox-content">
-        <img class="review-lightbox-image" id="review-lightbox-image" src="" alt="Увеличенный отзыв">
-        <button class="review-lightbox-close" type="button" data-review-close aria-label="Закрыть">×</button>
-      </div>
-    </div>
 
     <section class="stage-placeholder" id="next" aria-label="Следующий раздел сайта">
       <div class="container"><span>Следующий этап</span><p>После отзывов — отдельный блок бесплатного пробного занятия.</p></div>
@@ -416,55 +199,49 @@
   </main>
 
   <script>
-    const scoreButtons = Array.from(document.querySelectorAll('.score[data-score]'));
-    const proof = document.getElementById('score-proof');
-    const proofScore = document.getElementById('proof-score');
-    const proofNote = document.getElementById('proof-note');
-    const proofImage = document.getElementById('proof-image');
+    const scoreButtons=Array.from(document.querySelectorAll('.score[data-score]'));
+    const proof=document.getElementById('score-proof');
+    const proofScore=document.getElementById('proof-score');
+    const proofNote=document.getElementById('proof-note');
+    const proofImage=document.getElementById('proof-image');
 
-    scoreButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        scoreButtons.forEach((item) => {
-          item.classList.remove('is-active');
-          item.setAttribute('aria-expanded', 'false');
-        });
+    scoreButtons.forEach((button)=>{
+      button.addEventListener('click',()=>{
+        scoreButtons.forEach((item)=>{item.classList.remove('is-active');item.setAttribute('aria-expanded','false')});
         button.classList.add('is-active');
-        button.setAttribute('aria-expanded', 'true');
-        proofScore.textContent = button.dataset.score;
-        proofNote.textContent = button.dataset.note;
-        proofImage.src = button.dataset.image;
-        proofImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
-        proof.hidden = false;
+        button.setAttribute('aria-expanded','true');
+        proofScore.textContent=button.dataset.score;
+        proofNote.textContent=button.dataset.note;
+        proofImage.src=button.dataset.image;
+        proofImage.alt=`Подтверждение результата ${button.dataset.score} баллов`;
+        proof.hidden=false;
       });
     });
 
-    const reviewButtons = Array.from(document.querySelectorAll('.review-shot[data-review]'));
-    const reviewLightbox = document.getElementById('review-lightbox');
-    const reviewLightboxImage = document.getElementById('review-lightbox-image');
-    const reviewCloseButtons = Array.from(document.querySelectorAll('[data-review-close]'));
+    document.querySelectorAll('[data-review-slider]').forEach((slider)=>{
+      const slides=Array.from(slider.querySelectorAll('.review-slide'));
+      const counter=slider.querySelector('[data-review-counter]');
+      const prev=slider.querySelector('[data-review-prev]');
+      const next=slider.querySelector('[data-review-next]');
+      let current=0;
+      let touchStartX=null;
 
-    function closeReviewLightbox() {
-      reviewLightbox.hidden = true;
-      reviewLightboxImage.src = '';
-      document.body.style.overflow = '';
-    }
-
-    reviewButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        reviewLightboxImage.src = button.dataset.review;
-        reviewLightbox.hidden = false;
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    reviewCloseButtons.forEach((button) => {
-      button.addEventListener('click', closeReviewLightbox);
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !reviewLightbox.hidden) {
-        closeReviewLightbox();
+      function show(index){
+        current=(index+slides.length)%slides.length;
+        slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===current));
+        counter.textContent=`${current+1} / ${slides.length}`;
       }
+
+      prev.addEventListener('click',()=>show(current-1));
+      next.addEventListener('click',()=>show(current+1));
+      slider.addEventListener('touchstart',(event)=>{touchStartX=event.changedTouches[0].clientX},{passive:true});
+      slider.addEventListener('touchend',(event)=>{
+        if(touchStartX===null)return;
+        const delta=event.changedTouches[0].clientX-touchStartX;
+        if(Math.abs(delta)>45)show(delta<0?current+1:current-1);
+        touchStartX=null;
+      },{passive:true});
+      show(0);
     });
   </script>
 </body>
