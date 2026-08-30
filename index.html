@@ -27,12 +27,13 @@
     .about-facts li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; padding:18px 0; border-bottom:1px solid var(--line); }
     .about-facts strong { font-size:13px; font-weight:600; }
     .about-facts span { color:var(--muted); font-size:13px; line-height:1.6; }
-    .reviews-head { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:54px; align-items:end; margin-bottom:36px; }
+    .reviews-head { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:54px; align-items:end; margin-bottom:42px; }
     .reviews-head p { margin:0; max-width:560px; color:var(--muted); font-size:14px; line-height:1.7; }
-    .review-list { border-top:1px solid var(--line); }
-    .review-item { display:grid; grid-template-columns:170px minmax(0,1fr); gap:32px; padding:28px 0; border-bottom:1px solid var(--line); }
-    .review-meta { color:var(--muted); font-size:12px; line-height:1.6; }
-    .review-placeholder { min-height:150px; display:flex; align-items:center; justify-content:center; border:1px dashed #cfcfcf; color:#999; font-size:13px; text-align:center; padding:24px; }
+    .reviews-group { padding:28px 0 40px; border-top:1px solid var(--line); }
+    .reviews-group:last-child { padding-bottom:0; }
+    .reviews-group h3 { margin:0 0 22px; font-size:20px; font-weight:600; }
+    .review-images { display:flex; flex-direction:column; align-items:flex-start; gap:18px; }
+    .review-shot { display:block; width:auto; max-width:100%; height:auto; }
     @media (max-width:900px) {
       .about-layout { grid-template-columns:200px minmax(0,1fr); gap:32px; }
       .reviews-head { grid-template-columns:1fr; gap:18px; }
@@ -43,7 +44,7 @@
       .about-layout { grid-template-columns:1fr; }
       .about-photo { width:min(100%,320px); }
       .about-facts li { grid-template-columns:1fr; gap:5px; }
-      .review-item { grid-template-columns:1fr; gap:12px; }
+      .review-images { gap:14px; }
     }
   </style>
 </head>
@@ -143,12 +144,27 @@
       <div class="container">
         <div class="reviews-head">
           <div><span class="section-kicker">Отзывы</span><h2>Ученики и родители о занятиях</h2></div>
-          <p>В финальной версии здесь будут реальные скриншоты отзывов. Пока фиксируем саму структуру блока и его место на странице.</p>
+          <p>Оставляю отзывы в исходном виде — как их присылали ученики и родители.</p>
         </div>
-        <div class="review-list">
-          <div class="review-item"><div class="review-meta">Отзыв ученика<br>результат / подготовка</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
-          <div class="review-item"><div class="review-meta">Отзыв родителя<br>организация обучения</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
-          <div class="review-item"><div class="review-meta">Отзыв ученика<br>объяснение материала</div><div class="review-placeholder">Сюда поставим реальный скриншот отзыва</div></div>
+
+        <div class="reviews-group">
+          <h3>Отзывы учеников</h3>
+          <div class="review-images">
+            <img class="review-shot" src="assets/reviews/student-1.webp" alt="Отзыв ученика о подготовке к ЕГЭ по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/student-2.webp" alt="Отзыв ученика о подготовке к ЕГЭ по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/student-3.webp" alt="Отзыв ученика о занятиях по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/student-4.webp" alt="Отзыв ученика о занятиях" loading="lazy">
+          </div>
+        </div>
+
+        <div class="reviews-group">
+          <h3>Отзывы родителей</h3>
+          <div class="review-images">
+            <img class="review-shot" src="assets/reviews/parent-1.webp" alt="Отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/parent-2.webp" alt="Отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/parent-3.webp" alt="Отзыв родителя о занятиях по информатике" loading="lazy">
+            <img class="review-shot" src="assets/reviews/parent-4.webp" alt="Подробный отзыв родителя о подготовке к ЕГЭ по информатике" loading="lazy">
+          </div>
         </div>
       </div>
     </section>
