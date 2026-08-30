@@ -1,5 +1,10 @@
 @import url("styles-base.css");
 
+/* Keep primary site controls rectangular and consistent with the visual system. */
+.button {
+  border-radius: 2px;
+}
+
 /* Equal visual size for book cover and sample page. */
 .book-cover,
 .book-spread {
