@@ -1,0 +1,29 @@
+name: Inspect AlfaCRM form
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-alfa-form.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch form source
+        run: |
+          python - <<'PY'
+          import urllib.request
+          from urllib.parse import quote
+          css='https://hawky32av.github.io/makof-site-preview/alfa-form.css'
+          url='https://dmprokids.s20.online/common/1/form/draw?id=1&baseColor=E86819&borderRadius=2&css='+quote(css, safe='')
+          html=urllib.request.urlopen(url, timeout=20).read().decode('utf-8','replace')
+          open('alfa-inspect.html','w',encoding='utf-8').write(html)
+          PY
+      - name: Commit inspection
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add alfa-inspect.html
+          git commit -m 'Inspect AlfaCRM form source' || exit 0
+          git push
