@@ -3,104 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Подготовка к ЕГЭ по информатике для 10–11 классов. Занятия с Дмитрием Маковым: практика, домашняя работа, помощь между занятиями и пробники.">
+  <meta name="description" content="Подготовка к ЕГЭ по информатике для 10–11 классов. Дмитрий Маков: занятия, практика, помощь между занятиями, пробники и бесплатное пробное занятие.">
   <title>Дмитрий Маков — подготовка к ЕГЭ по информатике</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="preparation.css">
-  <link rel="stylesheet" href="hero-photo.css">
-  <link rel="stylesheet" href="simple.css">
-  <link rel="stylesheet" href="sketch.css">
-
-  <style>
-    html{scroll-behavior:smooth}
-    .hero-portrait-image{display:block}
-    .hero-portrait-image img{display:block;width:100%;height:auto;position:static;transform:none;opacity:1}
-    .proof-image{display:block;width:auto;max-width:min(100%,620px);height:auto}
-
-    .about-section,.reviews-section,.trial-section,.guarantee-section,.faq-section,.contact-section{
-      padding:76px 0;border-bottom:1px solid var(--line);background:#fff
-    }
-    .about-section h2,.reviews-section h2,.trial-section h2,.guarantee-section h2,.faq-section h2,.contact-section h2{
-      margin:0;font-size:clamp(34px,4vw,48px);line-height:1.08;letter-spacing:-.035em;font-weight:600
-    }
-
-    .about-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:54px;align-items:start}
-    .about-photo{display:block;width:100%;height:auto}
-    .about-lead{margin:18px 0 28px;max-width:660px;font-size:17px;line-height:1.65}
-    .about-facts{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
-    .about-facts li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
-    .about-facts strong{font-size:13px;font-weight:600}
-    .about-facts span{color:var(--muted);font-size:13px;line-height:1.6}
-
-    .reviews-head,.faq-head{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:54px;align-items:end;margin-bottom:42px}
-    .reviews-head p,.faq-head p{margin:0;max-width:560px;color:var(--muted);font-size:15px;line-height:1.7}
-    .reviews-group{padding-top:30px;border-top:1px solid var(--line)}
-    .reviews-group+.reviews-group{margin-top:58px}
-    .reviews-group h3{margin:0 0 22px;font-size:22px;line-height:1.25;font-weight:600}
-
-    .review-slider{max-width:820px}
-    .review-slide{display:none;max-width:100%;width:auto;height:auto;margin:0}
-    .review-slide.is-active{display:block}
-    .review-controls{display:flex;align-items:center;gap:16px;margin-top:18px}
-    .review-arrow{width:42px;height:42px;padding:0;border:1px solid #d8d8d8;background:#fff;color:#171717;font:400 22px/1 Arial,sans-serif;cursor:pointer}
-    .review-arrow:hover{border-color:#999}
-    .review-counter{min-width:48px;text-align:center;color:var(--muted);font-size:13px}
-
-    .trial-layout,.guarantee-layout,.contact-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
-    .trial-lead,.guarantee-lead,.contact-lead{margin:18px 0 0;max-width:620px;font-size:18px;line-height:1.65}
-    .trial-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
-    .trial-list li{padding:18px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.6}
-
-    .signup-form{scroll-margin-top:100px}
-    .alfacrm-wrap{width:100%;max-width:620px;margin:28px 0 0;border-top:1px solid var(--line);padding-top:22px}
-    .alfacrm-frame{display:block;width:100%;min-height:620px;border:0;background:#fff}
-    .alfacrm-fallback{margin:12px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
-    .alfacrm-fallback a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-
-    .guarantee-note{padding-top:4px;max-width:650px}
-    .guarantee-note strong{display:block;margin-bottom:12px;font-size:24px;line-height:1.25;font-weight:600}
-    .guarantee-note p{margin:0;color:var(--muted);font-size:15px;line-height:1.7}
-
-    .faq-list{margin:0;border-top:1px solid var(--line)}
-    .faq-item{border-bottom:1px solid var(--line)}
-    .faq-item summary{position:relative;padding:22px 46px 22px 0;cursor:pointer;list-style:none;font-size:17px;font-weight:500;line-height:1.45}
-    .faq-item summary::-webkit-details-marker{display:none}
-    .faq-item summary::after{content:"+";position:absolute;top:20px;right:2px;font:400 24px/1 Arial,sans-serif}
-    .faq-item[open] summary::after{content:"−"}
-    .faq-item p{margin:-3px 0 22px;max-width:760px;color:var(--muted);font-size:15px;line-height:1.7}
-
-    .contact-section{border-bottom:0}
-    .contact-action{margin-top:28px}
-    .site-footer{padding:28px 0 34px;border-top:1px solid var(--line);background:#fff}
-    .footer-inner{display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-size:12px;line-height:1.5}
-
-    @media(max-width:900px){
-      .about-layout{grid-template-columns:200px minmax(0,1fr);gap:32px}
-      .reviews-head,.faq-head,.trial-layout,.guarantee-layout,.contact-layout{grid-template-columns:1fr;gap:24px}
-    }
-    @media(max-width:720px){
-      .about-section,.reviews-section,.trial-section,.guarantee-section,.faq-section,.contact-section{padding:58px 0}
-      .about-layout{grid-template-columns:1fr}
-      .about-photo{width:min(100%,320px)}
-      .about-facts li{grid-template-columns:1fr;gap:5px}
-      .reviews-group+.reviews-group{margin-top:44px}
-      .review-arrow{width:40px;height:40px}
-      .alfacrm-frame{min-height:680px}
-      .footer-inner{flex-direction:column;gap:6px}
-    }
-  </style>
 </head>
-
 <body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Дмитрий Маков — на главную">
-        <span class="brand-copy"><strong>Дмитрий Маков</strong><span>преподаватель информатики</span></span>
+      <a class="brand" href="#top" aria-label="Дмитрий Маков — наверх">
+        <span class="brand-copy">
+          <strong>Дмитрий Маков</strong>
+          <span>преподаватель информатики</span>
+        </span>
       </a>
+
       <nav class="nav" aria-label="Навигация по странице">
         <a href="#results">Результаты</a>
         <a href="#preparation">Подготовка</a>
@@ -108,110 +30,203 @@
         <a href="#reviews">Отзывы</a>
         <a href="#faq">Вопросы</a>
       </nav>
+
       <a class="button button-small" href="#signup-form">Бесплатное пробное</a>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
+  <main id="main">
+    <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">ЕГЭ по информатике · 10–11 класс</div>
-          <h1>Подготовка к ЕГЭ по информатике<br><span>от базы до 80+ баллов</span></h1>
-          <p class="hero-lead">Разбираем темы по порядку, много решаем и регулярно проверяем прогресс. Если Python пока слабый — начнём с базы.</p>
-          <div class="hero-actions"><a class="button button-primary" href="#signup-form">Записаться на бесплатное пробное</a></div>
+          <span class="eyebrow">ЕГЭ по информатике · 10–11 класс</span>
+          <h1>Подготовка к ЕГЭ по информатике <span>от базы до 80+ баллов</span></h1>
+          <p class="hero-lead">Разбираем темы по порядку, много решаем и регулярно проверяем прогресс. Если Python пока слабый, начнём с базы.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#signup-form">Записаться на бесплатное пробное</a>
+          </div>
         </div>
+
         <div class="hero-portrait" aria-label="Фото преподавателя">
           <div class="hero-portrait-image">
             <img src="assets/hero/hero.png" alt="Дмитрий Маков с учебником">
           </div>
         </div>
       </div>
-      <div class="container proof-strip" aria-label="Ключевые факты о преподавателе">
-        <div class="proof-item"><strong>81</strong><span>средний балл моих учеников в 2026 году</span></div>
-        <div class="proof-item"><strong>с 2019 года</strong><span>готовлю школьников к экзаменам</span></div>
-        <div class="proof-item"><strong>ИТМО</strong><span>педагогическое IT-образование</span></div>
+
+      <div class="container proof-strip" aria-label="Ключевые факты">
+        <div class="proof-item">
+          <strong>81 балл</strong>
+          <span>средний результат моих учеников в 2026 году</span>
+        </div>
+        <div class="proof-item">
+          <strong>100 баллов</strong>
+          <span>лучший подтверждённый результат</span>
+        </div>
+        <div class="proof-item">
+          <strong>с 2019 года</strong>
+          <span>готовлю школьников к экзаменам</span>
+        </div>
+        <div class="proof-item">
+          <strong>ИТМО</strong>
+          <span>педагогическое образование в сфере IT</span>
+        </div>
       </div>
     </section>
 
-    <section class="results-section" id="results">
+    <section class="section results-section" id="results">
       <div class="container">
-        <div class="section-heading results-heading">
-          <div><span class="section-kicker">Результаты</span><h2>Результаты учеников</h2></div>
-          <p>Здесь несколько результатов моих учеников. По каждому можно открыть подтверждение.</p>
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Результаты</span>
+            <h2>Баллы учеников, которые можно проверить</h2>
+          </div>
+          <p>Нажмите на результат — ниже откроется его подтверждение. Контекст указываю только там, где он у меня точно есть.</p>
         </div>
-        <div class="score-intro"><span>Выберите балл</span><p>Ниже откроется подтверждение результата.</p></div>
+
+        <div class="score-intro">
+          <span>Выберите балл</span>
+          <p>Скрин откроется под списком.</p>
+        </div>
+
         <div class="score-row" aria-label="Подтверждённые результаты учеников">
           <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="90" data-image="assets/results/result-90.png" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.png" data-note="Результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
           <button class="score" type="button" data-score="78" data-image="assets/results/result-78.png" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
+          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
         </div>
+
         <div class="score-proof" id="score-proof" hidden aria-live="polite">
           <div class="proof-copy">
-            <span class="proof-eyebrow">Подтверждение результата</span>
-            <div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div>
+            <span class="proof-eyebrow">Подтверждение</span>
+            <div class="proof-score-line">
+              <strong id="proof-score">100</strong>
+              <span>баллов по ЕГЭ</span>
+            </div>
             <p id="proof-note">Подготовка с сентября до экзамена.</p>
           </div>
-          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
-        </div>
-        <div class="goal-card">
-          <div class="goal-copy">
-            <h3>Ориентируемся на цель поступления</h3>
-            <p>Если для поступления достаточно 75–80 баллов, план будет одним. Если нужны 90+, подготовка строится иначе. На старте смотрим, что ученик уже умеет, и от этого двигаемся дальше.</p>
+          <div>
+            <img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов">
           </div>
+        </div>
+
+        <div class="goal-note">
+          <strong>Как ставим цель</strong>
+          <p>Сначала смотрим стартовый уровень и балл, который нужен для поступления. Подготовка на уверенные 75–80 и подготовка на 90+ требуют разного объёма работы — это учитываем с самого начала.</p>
         </div>
       </div>
     </section>
 
-    <section class="preparation-section" id="preparation">
+    <section class="tagline-section" aria-label="Главный принцип подготовки">
+      <div class="container">
+        <p class="tagline">На экзамене важно не просто «знать тему». <span>Нужно уметь стабильно решать задачи самому.</span></p>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="preparation">
       <div class="container preparation-layout">
         <div class="preparation-intro">
           <span class="section-kicker">Подготовка</span>
-          <h2>Как проходит подготовка</h2>
-          <p>На занятии разбираем тему, дальше ученик закрепляет её сам. Материалы, записи и задания всегда под рукой, а вопрос можно задать и между занятиями.</p>
+          <h2>Как проходит обучение</h2>
+          <p>На занятии разбираем тему и решаем задачи. Между занятиями ученик продолжает работать сам, а я вижу, где появляются пробелы.</p>
         </div>
-        <div class="preparation-flow" aria-label="Как устроена подготовка к ЕГЭ">
-          <article class="preparation-step"><span class="step-number">01</span><div><h3>Занятия</h3><p>Объясняю тему и сразу переходим к задачам ЕГЭ. Python подключаем тогда, когда он нужен для конкретных заданий.</p></div></article>
-          <article class="preparation-step"><span class="step-number">02</span><div><h3>Домашняя практика</h3><p>После занятия остаётся понятное ДЗ по пройденной теме. По нему видно, что уже получается, а где ещё есть пробел.</p></div></article>
-          <article class="preparation-step"><span class="step-number">03</span><div><h3>Материалы и записи</h3><p>Конспекты, задания и записи хранятся в личном кабинете. Если что-то забылось, тему можно открыть ещё раз.</p></div></article>
-          <article class="preparation-step"><span class="step-number">04</span><div><h3>Вопросы между занятиями</h3><p>Если ученик застрял на задаче, можно написать в чат и получить помощь.</p></div></article>
-          <article class="preparation-step"><span class="step-number">05</span><div><h3>Пробники</h3><p>Периодически пишем пробники, смотрим на балл и разбираем ошибки. По ним проще понять, что сейчас важнее подтянуть.</p></div></article>
+
+        <div class="preparation-flow" aria-label="Этапы подготовки">
+          <article class="preparation-step">
+            <span class="step-number">01</span>
+            <div>
+              <h3>Разбираем тему</h3>
+              <p>Объясняю материал на задачах ЕГЭ. Стараюсь не перегружать теорией там, где её можно понять через нормальный пример.</p>
+            </div>
+          </article>
+
+          <article class="preparation-step">
+            <span class="step-number">02</span>
+            <div>
+              <h3>Закрепляем дома</h3>
+              <p>После занятия остаётся ДЗ по пройденной теме. По нему быстро видно, что уже получается без подсказки, а что стоит разобрать ещё раз.</p>
+            </div>
+          </article>
+
+          <article class="preparation-step">
+            <span class="step-number">03</span>
+            <div>
+              <h3>Возвращаемся к сложным местам</h3>
+              <p>Если одна и та же ошибка повторяется, не идём дальше «для галочки». Разбираем её и добиваемся, чтобы ученик мог решить похожую задачу сам.</p>
+            </div>
+          </article>
+
+          <article class="preparation-step">
+            <span class="step-number">04</span>
+            <div>
+              <h3>Материалы и записи остаются</h3>
+              <p>Конспекты, задания и записи занятий хранятся в личном кабинете. К старой теме можно вернуться перед пробником или повторением.</p>
+            </div>
+          </article>
+
+          <article class="preparation-step">
+            <span class="step-number">05</span>
+            <div>
+              <h3>Пишем пробники</h3>
+              <p>Так видно реальный балл на текущем этапе и становится понятнее, куда тратить время дальше.</p>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="container python-callout">
-        <div><span>Python</span><h3>Можно начинать с нуля</h3><p>Предварительная подготовка по программированию не нужна. Нужную для ЕГЭ базу разбираем по ходу курса.</p></div>
+
+      <div class="container python-note">
+        <strong>Если Python слабый</strong>
+        <p>Это нормально для старта. Нужную для ЕГЭ базу можно пройти с нуля и сразу привязать её к тем задачам, где программирование действительно понадобится.</p>
       </div>
     </section>
 
-    <section class="about-section" id="about">
+    <section class="section" id="about">
       <div class="container about-layout">
-        <div><img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков"></div>
-        <div>
+        <div class="about-photo-wrap">
+          <img class="about-photo" src="assets/about/about.jpg" alt="Дмитрий Маков">
+        </div>
+
+        <div class="about-copy">
           <span class="section-kicker">Обо мне</span>
           <h2>Дмитрий Маков</h2>
-          <p class="about-lead">Преподаю информатику и программирование с 2019 года. Больше всего работаю с подготовкой к ЕГЭ: от ребят, которые только начинают Python, до тех, кому нужен высокий балл.</p>
+          <p class="about-lead">Преподаю информатику и программирование с 2019 года. Основное направление сейчас — подготовка школьников к ЕГЭ по информатике.</p>
+
           <ul class="about-facts">
-            <li><strong>Образование</strong><span>Окончил Университет ИТМО по педагогическому IT-направлению.</span></li>
-            <li><strong>ЕГЭ</strong><span>Прошёл 72-часовую программу подготовки экспертов предметной комиссии по информатике.</span></li>
-            <li><strong>Учебник</strong><span>Написал учебник «Основы программирования для ЕГЭ: Python 3 с нуля».</span></li>
-            <li><strong>Специализация</strong><span>ЕГЭ по информатике и Python.</span></li>
+            <li>
+              <strong>Образование</strong>
+              <span>Университет ИТМО, педагогическое направление в сфере IT.</span>
+            </li>
+            <li>
+              <strong>Подготовка экспертов</strong>
+              <span>Прошёл 72-часовую программу подготовки экспертов предметной комиссии по информатике.</span>
+            </li>
+            <li>
+              <strong>Учебник</strong>
+              <span>Автор учебника «Основы программирования для ЕГЭ: Python 3 с нуля».</span>
+            </li>
+            <li>
+              <strong>Что преподаю</strong>
+              <span>ЕГЭ по информатике и Python. Работаю и с ребятами с хорошей базой, и с теми, кто только начинает.</span>
+            </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="reviews-section" id="reviews">
+    <section class="section section--soft" id="reviews">
       <div class="container">
-        <div class="reviews-head">
-          <div><span class="section-kicker">Отзывы</span><h2>Отзывы учеников и родителей</h2></div>
-          <p>Оставил отзывы скриншотами, без пересказа и сокращений.</p>
+        <div class="section-heading reviews-head">
+          <div>
+            <span class="section-kicker">Отзывы</span>
+            <h2>Что пишут после занятий и экзамена</h2>
+          </div>
+          <p>Оставил отзывы скриншотами, без пересказа и сокращений. Можно перелистывать по одному.</p>
         </div>
 
         <div class="reviews-group">
-          <h3>Отзывы учеников</h3>
+          <h3>Ученики</h3>
           <div class="review-slider" data-review-slider>
             <div class="review-slides">
               <img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy">
@@ -228,7 +243,7 @@
         </div>
 
         <div class="reviews-group">
-          <h3>Отзывы родителей</h3>
+          <h3>Родители</h3>
           <div class="review-slider" data-review-slider>
             <div class="review-slides">
               <img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy">
@@ -246,80 +261,97 @@
       </div>
     </section>
 
-    <section class="trial-section" id="trial">
+    <section class="section" id="trial">
       <div class="container trial-layout">
-        <div>
+        <div class="trial-copy">
           <span class="section-kicker">Бесплатное пробное</span>
-          <h2>Сначала познакомимся и порешаем</h2>
-          <p class="trial-lead">На пробном уроке ученик увидит, как я объясняю, и сможет понять, подходит ли ему такой формат.</p>
+          <h2>Сначала можно просто прийти и посмотреть</h2>
+          <p class="trial-lead">На пробном познакомимся, немного порешаем и станет понятно, комфортно ли ученику со мной заниматься.</p>
+
           <ul class="trial-list">
-            <li>Решим несколько заданий ЕГЭ.</li>
-            <li>Если понадобится Python, разберём нужную базу по ходу.</li>
-            <li>Покажу, как проходят занятия и где лежат материалы.</li>
-            <li>Отвечу на вопросы по подготовке и формату.</li>
+            <li>Разберём несколько заданий и я покажу, как объясняю материал.</li>
+            <li>Посмотрим, что сейчас даётся легко, а где уже есть пробелы.</li>
+            <li>Покажу, как устроены материалы и работа между занятиями.</li>
+            <li>После занятия можно спокойно решить, продолжать ли подготовку.</li>
           </ul>
         </div>
 
         <div class="signup-form" id="signup-form">
           <span class="section-kicker">Запись</span>
-          <h2>Запись на пробное</h2>
-          <p class="trial-lead">Заполните форму — я свяжусь с вами и договоримся о времени.</p>
+          <h2>Записаться на пробное занятие</h2>
+          <p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p>
 
           <div class="alfacrm-wrap">
-            <iframe
-              class="alfacrm-frame"
-              title="Запись на бесплатное пробное занятие"
-              src="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3"
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin">
-            </iframe>
-            <p class="alfacrm-fallback">
-              Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" target="_blank" rel="noopener">откройте её в отдельном окне</a>.
-            </p>
+            <iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" target="_blank" rel="noopener">откройте её отдельно</a>.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="guarantee-section" id="guarantee">
+    <section class="section section--soft" id="guarantee">
       <div class="container guarantee-layout">
-        <div>
+        <div class="guarantee-number">1 месяц<span>на то, чтобы понять, подходит ли формат</span></div>
+
+        <div class="guarantee-copy">
           <span class="section-kicker">Гарантия</span>
-          <h2>Если формат не подойдёт — верну оплату</h2>
-          <p class="guarantee-lead">Если в течение первого месяца поймёте, что занятия вам не подходят, верну оплату за этот месяц.</p>
-        </div>
-        <div class="guarantee-note">
-          <strong>За первый месяц уже понятно, удобно ли так заниматься</strong>
-          <p>Пробное даёт первое впечатление, а за несколько недель уже видно, подходит ли ученику такой режим.</p>
+          <h2>Если занятия не подойдут, верну оплату за первый месяц</h2>
+          <p>Такое решение можно принять в течение первого месяца. Пробное помогает познакомиться заранее, но иногда понять всё окончательно получается только после нескольких занятий.</p>
         </div>
       </div>
     </section>
 
-    <section class="faq-section" id="faq">
-      <div class="container">
-        <div class="faq-head">
-          <div><span class="section-kicker">Вопросы</span><h2>Часто спрашивают</h2></div>
-          <p>Ответы на вопросы, которые чаще всего возникают перед стартом.</p>
+    <section class="section" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-intro">
+          <span class="section-kicker">Вопросы</span>
+          <h2>Что обычно спрашивают до старта</h2>
+          <p>Коротко отвечаю на вещи, которые чаще всего обсуждаем перед началом занятий.</p>
         </div>
+
         <div class="faq-list">
-          <details class="faq-item"><summary>Нужно ли уже знать Python?</summary><p>Нет. Если Python пока не изучали или многое забыто, начнём с нужной для ЕГЭ базы.</p></details>
-          <details class="faq-item"><summary>Что если сейчас слабая база по информатике?</summary><p>Начнём с базовых тем и будем двигаться по порядку. Сложные задания подключим позже, когда основа станет понятной.</p></details>
-          <details class="faq-item"><summary>Что будет, если пропустить занятие?</summary><p>Запись и материалы останутся в личном кабинете. Их можно открыть позже и догнать тему.</p></details>
-          <details class="faq-item"><summary>Можно ли писать между занятиями?</summary><p>Да. Если ученик застрял на домашней задаче, можно написать в чат.</p></details>
-          <details class="faq-item"><summary>Как отслеживается прогресс?</summary><p>По домашней работе и пробникам. Ошибки разбираем, а слабые темы возвращаем в работу.</p></details>
+          <details class="faq-item">
+            <summary>Можно начинать, если почти не знаю Python?</summary>
+            <p>Да. Нужную для ЕГЭ базу можно пройти с нуля по ходу подготовки.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Подойдёт ли подготовка при слабой школьной базе?</summary>
+            <p>Да. Сначала смотрим, что уже получается, и от этого выбираем темп. Слабый старт просто означает, что на базовые темы потребуется больше времени.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Что делать, если пропустил занятие?</summary>
+            <p>Записи и материалы сохраняются в личном кабинете. Пропущенную тему можно восстановить и потом задать вопросы по ней.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Можно задать вопрос между занятиями?</summary>
+            <p>Да. Если ученик застрял на задании во время самостоятельной работы, вопрос можно написать в чат.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Как отслеживается прогресс?</summary>
+            <p>По домашним заданиям видно качество отдельных тем, а пробники показывают текущий результат целиком. Ошибки потом разбираем.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Пробное занятие действительно бесплатное?</summary>
+            <p>Да. За пробное платить не нужно и оно ни к чему не обязывает.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <section class="contact-section" id="contact">
-      <div class="container contact-layout">
-        <div>
-          <span class="section-kicker">Запись</span>
-          <h2>Хотите попробовать — оставьте заявку</h2>
-          <p class="contact-lead">Заполните форму выше. Я свяжусь с вами, отвечу на вопросы и договоримся о пробном занятии.</p>
+    <section class="final-section" id="contact">
+      <div class="container final-inner">
+        <div class="final-copy">
+          <span class="section-kicker">Начать</span>
+          <h2>Проще всего познакомиться на бесплатном пробном</h2>
+          <p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и удобно ли ученику работать в таком формате.</p>
         </div>
-        <div class="contact-action">
-          <a class="button button-primary" href="#signup-form">Перейти к форме</a>
+        <div class="final-action">
+          <a class="button button-primary" href="#signup-form">Записаться на пробное</a>
         </div>
       </div>
     </section>
@@ -327,7 +359,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span>Дмитрий Маков · подготовка к ЕГЭ по информатике</span>
+      <span>Дмитрий Маков · ЕГЭ по информатике</span>
       <span>Онлайн</span>
     </div>
   </footer>
@@ -345,6 +377,7 @@
           item.classList.remove('is-active');
           item.setAttribute('aria-expanded', 'false');
         });
+
         button.classList.add('is-active');
         button.setAttribute('aria-expanded', 'true');
         proofScore.textContent = button.dataset.score;
@@ -361,6 +394,7 @@
       const prev = slider.querySelector('[data-review-prev]');
       const next = slider.querySelector('[data-review-next]');
       let current = 0;
+      let startX = null;
 
       function show(index) {
         current = (index + slides.length) % slides.length;
@@ -371,14 +405,16 @@
       prev.addEventListener('click', () => show(current - 1));
       next.addEventListener('click', () => show(current + 1));
 
-      let startX = null;
-      slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive:true });
+      slider.addEventListener('touchstart', (event) => {
+        startX = event.touches[0].clientX;
+      }, { passive: true });
+
       slider.addEventListener('touchend', (event) => {
         if (startX === null) return;
         const delta = event.changedTouches[0].clientX - startX;
         if (Math.abs(delta) > 45) show(current + (delta < 0 ? 1 : -1));
         startX = null;
-      }, { passive:true });
+      }, { passive: true });
     });
   </script>
 </body>
