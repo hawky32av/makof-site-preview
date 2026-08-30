@@ -396,18 +396,6 @@
   color: var(--text);
   text-decoration-color: currentColor;
 }
-.footer-legal .footer-offer {
-  margin: -7px 0;
-  padding: 7px 11px;
-  border: 1px solid var(--line-strong);
-  color: var(--text);
-  text-decoration: none;
-}
-.footer-legal .footer-offer:hover {
-  border-color: var(--text);
-  background: var(--text);
-  color: #fff;
-}
 
 /* Learning section: same interaction language as the students' scores. */
 #learning .learning-heading {
