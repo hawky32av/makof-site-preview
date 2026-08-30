@@ -1,0 +1,32 @@
+name: One-off review copy and form size patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/oneoff-review-copy-form.py'
+      - '.github/workflows/oneoff-review-copy-form.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Apply patch
+        run: python .github/scripts/oneoff-review-copy-form.py
+      - name: Commit final result and clean one-off files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/scripts/oneoff-review-copy-form.py .github/workflows/oneoff-review-copy-form.yml
+          git add index.html
+          git commit -m "Polish reviews about spacing and signup form"
+          git push
