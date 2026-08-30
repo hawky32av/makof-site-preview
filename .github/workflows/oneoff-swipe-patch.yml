@@ -1,0 +1,173 @@
+name: One-off swipe carousel patch
+
+on:
+  push:
+    paths:
+      - .github/workflows/oneoff-swipe-patch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch carousel markup and behavior
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          text = text.replace(
+              '.achievement-track{display:flex;gap:18px;overflow-x:hidden;scroll-snap-type:none;scroll-behavior:smooth;scrollbar-width:none;padding:0 0 4px}\n    .achievement-track::-webkit-scrollbar{display:none}\n    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4)}\n    .achievement-controls{display:flex;align-items:center;gap:12px;margin-top:22px}\n    .achievement-arrow{width:46px;height:46px;padding:0;border:1px solid var(--line-strong);border-radius:4px;background:#fff;font-size:21px;cursor:pointer}\n    .achievement-arrow:hover{background:var(--surface)}\n    .achievement-counter{min-width:62px;color:var(--muted);font-size:13px;text-align:center}',
+              '.achievement-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain;padding:0 0 4px}\n    .achievement-track::-webkit-scrollbar{display:none}\n    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start;scroll-snap-stop:always}\n    .achievement-controls{display:flex;justify-content:center;align-items:center;margin-top:18px}\n    .achievement-counter{min-width:62px;color:var(--muted);font-size:13px;text-align:center}'
+          )
+          text = text.replace('.achievement-track{gap:12px;overflow-x:hidden}', '.achievement-track{gap:12px;overflow-x:auto}')
+
+          def review_slider(kind, label):
+              slides = []
+              for i in range(1, 5):
+                  src = f'assets/reviews/{kind}-{i}.png'
+                  alt = f'Отзыв {label} {i}'
+                  slides.append(
+                      f'<button class="review-slide" type="button" data-lightbox-src="{src}" data-lightbox-alt="{alt}">'
+                      f'<img src="{src}" alt="{alt}" loading="lazy"></button>'
+                  )
+              return (
+                  '<div class="review-slider" data-review-slider>'
+                  '<div class="review-slides" data-swipe-track>' + ''.join(slides) + '</div>'
+                  '<div class="review-controls"><span class="review-counter" data-review-counter>1 / 4</span></div>'
+                  '</div>'
+              )
+
+          pattern = r'<div class="review-slider" data-review-slider><div class="review-slides">.*?</div><div class="review-controls">.*?</div></div>'
+          text, n1 = re.subn(pattern, review_slider('student', 'ученика'), text, count=1, flags=re.S)
+          text, n2 = re.subn(pattern, review_slider('parent', 'родителя'), text, count=1, flags=re.S)
+          if n1 != 1 or n2 != 1:
+              raise RuntimeError(f'Review slider patch failed: {n1=}, {n2=}')
+
+          text = text.replace('<div class="achievement-track" data-achievement-track>', '<div class="achievement-track" data-achievement-track data-swipe-track>')
+          controls_pattern = r'<div class="achievement-controls">\s*<button class="achievement-arrow".*?</button>\s*<span class="achievement-counter" data-achievement-counter>.*?</span>\s*<button class="achievement-arrow".*?</button>\s*</div>'
+          text, n3 = re.subn(controls_pattern, '<div class="achievement-controls"><span class="achievement-counter" data-achievement-counter>4 / 14</span></div>', text, flags=re.S)
+          if n3 != 1:
+              raise RuntimeError(f'Achievement controls patch failed: {n3=}')
+
+          start_marker = "    document.querySelectorAll('[data-review-slider]').forEach((slider) => {"
+          end_marker = "    const lightbox = document.getElementById('lightbox');"
+          start = text.find(start_marker)
+          end = text.find(end_marker, start)
+          if start == -1 or end == -1:
+              raise RuntimeError('Carousel JS markers not found')
+
+          swipe_js = r'''    function enableMouseDrag(track) {
+      let dragging = false;
+      let startX = 0;
+      let startScroll = 0;
+      let moved = false;
+      let suppressClickUntil = 0;
+
+      track.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = event.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        const delta = event.clientX - startX;
+        if (Math.abs(delta) > 5) moved = true;
+        track.scrollLeft = startScroll - delta;
+      });
+
+      function finishDrag(event) {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('is-dragging');
+        if (moved) suppressClickUntil = performance.now() + 250;
+        if (track.hasPointerCapture?.(event.pointerId)) track.releasePointerCapture(event.pointerId);
+      }
+
+      track.addEventListener('pointerup', finishDrag);
+      track.addEventListener('pointercancel', finishDrag);
+      track.addEventListener('click', (event) => {
+        if (performance.now() < suppressClickUntil) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+    }
+
+    function nearestSlideIndex(track, items) {
+      if (!items.length) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const step = items[0].getBoundingClientRect().width + gap;
+      return step ? Math.max(0, Math.min(items.length - 1, Math.round(track.scrollLeft / step))) : 0;
+    }
+
+    document.querySelectorAll('[data-review-slider]').forEach((slider) => {
+      const track = slider.querySelector('[data-swipe-track]');
+      const slides = Array.from(track.querySelectorAll('.review-slide'));
+      const counter = slider.querySelector('[data-review-counter]');
+      let raf = 0;
+
+      function updateCounter() {
+        const index = nearestSlideIndex(track, slides);
+        counter.textContent = `${index + 1} / ${slides.length}`;
+      }
+
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(updateCounter);
+      }, { passive: true });
+      window.addEventListener('resize', updateCounter, { passive: true });
+      enableMouseDrag(track);
+      updateCounter();
+    });
+
+    document.querySelectorAll('[data-achievement-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('[data-achievement-track]');
+      const items = Array.from(track.querySelectorAll('.achievement-item'));
+      const counter = carousel.querySelector('[data-achievement-counter]');
+      let raf = 0;
+
+      function visibleCount() {
+        if (window.matchMedia('(max-width: 720px)').matches) return 1;
+        if (window.matchMedia('(max-width: 980px)').matches) return 2;
+        return 4;
+      }
+
+      function updateCounter() {
+        const first = nearestSlideIndex(track, items);
+        const end = Math.min(first + visibleCount(), items.length);
+        counter.textContent = `${end} / ${items.length}`;
+      }
+
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(updateCounter);
+      }, { passive: true });
+      window.addEventListener('resize', updateCounter, { passive: true });
+      enableMouseDrag(track);
+      updateCounter();
+    });
+
+'''
+          text = text[:start] + swipe_js + text[end:]
+          path.write_text(text, encoding='utf-8')
+
+      - name: Commit patched page and remove one-off workflow
+        run: |
+          rm .github/workflows/oneoff-swipe-patch.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/oneoff-swipe-patch.yml
+          git commit -m "Use swipe-only image carousels"
+          git push
