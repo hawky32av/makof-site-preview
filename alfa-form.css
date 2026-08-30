@@ -1,10 +1,9 @@
-@import url("https://cdn.alfacrm.pro/lead-form/form.css");
+@import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap");
 
 :root {
   --makof-text: #171717;
   --makof-muted: #6d6d6d;
-  --makof-line: #cccccc;
-  --makof-line-soft: #e6e6e6;
+  --makof-line: #cfcfcf;
   --makof-accent: #e86819;
   --makof-accent-hover: #ca5612;
 }
@@ -16,91 +15,141 @@ body {
   background: transparent !important;
   color: var(--makof-text) !important;
   font-family: "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-  font-size: 15px !important;
-  line-height: 1.5 !important;
 }
 
-body,
-button,
-input,
-textarea,
-select {
-  font-family: inherit !important;
+/* AlfaCRM builds the form with styled-components, so target its stable classes. */
+.alfa-form-wrapper {
+  width: 100% !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
+  font-family: "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
 
-form {
+.alfa-form-wrapper *,
+.alfa-form-wrapper *::before,
+.alfa-form-wrapper *::after {
+  box-sizing: border-box !important;
+}
+
+.alfa-form {
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
-}
-
-label,
-.form-label,
-.control-label {
   color: var(--makof-text) !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
 }
 
-.form-group,
-.mb-3,
-.field,
-.form-field {
-  margin-bottom: 16px !important;
+.alfa-form-content-wrapper {
+  row-gap: 14px !important;
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
-textarea,
-select,
-.form-control,
-.form-select {
+.alfa-form-titles-wrapper {
+  row-gap: 8px !important;
+  margin: 0 0 8px !important;
+}
+
+.alfa-form-title,
+.alfa-form-subtitle,
+.alfa-form-link,
+.alfa-form-input-container,
+.Input--container,
+.Input--label,
+.Input--label-static,
+.Input--label-checkbox,
+.Input--label-radio {
+  font-family: inherit !important;
+}
+
+.alfa-form-title {
   width: 100% !important;
-  min-height: 50px !important;
+  margin: 0 !important;
+  color: var(--makof-text) !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+}
+
+.alfa-form-subtitle {
+  margin: 0 !important;
+  color: var(--makof-muted) !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.alfa-form-input-container {
+  color: var(--makof-text) !important;
+}
+
+.Input--container {
+  width: 100% !important;
+}
+
+.Input--label,
+.Input--label-static,
+.Input--label-checkbox,
+.Input--label-radio,
+.alfa-form-input-container label {
+  color: var(--makof-text) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+
+.alfa-form-wrapper .Input--input-field,
+.alfa-form-wrapper .Input--textarea-field {
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 0 !important;
   padding: 12px 14px !important;
+  appearance: none !important;
   border: 1px solid var(--makof-line) !important;
   border-radius: 2px !important;
+  outline: none !important;
   background: #fff !important;
   color: var(--makof-text) !important;
   box-shadow: none !important;
+  font-family: inherit !important;
   font-size: 15px !important;
+  font-weight: 400 !important;
   line-height: 1.35 !important;
   transition: border-color 150ms ease, box-shadow 150ms ease !important;
 }
 
-textarea {
-  min-height: 104px !important;
+.alfa-form-wrapper .Input--textarea-field {
+  min-height: 96px !important;
   resize: vertical !important;
 }
 
-input::placeholder,
-textarea::placeholder {
+.alfa-form-wrapper .Input--input-field::placeholder,
+.alfa-form-wrapper .Input--textarea-field::placeholder {
   color: #9a9a9a !important;
   opacity: 1 !important;
 }
 
-input:not([type="checkbox"]):not([type="radio"]):focus,
-textarea:focus,
-select:focus,
-.form-control:focus,
-.form-select:focus {
-  outline: none !important;
+.alfa-form-wrapper .Input--input-field:focus,
+.alfa-form-wrapper .Input--textarea-field:focus {
   border-color: var(--makof-accent) !important;
-  box-shadow: 0 0 0 2px rgba(232, 104, 25, .12) !important;
+  box-shadow: 0 0 0 2px rgba(232, 104, 25, .10) !important;
 }
 
-button,
-input[type="submit"],
-.btn,
-.btn-primary,
-[type="submit"] {
+.alfa-form-wrapper .alfa-form-button {
+  width: 100% !important;
   min-height: 50px !important;
-  padding: 12px 20px !important;
+  margin: 4px 0 0 !important;
+  padding: 13px 20px !important;
   border: 1px solid var(--makof-accent) !important;
   border-radius: 2px !important;
   background: var(--makof-accent) !important;
   color: #fff !important;
   box-shadow: none !important;
+  font-family: inherit !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   line-height: 1.25 !important;
@@ -108,45 +157,42 @@ input[type="submit"],
   transition: background 150ms ease, border-color 150ms ease !important;
 }
 
-button:hover,
-input[type="submit"]:hover,
-.btn:hover,
-.btn-primary:hover,
-[type="submit"]:hover {
+.alfa-form-wrapper .alfa-form-button:hover:not(:disabled) {
   background: var(--makof-accent-hover) !important;
   border-color: var(--makof-accent-hover) !important;
+  box-shadow: none !important;
 }
 
-small,
-.help-block,
-.form-text,
-.text-muted {
+.alfa-form-wrapper .alfa-form-button:disabled {
+  box-shadow: none !important;
+  opacity: .55 !important;
+}
+
+.alfa-form-error-container,
+.alfa-form-error-block {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+.alfa-form-link {
   color: var(--makof-muted) !important;
   font-size: 12px !important;
-  line-height: 1.45 !important;
+  font-weight: 500 !important;
 }
 
-.alert,
-.error,
-.invalid-feedback,
-.help-block-error {
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
+@media (max-width: 768px) {
+  .alfa-form-wrapper,
+  .alfa-form {
+    padding: 0 !important;
+  }
 
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: var(--makof-accent) !important;
-}
+  .alfa-form-content-wrapper {
+    row-gap: 13px !important;
+  }
 
-.card,
-.panel,
-.well,
-.container,
-.container-fluid,
-.form-wrapper,
-.lead-form {
-  background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  .alfa-form-wrapper .Input--input-field,
+  .alfa-form-wrapper .Input--textarea-field {
+    font-size: 16px !important;
+  }
 }
