@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Подготовка к ЕГЭ по информатике для 10–11 классов. Дмитрий Маков — занятия, практика, пробники и бесплатное пробное занятие.">
+  <title>Дмитрий Маков — подготовка к ЕГЭ по информатике</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top"><strong>Дмитрий Маков</strong><span>ЕГЭ по информатике</span></a>
+      <nav class="nav" aria-label="Навигация">
+        <a href="#results">Результаты</a>
+        <a href="#method">Подготовка</a>
+        <a href="#about">Обо мне</a>
+        <a href="#reviews">Отзывы</a>
+      </nav>
+      <a class="header-cta" href="#signup">Пробное</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <span class="kicker">10–11 класс · ЕГЭ по информатике</span>
+          <h1>Подготовка, после которой ученик <em>умеет решать сам</em></h1>
+          <p class="hero-lead">Разбираем темы по порядку, закрепляем их домашней работой и регулярно проверяем результат на пробниках. Python можно начать с нуля.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#signup">Записаться на бесплатное пробное</a>
+            <span class="hero-note">Сначала познакомимся и немного порешаем</span>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <img src="../assets/hero/hero.png" alt="Дмитрий Маков с учебником">
+        </div>
+
+        <div class="hero-facts" aria-label="Ключевые факты">
+          <div class="hero-fact"><strong>81 балл</strong><span>средний результат учеников в 2026 году</span></div>
+          <div class="hero-fact"><strong>100 баллов</strong><span>лучший подтверждённый результат</span></div>
+          <div class="hero-fact"><strong>с 2019 года</strong><span>готовлю школьников к экзаменам</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-index">01 · Результаты</div>
+          <div class="section-title">
+            <h2>Не обещания, а баллы, которые можно открыть и посмотреть</h2>
+            <p>Выберите результат слева. Справа появится подтверждение и тот контекст, который у меня точно есть по этому ученику.</p>
+          </div>
+        </div>
+
+        <div class="results-browser">
+          <div class="result-tabs" role="tablist" aria-label="Результаты учеников">
+            <button class="result-tab is-active" type="button" data-score="100" data-image="../assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-selected="true"><strong>100</strong><span>баллов</span></button>
+            <button class="result-tab" type="button" data-score="90" data-image="../assets/results/result-90.png" data-note="Подготовка с сентября." aria-selected="false"><strong>90</strong><span>баллов</span></button>
+            <button class="result-tab" type="button" data-score="88" data-image="../assets/results/result-88.png" data-note="Подтверждённый результат ученика." aria-selected="false"><strong>88</strong><span>баллов</span></button>
+            <button class="result-tab" type="button" data-score="78" data-image="../assets/results/result-78.png" data-note="Результат после двух месяцев подготовки." aria-selected="false"><strong>78</strong><span>баллов</span></button>
+            <button class="result-tab" type="button" data-score="75" data-image="../assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-selected="false"><strong>75</strong><span>баллов</span></button>
+            <button class="result-tab" type="button" data-score="72" data-image="../assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-selected="false"><strong>72</strong><span>балла</span></button>
+          </div>
+
+          <div class="result-stage" aria-live="polite">
+            <div class="result-caption">
+              <div class="result-score"><strong id="result-score">100</strong><span>баллов по ЕГЭ</span></div>
+              <div class="result-copy"><strong>Подтверждённый результат</strong><p id="result-note">Подготовка с сентября до экзамена.</p></div>
+            </div>
+            <img class="result-image" id="result-image" src="../assets/results/result-100.png" alt="Подтверждение результата 100 баллов">
+          </div>
+        </div>
+
+        <div class="result-foot">
+          <strong>Цель у всех разная</strong>
+          <p>Кому-то нужно уверенно перейти порог 70–80, кому-то важны 90+. Поэтому в начале смотрим текущий уровень и балл, который нужен для поступления, а уже потом выбираем темп работы.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-label="Принцип подготовки">
+      <div class="container"><p>Большая часть результата появляется <span>между занятиями:</span> когда ученик сам решает, ошибается, возвращается к теме и пробует ещё раз.</p></div>
+    </section>
+
+    <section class="section method" id="method">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-index">02 · Подготовка</div>
+          <div class="section-title">
+            <h2>Вся работа держится на трёх вещах</h2>
+            <p>Так проще контролировать подготовку и ученику, и мне: есть разбор темы, самостоятельная практика и понятная проверка прогресса.</p>
+          </div>
+        </div>
+
+        <div class="method-grid">
+          <article class="method-row">
+            <span class="method-number">01</span>
+            <h3>Разобраться</h3>
+            <p>На занятии объясняю новую тему на задачах ЕГЭ. Теории даю столько, сколько действительно нужно для решения, после чего сразу переходим к практике.</p>
+          </article>
+          <article class="method-row">
+            <span class="method-number">02</span>
+            <h3>Закрепить самому</h3>
+            <p>После занятия остаётся домашняя работа. По ней видно, может ли ученик повторить решение без подсказки и где начинает путаться.</p>
+          </article>
+          <article class="method-row">
+            <span class="method-number">03</span>
+            <h3>Проверить результат</h3>
+            <p>Пробники показывают картину целиком. После них разбираем ошибки и решаем, какие темы стоит повторить сейчас, а какие уже можно оставить.</p>
+          </article>
+        </div>
+
+        <div class="support-line" aria-label="Что остаётся между занятиями">
+          <div class="support-item"><strong>Записи и материалы</strong><span>К пройденной теме можно вернуться в личном кабинете.</span></div>
+          <div class="support-item"><strong>Вопросы в чате</strong><span>Если ученик застрял на задании, можно спросить между занятиями.</span></div>
+          <div class="support-item"><strong>Python с нуля</strong><span>Заранее знать программирование не обязательно.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section profile" id="about">
+      <div class="container profile-grid">
+        <div class="profile-photo"><img src="../assets/about/about.jpg" alt="Дмитрий Маков"></div>
+        <div class="profile-copy">
+          <span class="kicker">03 · Обо мне</span>
+          <h2>Дмитрий Маков</h2>
+          <p class="lead">Преподаю информатику и программирование с 2019 года. Сейчас основное направление — подготовка школьников к ЕГЭ по информатике.</p>
+          <p class="bio">Мне важно, чтобы ученик понимал, что именно он делает в задаче, а не просто запоминал последовательность действий. Поэтому на занятиях много решаем и постоянно возвращаемся к тем местам, где логика пока не складывается.</p>
+        </div>
+        <ul class="profile-facts">
+          <li><strong>ИТМО</strong><span>Педагогическое направление в сфере IT.</span></li>
+          <li><strong>72 часа</strong><span>Программа подготовки экспертов предметной комиссии по информатике.</span></li>
+          <li><strong>Учебник</strong><span>«Основы программирования для ЕГЭ: Python 3 с нуля».</span></li>
+          <li><strong>Специализация</strong><span>ЕГЭ по информатике и Python.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-intro">
+          <div class="section-index">04 · Отзывы</div>
+          <div class="section-title"><h2>Лучше оставить сообщения как есть</h2><p>Поэтому здесь обычные скриншоты. Без пересказа, оформления цитат и «улучшенных» формулировок.</p></div>
+        </div>
+
+        <div class="review-shell" data-review-slider>
+          <div class="review-meta"><strong id="review-type">Ученик</strong><span>Можно листать стрелками или свайпом</span></div>
+          <div class="review-stage">
+            <img class="review-slide is-active" data-type="Ученик" src="../assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy">
+            <img class="review-slide" data-type="Ученик" src="../assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy">
+            <img class="review-slide" data-type="Ученик" src="../assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy">
+            <img class="review-slide" data-type="Ученик" src="../assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy">
+            <img class="review-slide" data-type="Родитель" src="../assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy">
+            <img class="review-slide" data-type="Родитель" src="../assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy">
+            <img class="review-slide" data-type="Родитель" src="../assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy">
+            <img class="review-slide" data-type="Родитель" src="../assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy">
+            <div class="review-controls">
+              <button class="review-arrow" type="button" data-prev aria-label="Предыдущий отзыв">←</button>
+              <span class="review-counter" data-counter>1 / 8</span>
+              <button class="review-arrow" type="button" data-next aria-label="Следующий отзыв">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trial" id="trial">
+      <div class="container trial-grid">
+        <div class="trial-copy">
+          <span class="kicker">05 · Бесплатное пробное</span>
+          <h2>До оплаты можно просто прийти и посмотреть, как всё проходит</h2>
+          <p>На пробном познакомимся, порешаем несколько заданий и станет понятнее, комфортно ли ученику со мной работать.</p>
+          <ul class="trial-points">
+            <li>Покажу, как объясняю материал на задачах.</li>
+            <li>Посмотрим, что уже получается и где есть пробелы.</li>
+            <li>Покажу материалы и как устроена работа между занятиями.</li>
+            <li>После занятия можно спокойно решить, продолжать ли подготовку.</li>
+          </ul>
+        </div>
+
+        <div class="form-panel" id="signup">
+          <h3>Записаться на пробное</h3>
+          <p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p>
+          <iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe>
+          <p class="form-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/lead/create?unique=1&amp;access=1&amp;lead_source_id=3" target="_blank" rel="noopener">откройте её отдельно</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section decision" id="questions">
+      <div class="container decision-grid">
+        <div class="guarantee">
+          <span class="kicker">06 · Перед стартом</span>
+          <div class="guarantee-value">1 месяц<span>чтобы понять, подходит ли формат</span></div>
+          <h2>Если занятия не подойдут, верну оплату за первый месяц</h2>
+          <p>Пробное помогает познакомиться заранее, но иногда нормально оценить формат получается только после нескольких занятий.</p>
+        </div>
+
+        <div class="faq">
+          <details class="faq-item"><summary>Можно начинать, если почти не знаю Python?</summary><p>Да. Нужную для ЕГЭ базу можно пройти с нуля по ходу подготовки.</p></details>
+          <details class="faq-item"><summary>Подойдёт ли подготовка при слабой школьной базе?</summary><p>Да. Сначала смотрим, что уже получается, и от этого выбираем темп. На базовые темы просто потребуется больше времени.</p></details>
+          <details class="faq-item"><summary>Что делать, если пропустил занятие?</summary><p>Записи и материалы сохраняются в личном кабинете. Пропущенную тему можно восстановить и потом задать вопросы.</p></details>
+          <details class="faq-item"><summary>Можно задать вопрос между занятиями?</summary><p>Да. Если ученик застрял на задании во время самостоятельной работы, вопрос можно написать в чат.</p></details>
+          <details class="faq-item"><summary>Как отслеживается прогресс?</summary><p>По домашней работе видно качество отдельных тем, а пробники показывают текущий результат целиком.</p></details>
+          <details class="faq-item"><summary>Пробное действительно бесплатное?</summary><p>Да. За него платить не нужно, и оно ни к чему не обязывает.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="container final-inner">
+        <div><span class="kicker">Начать подготовку</span><h2>Сначала одно бесплатное занятие. Дальше уже решите.</h2><p>Этого достаточно, чтобы увидеть мой стиль объяснения и понять, насколько ученику подходит такой формат.</p></div>
+        <div class="final-action"><a class="primary-button" href="#signup">Записаться на пробное</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><span>Дмитрий Маков · ЕГЭ по информатике</span><span>Онлайн</span></div></footer>
+
+  <script>
+    const resultTabs = Array.from(document.querySelectorAll('.result-tab'));
+    const resultScore = document.getElementById('result-score');
+    const resultNote = document.getElementById('result-note');
+    const resultImage = document.getElementById('result-image');
+
+    resultTabs.forEach((button) => {
+      button.addEventListener('click', () => {
+        resultTabs.forEach((item) => {
+          item.classList.remove('is-active');
+          item.setAttribute('aria-selected', 'false');
+        });
+        button.classList.add('is-active');
+        button.setAttribute('aria-selected', 'true');
+        resultScore.textContent = button.dataset.score;
+        resultNote.textContent = button.dataset.note;
+        resultImage.src = button.dataset.image;
+        resultImage.alt = `Подтверждение результата ${button.dataset.score} баллов`;
+      });
+    });
+
+    const slider = document.querySelector('[data-review-slider]');
+    const slides = Array.from(slider.querySelectorAll('.review-slide'));
+    const counter = slider.querySelector('[data-counter]');
+    const type = document.getElementById('review-type');
+    const prev = slider.querySelector('[data-prev]');
+    const next = slider.querySelector('[data-next]');
+    let current = 0;
+    let startX = null;
+
+    function showReview(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      type.textContent = slides[current].dataset.type;
+    }
+
+    prev.addEventListener('click', () => showReview(current - 1));
+    next.addEventListener('click', () => showReview(current + 1));
+    slider.addEventListener('touchstart', (event) => { startX = event.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', (event) => {
+      if (startX === null) return;
+      const delta = event.changedTouches[0].clientX - startX;
+      if (Math.abs(delta) > 45) showReview(current + (delta < 0 ? 1 : -1));
+      startX = null;
+    }, { passive: true });
+  </script>
+</body>
+</html>
