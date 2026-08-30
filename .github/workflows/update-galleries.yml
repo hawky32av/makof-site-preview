@@ -33,4 +33,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html styles.css privacy.html consent.html offer.html
           git commit -m "Update generated site content"
+          git pull --rebase origin main
           git push
