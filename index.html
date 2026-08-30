@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=learning2">
   <style>
     .hero-expertise{max-width:760px;margin-top:28px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));color:#3d3d3d}
     .hero-expertise a{position:relative;display:flex;align-items:flex-start;min-height:78px;padding:17px 18px;font-size:15px;font-weight:500;line-height:1.35;text-decoration:none;transition:background 160ms ease,color 160ms ease}
@@ -199,7 +199,7 @@
               <img src="assets/credentials/itmo-diploma.png" alt="Скан диплома Университета ИТМО">
               <span>Диплом ИТМО</span>
             </button>
-            <button class="document-preview" type="button" data-lightbox-src="assets/credentials/ege-expert-training.png" data-lightbox-alt="Удостоверение о подготовке экспертов предметной комиссии по информатике">
+            <button class="document-preview" type="button" data-lightbox-src="assets/credentials/ege-expert-training.png" data-lightbox-alt="Удостоверение о подготовке экспертов предметной комиссии">
               <img src="assets/credentials/ege-expert-training.png" alt="Скан удостоверения о подготовке экспертов предметной комиссии">
               <span>ФИПИ · подготовка экспертов · 72 часа</span>
             </button>
@@ -357,7 +357,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-inner"><span>Дмитрий Маков · ЕГЭ по информатике</span><nav class="footer-legal" aria-label="Правовые документы"><a href="privacy.html">Политика обработки ПД</a><a href="consent.html">Согласие на обработку ПД</a></nav><span>Онлайн</span></div></footer>
+  <footer class="site-footer"><div class="container footer-inner"><span>Дмитрий Маков · ЕГЭ по информатике</span><nav class="footer-legal" aria-label="Правовые документы"><a class="footer-offer" href="offer.html">Публичная оферта</a><a href="privacy.html">Политика обработки ПД</a><a href="consent.html">Согласие на обработку ПД</a></nav><span>Онлайн</span></div></footer>
 
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр изображения"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img id="lightbox-image" src="" alt=""></div>
 
@@ -399,10 +399,8 @@
       learningLightboxButton.dataset.lightboxAlt = button.dataset.learningTitle;
     }
 
-    const canHoverLearning = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     learningTabs.forEach((button) => {
       button.addEventListener('click', () => activateLearningTab(button));
-      if (canHoverLearning) button.addEventListener('mouseenter', () => activateLearningTab(button));
     });
 
     const desktopCarouselQuery = window.matchMedia('(min-width: 1025px) and (hover: hover) and (pointer: fine)');
