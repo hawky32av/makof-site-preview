@@ -16,57 +16,81 @@
     .about-method{max-width:720px;margin:0;color:var(--muted);font-size:16px;line-height:1.7}
     .about-meta{max-width:720px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:#444;font-size:14px;line-height:1.5}
 
-    /* Документы показываем в их естественной горизонтальной пропорции. */
-    .credential-documents{grid-template-columns:1fr 1fr;align-items:start}
+    /* Крупнее показываем реальные фото и документы. */
+    .hero{overflow:clip}
+    .hero-portrait{position:relative;z-index:2;overflow:visible}
+    .hero-portrait-image{width:min(122%,560px);max-width:none;margin-right:-48px}
+    .hero-portrait-image img{width:100%;max-width:none}
+
+    .credentials-layout{grid-template-columns:1fr;gap:48px}
+    .credential-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;border-top:0}
+    .credential-copy{grid-template-columns:36px minmax(0,1fr);gap:14px;padding:24px 0 26px;border-top:1px solid var(--line-strong);border-bottom:0}
+    .credential-documents{grid-template-columns:1fr 1fr;gap:28px;align-items:start;max-width:none}
     .document-preview img,
     .document-preview-large img{display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto;object-fit:contain;background:#fff}
 
-    /* Подарок после пробного. */
-    .trial-gift{max-width:540px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--line);color:#343434;font-size:15px;line-height:1.65}
-    .trial-gift strong{color:var(--accent);font-weight:600}
+    /* Подарок после пробного — отдельный заметный акцент. */
+    .trial-gift{max-width:580px;margin:34px 0 0;padding:26px 0 0;border-top:2px solid var(--accent);color:var(--text);line-height:1.45}
+    .trial-gift strong{display:block;margin-bottom:10px;color:var(--accent);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+    .trial-gift span{display:block;font-size:clamp(20px,2.1vw,26px);font-weight:500;letter-spacing:-.02em}
 
-    /* Карусель дипломов. */
+    /* Карусель дипломов: на ПК показываем 4 и листаем страницами. */
     .achievements-section{padding-top:72px;padding-bottom:72px}
     .achievements-heading{margin-bottom:32px}
     .achievement-carousel{position:relative;min-width:0}
-    .achievement-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:0 0 4px}
+    .achievement-track{display:flex;gap:18px;overflow-x:hidden;scroll-snap-type:none;scroll-behavior:smooth;scrollbar-width:none;padding:0 0 4px}
     .achievement-track::-webkit-scrollbar{display:none}
-    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4);scroll-snap-align:start}
+    .achievement-track .achievement-item{flex:0 0 calc((100% - 54px)/4)}
     .achievement-controls{display:flex;align-items:center;gap:12px;margin-top:22px}
     .achievement-arrow{width:46px;height:46px;padding:0;border:1px solid var(--line-strong);border-radius:4px;background:#fff;font-size:21px;cursor:pointer}
     .achievement-arrow:hover{background:var(--surface)}
     .achievement-counter{min-width:62px;color:var(--muted);font-size:13px;text-align:center}
 
-    /* Финальный CTA теперь по центру и заметнее. */
+    /* Финальный CTA по центру и заметнее. */
     .final-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0}
     .final-copy{max-width:900px}
     .final-copy p{margin:22px auto 0}
     .final-action{justify-self:auto;margin-top:34px}
-    .final-action .button{min-width:280px;min-height:56px;padding:14px 28px;font-size:16px}
+    .final-action .button{min-width:300px;min-height:58px;padding:15px 30px;font-size:17px}
 
-    /* На широком экране фото в «Обо мне» опирается на нижнюю линию секции. */
+    /* Фото в «Обо мне» крупнее и опирается на нижнюю линию секции. */
+    #about{overflow:clip}
     @media(min-width:981px){
       #about{padding-bottom:0}
-      #about .about-layout{align-items:end}
+      #about .about-layout{grid-template-columns:minmax(380px,.72fr) minmax(0,1.28fr);align-items:end;gap:70px}
       #about .about-copy{padding-bottom:104px}
-      #about .about-photo-wrap{align-self:end}
+      #about .about-photo-wrap{align-self:end;width:118%;margin-left:-12%;max-width:none}
+      #about .about-photo{width:100%;max-width:none}
     }
 
     @media(max-width:980px){
+      .credential-list{display:block;border-top:1px solid var(--line-strong)}
+      .credential-copy{grid-template-columns:54px minmax(0,1fr);gap:20px;border-top:0;border-bottom:1px solid var(--line)}
       .achievement-track .achievement-item{flex-basis:calc((100% - 18px)/2)}
+      #about .about-photo-wrap{max-width:500px;width:min(110%,500px);margin-left:-4%}
     }
 
     @media(max-width:720px){
       .hero-expertise{display:grid;gap:7px}
       .hero .proof-strip{margin-top:0}
-      .hero-portrait{margin-bottom:0}
+      .hero-portrait{margin-bottom:0;justify-content:flex-start}
+      .hero-portrait-image{width:min(125%,470px);margin-left:-14px;margin-right:0}
       .hero-portrait-image img{margin-bottom:0}
-      .credential-documents{grid-template-columns:1fr;gap:24px}
+      .credential-documents{grid-template-columns:1fr;gap:28px}
+      .credential-copy{grid-template-columns:38px minmax(0,1fr);gap:12px}
       .achievements-section{padding-top:60px;padding-bottom:60px}
-      .achievement-track{gap:12px}
-      .achievement-track .achievement-item{flex-basis:min(82vw,290px)}
+      .achievement-track{gap:12px;overflow-x:hidden}
+      .achievement-track .achievement-item{flex-basis:100%}
+      .trial-gift{padding-top:22px}
+      .trial-gift span{font-size:21px}
+      #about .about-photo-wrap{width:min(118%,480px);max-width:none;margin-left:-9%}
       .final-action{width:100%;max-width:420px}
       .final-action .button{width:100%}
+
+      /* Все 6 разделов обучения видны сразу: 3 × 2. */
+      .learning-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;overflow:visible;border-top:1px solid var(--line-strong);border-left:1px solid var(--line)}
+      .learning-tab{width:100%;min-width:0;display:flex;flex-direction:column;gap:4px;margin:0;padding:12px 9px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);white-space:normal;line-height:1.2}
+      .learning-tab span{padding:0;font-size:10px}
     }
   </style>
 </head>
@@ -207,7 +231,6 @@
     <section class="section learning-section" id="learning">
       <div class="container">
         <div class="section-heading learning-heading"><div><span class="section-kicker">Обучение изнутри</span><h2>Как выглядит подготовка</h2></div><p>Реальные кадры с занятий и скриншоты личного кабинета: разбор задач, практика, прогресс и записи занятий.</p></div>
-
         <div class="learning-browser">
           <div class="learning-tabs" role="tablist" aria-label="Примеры обучения">
             <button class="learning-tab is-active" type="button" data-learning-image="assets/learning/lesson-1.png" data-learning-title="Фрагмент занятия" data-learning-text="Разбираем новую тему на задачах и сразу проверяем, понятна ли логика решения." aria-selected="true"><span>01</span>Занятие</button>
@@ -217,7 +240,6 @@
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-progress.png" data-learning-title="Прогресс" data-learning-text="По выполнению заданий и пробникам видно, какие темы уже держатся уверенно, а к каким стоит вернуться." aria-selected="false"><span>05</span>Прогресс</button>
             <button class="learning-tab" type="button" data-learning-image="assets/learning/platform-records.png" data-learning-title="Записи занятий" data-learning-text="Если занятие пропущено или тему хочется повторить, запись и материалы остаются доступны." aria-selected="false"><span>06</span>Записи</button>
           </div>
-
           <div class="learning-stage" aria-live="polite">
             <button class="learning-image-button" type="button" id="learning-lightbox-button" data-lightbox-src="assets/learning/lesson-1.png" data-lightbox-alt="Фрагмент занятия"><img id="learning-image" src="assets/learning/lesson-1.png" alt="Фрагмент занятия"></button>
             <div class="learning-caption"><span>Что здесь происходит</span><h3 id="learning-title">Фрагмент занятия</h3><p id="learning-text">Разбираем новую тему на задачах и сразу проверяем, понятна ли логика решения.</p></div>
@@ -257,21 +279,13 @@
     <section class="section section--soft" id="reviews">
       <div class="container">
         <div class="section-heading reviews-head"><div><span class="section-kicker">Отзывы</span><h2>Что пишут после занятий и экзамена</h2></div><p>Отзывы оставил скриншотами — без пересказа и сокращений.</p></div>
-
         <div class="reviews-group">
           <h3>Ученики</h3>
-          <div class="review-slider" data-review-slider>
-            <div class="review-slides"><img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"><img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"><img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"><img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></div>
-            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
-          </div>
+          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/student-1.png" alt="Отзыв ученика 1" loading="lazy"><img class="review-slide" src="assets/reviews/student-2.png" alt="Отзыв ученика 2" loading="lazy"><img class="review-slide" src="assets/reviews/student-3.png" alt="Отзыв ученика 3" loading="lazy"><img class="review-slide" src="assets/reviews/student-4.png" alt="Отзыв ученика 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
         </div>
-
         <div class="reviews-group">
           <h3>Родители</h3>
-          <div class="review-slider" data-review-slider>
-            <div class="review-slides"><img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"><img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"><img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"><img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></div>
-            <div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div>
-          </div>
+          <div class="review-slider" data-review-slider><div class="review-slides"><img class="review-slide is-active" src="assets/reviews/parent-1.png" alt="Отзыв родителя 1" loading="lazy"><img class="review-slide" src="assets/reviews/parent-2.png" alt="Отзыв родителя 2" loading="lazy"><img class="review-slide" src="assets/reviews/parent-3.png" alt="Отзыв родителя 3" loading="lazy"><img class="review-slide" src="assets/reviews/parent-4.png" alt="Отзыв родителя 4" loading="lazy"></div><div class="review-controls"><button class="review-arrow" type="button" data-review-prev aria-label="Предыдущий отзыв">←</button><span class="review-counter" data-review-counter>1 / 4</span><button class="review-arrow" type="button" data-review-next aria-label="Следующий отзыв">→</button></div></div>
         </div>
       </div>
     </section>
@@ -282,21 +296,10 @@
           <span class="section-kicker">Бесплатное пробное</span>
           <h2>Бесплатное пробное занятие</h2>
           <p class="trial-lead">Познакомимся, решим несколько заданий и посмотрим, как ученику удобнее строить подготовку.</p>
-          <ul class="trial-list">
-            <li>Решим несколько заданий и покажу, как объясняю материал.</li>
-            <li>Посмотрим сильные места и пробелы.</li>
-            <li>Покажу, как проходят занятия и самостоятельная работа.</li>
-          </ul>
-          <p class="trial-gift"><strong>Подарок после пробного:</strong> мой учебник «Основы программирования для ЕГЭ: Python 3 с нуля» и конспект-шпаргалка по ЕГЭ-2026.</p>
+          <ul class="trial-list"><li>Решим несколько заданий и покажу, как объясняю материал.</li><li>Посмотрим сильные места и пробелы.</li><li>Покажу, как проходят занятия и самостоятельная работа.</li></ul>
+          <p class="trial-gift"><strong>После пробного — в подарок</strong><span>Мой учебник «Основы программирования для ЕГЭ: Python 3 с нуля» и конспект-шпаргалка по ЕГЭ-2026.</span></p>
         </div>
-
-        <div class="signup-form" id="signup-form">
-          <span class="section-kicker">Запись</span>
-          <h2>Записаться на пробное занятие</h2>
-          <p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p>
-          <iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" width="100%" height="100%" frameborder="0" scrolling="no" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe>
-          <p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" target="_blank" rel="noopener">откройте её отдельно</a>.</p>
-        </div>
+        <div class="signup-form" id="signup-form"><span class="section-kicker">Запись</span><h2>Записаться на пробное занятие</h2><p>Оставьте контактные данные. Я свяжусь с вами и договоримся по времени.</p><iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" width="100%" height="100%" frameborder="0" scrolling="no" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe><p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=205EDC&amp;borderRadius=8&amp;css=%2F%2Fcdn.alfacrm.pro%2Flead-form%2Fform.css" target="_blank" rel="noopener">откройте её отдельно</a>.</p></div>
       </div>
     </section>
 
@@ -307,7 +310,6 @@
     <section class="section achievements-section" id="achievements">
       <div class="container">
         <div class="section-heading achievements-heading"><div><span class="section-kicker">Достижения</span><h2>Дополнительные дипломы и сертификаты</h2></div><p>Победы в профессиональных конкурсах и олимпиадах по информатике, ФГОС и методике преподавания.</p></div>
-
         <div class="achievement-carousel" data-achievement-carousel>
           <div class="achievement-track" data-achievement-track>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/Диплом_RS_338_213172.jpg" data-lightbox-alt="Диплом за I место в конкурсе Искусственный интеллект в образовании"><img src="assets/achievements/Диплом_RS_338_213172.jpg" alt="Диплом за I место в конкурсе Искусственный интеллект в образовании" loading="lazy"><span>«Искусственный интеллект в образовании» · I место</span></button>
@@ -325,10 +327,9 @@
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию"><img src="assets/achievements/makov-dmitriy-gennadyevich12.pdf-page1of2.jpg" alt="Диплом за I место в олимпиаде Требования ФГОС к среднему общему образованию" loading="lazy"><span>«Требования ФГОС к среднему общему образованию» · I место</span></button>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/author.jpg" data-lightbox-alt="Диплом за I место в олимпиаде Основные педагогические понятия"><img src="assets/achievements/author.jpg" alt="Диплом за I место в олимпиаде Основные педагогические понятия" loading="lazy"><span>«Основные педагогические понятия» · I место</span></button>
           </div>
-
           <div class="achievement-controls">
             <button class="achievement-arrow" type="button" data-achievement-prev aria-label="Предыдущие дипломы">←</button>
-            <span class="achievement-counter" data-achievement-counter>1 / 14</span>
+            <span class="achievement-counter" data-achievement-counter>4 / 14</span>
             <button class="achievement-arrow" type="button" data-achievement-next aria-label="Следующие дипломы">→</button>
           </div>
         </div>
@@ -350,10 +351,7 @@
     </section>
 
     <section class="final-section" id="contact">
-      <div class="container final-inner">
-        <div class="final-copy"><span class="section-kicker">Начать</span><h2>Проще всего познакомиться на бесплатном пробном</h2><p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и подходит ли ученику такой формат.</p></div>
-        <div class="final-action"><a class="button button-primary" href="#signup-form">Записаться на пробное</a></div>
-      </div>
+      <div class="container final-inner"><div class="final-copy"><span class="section-kicker">Начать</span><h2>Проще всего познакомиться на бесплатном пробном</h2><p>После одного занятия уже будет понятнее, как я объясняю, как устроена подготовка и подходит ли ученику такой формат.</p></div><div class="final-action"><a class="button button-primary" href="#signup-form">Записаться на пробное</a></div></div>
     </section>
   </main>
 
@@ -387,18 +385,22 @@
     const learningText = document.getElementById('learning-text');
     const learningLightboxButton = document.getElementById('learning-lightbox-button');
 
+    function activateLearningTab(button) {
+      learningTabs.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-selected', 'false'); });
+      button.classList.add('is-active');
+      button.setAttribute('aria-selected', 'true');
+      learningImage.src = button.dataset.learningImage;
+      learningImage.alt = button.dataset.learningTitle;
+      learningTitle.textContent = button.dataset.learningTitle;
+      learningText.textContent = button.dataset.learningText;
+      learningLightboxButton.dataset.lightboxSrc = button.dataset.learningImage;
+      learningLightboxButton.dataset.lightboxAlt = button.dataset.learningTitle;
+    }
+
+    const canHoverLearning = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     learningTabs.forEach((button) => {
-      button.addEventListener('click', () => {
-        learningTabs.forEach((item) => { item.classList.remove('is-active'); item.setAttribute('aria-selected', 'false'); });
-        button.classList.add('is-active');
-        button.setAttribute('aria-selected', 'true');
-        learningImage.src = button.dataset.learningImage;
-        learningImage.alt = button.dataset.learningTitle;
-        learningTitle.textContent = button.dataset.learningTitle;
-        learningText.textContent = button.dataset.learningText;
-        learningLightboxButton.dataset.lightboxSrc = button.dataset.learningImage;
-        learningLightboxButton.dataset.lightboxAlt = button.dataset.learningTitle;
-      });
+      button.addEventListener('click', () => activateLearningTab(button));
+      if (canHoverLearning) button.addEventListener('mouseenter', () => activateLearningTab(button));
     });
 
     document.querySelectorAll('[data-review-slider]').forEach((slider) => {
@@ -432,6 +434,21 @@
       const prev = carousel.querySelector('[data-achievement-prev]');
       const next = carousel.querySelector('[data-achievement-next]');
       const counter = carousel.querySelector('[data-achievement-counter]');
+      let pageIndex = 0;
+
+      function pageSize() {
+        if (window.matchMedia('(max-width: 720px)').matches) return 1;
+        if (window.matchMedia('(max-width: 980px)').matches) return 2;
+        return 4;
+      }
+
+      function pageStarts() {
+        const size = pageSize();
+        if (items.length <= size) return [0];
+        const starts = [];
+        for (let i = 0; i < items.length; i += size) starts.push(Math.min(i, items.length - size));
+        return [...new Set(starts)];
+      }
 
       function itemStep() {
         if (!items.length) return 0;
@@ -439,21 +456,21 @@
         return items[0].getBoundingClientRect().width + gap;
       }
 
-      function currentIndex() {
-        const step = itemStep();
-        if (!step) return 0;
-        return Math.max(0, Math.min(items.length - 1, Math.round(track.scrollLeft / step)));
+      function showPage(index, smooth = true) {
+        const starts = pageStarts();
+        pageIndex = Math.max(0, Math.min(index, starts.length - 1));
+        const start = starts[pageIndex];
+        track.scrollTo({ left: start * itemStep(), behavior: smooth ? 'smooth' : 'auto' });
+        const visibleEnd = Math.min(start + pageSize(), items.length);
+        counter.textContent = `${visibleEnd} / ${items.length}`;
+        prev.disabled = pageIndex === 0;
+        next.disabled = pageIndex === starts.length - 1;
       }
 
-      function updateCounter() {
-        counter.textContent = `${currentIndex() + 1} / ${items.length}`;
-      }
-
-      prev.addEventListener('click', () => track.scrollBy({ left: -itemStep(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: itemStep(), behavior: 'smooth' }));
-      track.addEventListener('scroll', () => window.requestAnimationFrame(updateCounter), { passive: true });
-      window.addEventListener('resize', updateCounter, { passive: true });
-      updateCounter();
+      prev.addEventListener('click', () => showPage(pageIndex - 1));
+      next.addEventListener('click', () => showPage(pageIndex + 1));
+      window.addEventListener('resize', () => showPage(0, false), { passive: true });
+      showPage(0, false);
     });
 
     const lightbox = document.getElementById('lightbox');
