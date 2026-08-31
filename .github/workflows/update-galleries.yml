@@ -1,12 +1,15 @@
-name: Update galleries
+name: Update generated site content
 
 on:
   push:
+    branches: [main]
     paths:
       - "assets/reviews/**"
       - "assets/achievements/**"
-      - "favicon.svg"
+      - "assets/about/about.png"
+      - "favicon.png"
       - "scripts/update_galleries.py"
+      - "scripts/build_og_preview.py"
       - ".github/workflows/update-galleries.yml"
   workflow_dispatch:
 
@@ -21,29 +24,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update generated site content
-        run: |
-          python scripts/update_galleries.py
-          python - <<'PY'
-          from pathlib import Path
+      - name: Install image dependency
+        run: python -m pip install --quiet Pillow
 
-          old = '<link rel="icon" href="assets/hero/hero.png" type="image/png">'
-          new = '<link rel="icon" href="favicon.svg" type="image/svg+xml">'
-          for filename in ("index.html", "privacy.html", "consent.html", "offer.html"):
-              path = Path(filename)
-              text = path.read_text(encoding="utf-8")
-              path.write_text(text.replace(old, new), encoding="utf-8")
-          PY
+      - name: Update galleries and metadata
+        run: python scripts/update_galleries.py
+
+      - name: Build Open Graph preview
+        run: python scripts/build_og_preview.py
 
       - name: Commit generated files
         run: |
-          if git diff --quiet -- index.html styles.css privacy.html consent.html offer.html; then
+          if git diff --quiet -- index.html styles.css privacy.html consent.html offer.html assets/og/og-preview.jpg; then
             echo "Nothing to update"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html styles.css privacy.html consent.html offer.html
+          git add index.html styles.css privacy.html consent.html offer.html assets/og/og-preview.jpg
           git commit -m "Update generated site content"
           git pull --rebase origin main
           git push
