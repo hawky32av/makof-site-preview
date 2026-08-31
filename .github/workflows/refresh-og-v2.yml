@@ -19,7 +19,7 @@ jobs:
 
       - name: Switch OG to a fresh URL
         run: |
-          sed -i 's#og-preview.jpg#og-preview-v2.jpg#g' index.html scripts/update_galleries.py scripts/build_og_preview.mjs .github/workflows/update-galleries.yml
+          sed -i 's#og-preview.jpg#og-preview-v2.jpg#g' index.html scripts/update_galleries.py scripts/build_og_preview.mjs
 
       - name: Install browser renderer
         run: |
@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html scripts/update_galleries.py scripts/build_og_preview.mjs .github/workflows/update-galleries.yml assets/og/og-preview-v2.jpg
+          git add index.html scripts/update_galleries.py scripts/build_og_preview.mjs assets/og/og-preview-v2.jpg
           git commit -m "Refresh OG preview at uncached URL"
           git pull --rebase origin main
           git push
