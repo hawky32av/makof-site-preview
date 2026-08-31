@@ -38,13 +38,13 @@ jobs:
 
       - name: Commit generated files
         run: |
-          if git diff --quiet -- index.html styles.css privacy.html consent.html offer.html assets/og/og-preview.jpg; then
+          if git diff --quiet -- index.html styles.css privacy.html consent.html offer.html assets/og/og-preview-v2.jpg; then
             echo "Nothing to update"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html styles.css privacy.html consent.html offer.html assets/og/og-preview.jpg
+          git add index.html styles.css privacy.html consent.html offer.html assets/og/og-preview-v2.jpg
           git commit -m "Update generated site content"
           git pull --rebase origin main
           git push
