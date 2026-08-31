@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const htmlPath = path.join(here, 'og-preview.html');
-const outputPath = path.join(here, '..', 'assets', 'og', 'og-preview.jpg');
+const outputPath = path.join(here, '..', 'assets', 'og', 'og-preview-v2.jpg');
 
 const browser = await chromium.launch({ headless: true });
 try {

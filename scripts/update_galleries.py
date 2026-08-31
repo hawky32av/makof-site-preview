@@ -48,7 +48,7 @@ SEO_BLOCK = '''  <!-- SITE-SEO:START -->
   <meta property="og:title" content="ЕГЭ по информатике — Дмитрий Маков">
   <meta property="og:description" content="10–11 класс · от базы до 80+ баллов · Python с нуля · бесплатное пробное занятие.">
   <meta property="og:url" content="https://makof.ru/">
-  <meta property="og:image" content="https://makof.ru/assets/og/og-preview.jpg">
+  <meta property="og:image" content="https://makof.ru/assets/og/og-preview-v2.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
@@ -56,7 +56,7 @@ SEO_BLOCK = '''  <!-- SITE-SEO:START -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ЕГЭ по информатике — Дмитрий Маков">
   <meta name="twitter:description" content="10–11 класс · от базы до 80+ баллов · Python с нуля · бесплатное пробное занятие.">
-  <meta name="twitter:image" content="https://makof.ru/assets/og/og-preview.jpg">
+  <meta name="twitter:image" content="https://makof.ru/assets/og/og-preview-v2.jpg">
 
   <script type="application/ld+json">
   {
