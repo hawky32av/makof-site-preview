@@ -1,0 +1,127 @@
+name: Build OG preview
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-og-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pillow
+        run: python -m pip install --quiet pillow
+
+      - name: Build social preview and update metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          from PIL import Image, ImageDraw, ImageFont, ImageOps
+
+          W, H = 1200, 630
+          bg = (250, 247, 243)
+          surface = (245, 238, 230)
+          text = (23, 23, 23)
+          muted = (92, 92, 92)
+          accent = (232, 104, 25)
+
+          canvas = Image.new('RGB', (W, H), bg)
+          draw = ImageDraw.Draw(canvas)
+
+          # Right photo panel: use the existing real photo from the site.
+          photo = Image.open('assets/about/about.png').convert('RGB')
+          panel_w = 455
+          panel = ImageOps.fit(photo, (panel_w, H), method=Image.Resampling.LANCZOS, centering=(0.5, 0.42))
+          canvas.paste(panel, (W - panel_w, 0))
+
+          # Soft separation between copy and photo.
+          draw.rectangle((W-panel_w-18, 0, W-panel_w, H), fill=surface)
+          draw.rectangle((0, H-8, W, H), fill=accent)
+
+          # Logo.
+          try:
+              logo = Image.open('favicon.png').convert('RGBA')
+              logo.thumbnail((72, 72), Image.Resampling.LANCZOS)
+              canvas.paste(logo, (64, 54), logo)
+          except Exception:
+              pass
+
+          regular = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          bold = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          f_name = ImageFont.truetype(bold, 27)
+          f_small = ImageFont.truetype(regular, 18)
+          f_title = ImageFont.truetype(bold, 62)
+          f_sub = ImageFont.truetype(regular, 29)
+          f_bullet = ImageFont.truetype(regular, 23)
+
+          draw.text((154, 58), 'Дмитрий Маков', font=f_name, fill=text)
+          draw.text((154, 94), 'преподаватель информатики', font=f_small, fill=muted)
+
+          draw.text((64, 176), 'Подготовка к ЕГЭ', font=f_title, fill=text)
+          draw.text((64, 248), 'по информатике', font=f_title, fill=text)
+          draw.text((64, 344), '10–11 класс · от базы до 80+ баллов', font=f_sub, fill=accent)
+
+          items = ['Python можно начать с нуля', 'Бесплатное пробное занятие']
+          y = 412
+          for item in items:
+              draw.ellipse((66, y+8, 78, y+20), fill=accent)
+              draw.text((94, y), item, font=f_bullet, fill=text)
+              y += 48
+
+          draw.text((64, 558), 'makof.ru', font=f_small, fill=muted)
+
+          out = Path('assets/og')
+          out.mkdir(parents=True, exist_ok=True)
+          canvas.save(out / 'og-preview.jpg', 'JPEG', quality=92, optimize=True, progressive=True)
+
+          og_title = 'ЕГЭ по информатике — Дмитрий Маков'
+          og_desc = '10–11 класс · от базы до 80+ баллов · Python с нуля · бесплатное пробное занятие.'
+          og_url = 'https://makof.ru/assets/og/og-preview.jpg'
+
+          def update_meta(path: Path):
+              s = path.read_text(encoding='utf-8')
+              s = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{og_title}">', s, count=1)
+              s = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{og_desc}">', s, count=1)
+              s = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{og_url}">', s, count=1)
+              s = re.sub(r'<meta property="og:image:alt" content="[^"]*">', '<meta property="og:image:alt" content="Дмитрий Маков — подготовка к ЕГЭ по информатике">', s, count=1)
+              if 'property="og:image:width"' not in s:
+                  s = s.replace(f'<meta property="og:image" content="{og_url}">', f'<meta property="og:image" content="{og_url}">\n  <meta property="og:image:width" content="1200">\n  <meta property="og:image:height" content="630">\n  <meta property="og:image:type" content="image/jpeg">', 1)
+              s = re.sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{og_title}">', s, count=1)
+              s = re.sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{og_desc}">', s, count=1)
+              s = re.sub(r'<meta name="twitter:image" content="[^"]*">', f'<meta name="twitter:image" content="{og_url}">', s, count=1)
+              path.write_text(s, encoding='utf-8')
+
+          update_meta(Path('index.html'))
+
+          # Keep the automatic gallery/SEO updater from reverting the OG metadata later.
+          script = Path('scripts/update_galleries.py')
+          s = script.read_text(encoding='utf-8')
+          s = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{og_title}">', s, count=1)
+          s = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{og_desc}">', s, count=1)
+          s = re.sub(r'<meta property="og:image" content="[^"]*">', f'<meta property="og:image" content="{og_url}">', s, count=1)
+          s = re.sub(r'<meta property="og:image:alt" content="[^"]*">', '<meta property="og:image:alt" content="Дмитрий Маков — подготовка к ЕГЭ по информатике">', s, count=1)
+          if 'property="og:image:width"' not in s:
+              s = s.replace(f'<meta property="og:image" content="{og_url}">', f'<meta property="og:image" content="{og_url}">\n  <meta property="og:image:width" content="1200">\n  <meta property="og:image:height" content="630">\n  <meta property="og:image:type" content="image/jpeg">', 1)
+          s = re.sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{og_title}">', s, count=1)
+          s = re.sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{og_desc}">', s, count=1)
+          s = re.sub(r'<meta name="twitter:image" content="[^"]*">', f'<meta name="twitter:image" content="{og_url}">', s, count=1)
+          script.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit generated preview
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/build-og-preview.yml
+          git add index.html scripts/update_galleries.py assets/og/og-preview.jpg
+          git commit -m "Add branded Open Graph preview"
+          git pull --rebase origin main
+          git push
