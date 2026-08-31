@@ -64,6 +64,14 @@ SEO_BLOCK = '''  <!-- SITE-SEO:START -->
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://makof.ru/#website",
+        "url": "https://makof.ru/",
+        "name": "Дмитрий Маков",
+        "alternateName": "Подготовка к ЕГЭ по информатике — Дмитрий Маков",
+        "inLanguage": "ru-RU"
+      },
+      {
         "@type": "Person",
         "@id": "https://makof.ru/#person",
         "name": "Дмитрий Маков",
