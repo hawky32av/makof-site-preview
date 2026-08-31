@@ -1,0 +1,41 @@
+name: Update production links
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-links.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Point AlfaCRM form CSS to makof.ru
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          old = 'https%3A%2F%2Fhawky32av.github.io%2Fmakof-site-preview%2Falfa-form.css%3Fv%3D2'
+          new = 'https%3A%2F%2Fmakof.ru%2Falfa-form.css%3Fv%3D3'
+          updated = text.replace(old, new)
+          if updated == text:
+              print('No production-link replacement needed')
+          else:
+              path.write_text(updated, encoding='utf-8')
+          PY
+      - name: Commit update
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Use makof.ru for AlfaCRM form styles"
+          git push
