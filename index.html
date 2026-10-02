@@ -8,7 +8,7 @@
   <!-- SITE-SEO:START -->
   <link rel="canonical" href="https://makof.ru/">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="theme-color" content="#e86819">
+  <meta name="theme-color" content="#343e48">
   <meta name="yandex-verification" content="a87080eaedd76cc9">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -74,7 +74,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=learning2">
+  <link rel="stylesheet" href="styles.css?v=neutral1">
   <style>
     .hero-expertise{max-width:760px;margin-top:28px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));color:#3d3d3d}
     .hero-expertise a{position:relative;display:flex;align-items:flex-start;min-height:78px;padding:17px 18px;font-size:15px;font-weight:500;line-height:1.35;text-decoration:none;transition:background 160ms ease,color 160ms ease}
@@ -164,6 +164,7 @@
       .learning-tab span{padding:0;font-size:10px}
     }
   </style>
+  <link rel="stylesheet" href="neutral.css?v=1">
   <!-- YANDEX-METRIKA:START -->
   <script>
     (function(m,e,t,r,i,k,a){
@@ -391,7 +392,7 @@
           <ul class="trial-list"><li>Решим несколько заданий и покажу, как объясняю материал.</li><li>Посмотрим сильные места и пробелы.</li><li>Покажу, как проходят занятия и самостоятельная работа.</li></ul>
           <div class="trial-gift"><strong>После пробного — в подарок</strong><ul class="trial-gift-list"><li>Мой учебник «Основы программирования для ЕГЭ: Python 3 с нуля»</li><li>Конспект-шпаргалка по ЕГЭ-2026</li></ul></div>
         </div>
-        <div class="signup-form" id="signup-form"><iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=E86819&amp;borderRadius=2&amp;css=https%3A%2F%2Fmakof.ru%2Falfa-form.css%3Fv%3D3" width="100%" height="500" frameborder="0" scrolling="no" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe><p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=E86819&amp;borderRadius=2&amp;css=https%3A%2F%2Fmakof.ru%2Falfa-form.css%3Fv%3D3" target="_blank" rel="noopener">откройте её отдельно</a>.</p></div>
+        <div class="signup-form" id="signup-form"><iframe class="alfacrm-frame" title="Запись на бесплатное пробное занятие" src="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=343E48&amp;borderRadius=2&amp;css=https%3A%2F%2Fmakof.ru%2Falfa-form.css%3Fv%3Dneutral1" width="100%" height="500" frameborder="0" scrolling="auto" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe><p class="alfacrm-fallback">Если форма не открылась, <a href="https://dmprokids.s20.online/common/1/form/draw?id=1&amp;baseColor=343E48&amp;borderRadius=2&amp;css=https%3A%2F%2Fmakof.ru%2Falfa-form.css%3Fv%3Dneutral1" target="_blank" rel="noopener">откройте её отдельно</a>.</p></div>
       </div>
     </section>
 
@@ -401,7 +402,8 @@
 
     <section class="section achievements-section" id="achievements">
       <div class="container">
-        <div class="section-heading achievements-heading"><div><span class="section-kicker">Достижения</span><h2>Дополнительные дипломы и сертификаты</h2></div><p>Победы в профессиональных конкурсах и олимпиадах по информатике, ФГОС и методике преподавания.</p></div>
+        <details class="achievements-disclosure">
+        <summary class="section-heading achievements-heading"><div><span class="section-kicker">Достижения</span><h2>Дополнительные дипломы и сертификаты</h2></div><p>Победы в профессиональных конкурсах и олимпиадах по информатике, ФГОС и методике преподавания.</p></summary>
         <div class="achievement-carousel" data-achievement-carousel>
           <div class="achievement-track" data-achievement-track data-swipe-track>
             <button class="achievement-item" type="button" data-lightbox-src="assets/achievements/Диплом_RS_338_213172.jpg" data-lightbox-alt="Диплом за I место в конкурсе Искусственный интеллект в образовании"><img src="assets/achievements/Диплом_RS_338_213172.jpg" alt="Диплом за I место в конкурсе Искусственный интеллект в образовании" loading="lazy"><span>«Искусственный интеллект в образовании» · I место</span></button>
@@ -423,6 +425,7 @@
           </div>
           <div class="achievement-controls"><span class="achievement-counter" data-achievement-counter>4 / 16</span></div>
         </div>
+        </details>
       </div>
     </section>
 
@@ -449,6 +452,14 @@
 
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Просмотр изображения"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img id="lightbox-image" src="" alt=""></div>
 
+  <dialog class="signup-dialog" id="signup-dialog" aria-labelledby="signup-dialog-title">
+    <div class="signup-dialog-heading">
+      <h2 id="signup-dialog-title">Бесплатное пробное занятие</h2>
+      <button type="button" class="signup-dialog-close" aria-label="Закрыть форму записи" autofocus>×</button>
+    </div>
+    <div id="signup-dialog-content"></div>
+  </dialog>
+  <script src="signup-dialog.js?v=1"></script>
   <script>
     const header = document.querySelector('.site-header');
 
@@ -470,7 +481,7 @@
 
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
       const selector = link.getAttribute('href');
-      if (!selector || selector === '#') return;
+      if (!selector || selector === '#' || (selector === '#signup-form' && typeof document.getElementById('signup-dialog').showModal === 'function')) return;
 
       link.addEventListener('click', (event) => {
         const behavior = link.classList.contains('skip-link') ? 'auto' : 'smooth';
@@ -687,6 +698,7 @@
       }, { passive: true });
       window.addEventListener('resize', syncMode, { passive: true });
       if (desktopCarouselQuery.addEventListener) desktopCarouselQuery.addEventListener('change', syncMode);
+      carousel.closest('details')?.addEventListener('toggle', syncMode);
       syncMode();
     });
 

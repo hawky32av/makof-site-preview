@@ -4,8 +4,8 @@
   --makof-text: #171717;
   --makof-muted: #6d6d6d;
   --makof-line: #cfcfcf;
-  --makof-accent: #e86819;
-  --makof-accent-hover: #ca5612;
+  --makof-accent: #343e48;
+  --makof-accent-hover: #222b33;
 }
 
 html,
@@ -136,7 +136,7 @@ body {
 .alfa-form-wrapper .Input--input-field:focus,
 .alfa-form-wrapper .Input--textarea-field:focus {
   border-color: var(--makof-accent) !important;
-  box-shadow: 0 0 0 2px rgba(232, 104, 25, .10) !important;
+  box-shadow: 0 0 0 2px rgba(52, 62, 72, .10) !important;
 }
 
 .alfa-form-wrapper .alfa-form-button {
@@ -196,3 +196,4 @@ body {
     font-size: 16px !important;
   }
 }
+

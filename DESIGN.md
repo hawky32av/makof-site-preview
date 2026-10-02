@@ -28,7 +28,7 @@ Do not blindly copy stylistic prescriptions from external skills. This project's
 - Background: white or very near-white only.
 - Text: near-black.
 - Muted text: neutral gray.
-- Accent: one restrained orange.
+- Accent: restrained graphite (#343e48), with white and cool light-gray surfaces.
 - Typeface: Golos Text only.
 - No gradients.
 - No glassmorphism.
@@ -74,7 +74,7 @@ The page should answer buyer questions in roughly this order:
 8. Common objections and questions.
 9. Clear final route to the same free trial form.
 
-The top CTA, mid-page CTA and final CTA all lead to the same free trial form.
+The top CTA, mid-page CTA and final CTA open a modal with the same AlfaCRM form. Keep the inline form visible in its own trial section and retain anchor navigation as the no-JavaScript fallback.
 
 ## Proof rules
 
@@ -172,3 +172,4 @@ For every substantial redesign:
 5. Verify proof image paths remain unchanged unless the user explicitly asks otherwise.
 6. Verify no 93-point result appears.
 7. Verify the GitHub Pages deployment succeeds.
+
