@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap");
 
 :root {
-  --makof-text: #171717;
-  --makof-muted: #6d6d6d;
-  --makof-line: #cfcfcf;
-  --makof-accent: #343e48;
-  --makof-accent-hover: #222b33;
+  --makof-text: #202120;
+  --makof-muted: #60625f;
+  --makof-line: #deded8;
+  --makof-accent: #202120;
+  --makof-accent-hover: #353734;
 }
 
 html,
