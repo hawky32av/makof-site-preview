@@ -165,6 +165,7 @@
     }
   </style>
   <link rel="stylesheet" href="neutral.css?v=1">
+  <link rel="stylesheet" href="hallmark-editorial.css?v=1">
   <!-- YANDEX-METRIKA:START -->
   <script>
     (function(m,e,t,r,i,k,a){
@@ -200,8 +201,8 @@
       </a>
 
       <nav class="nav" aria-label="Навигация по странице">
-        <a href="#credentials">Документы</a>
         <a href="#results">Результаты</a>
+        <a href="#credentials">Документы</a>
         <a href="#learning">Обучение</a>
         <a href="#reviews">Отзывы</a>
         <a href="#faq">Вопросы</a>
@@ -215,12 +216,12 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">ЕГЭ по информатике · 10–11 класс</span>
-          <h1>Подготовка к ЕГЭ по информатике <span>от базы до 80+ баллов</span></h1>
-          <p class="hero-lead">Учимся решать задачи самостоятельно: разбираем тему, закрепляем её на практике, возвращаемся к ошибкам и регулярно пишем пробники. Python можно начать с нуля.</p>
+          <span class="eyebrow">Для учеников 10–11 классов</span>
+          <h1>ЕГЭ по информатике. <span>Цель — 80+</span></h1>
+          <p class="hero-lead">Готовлю школьников онлайн: Python с нуля, самостоятельная практика и ежемесячные пробники.</p>
 
           <div class="hero-expertise" aria-label="Квалификация преподавателя">
-            <a href="#credentials">ИТМО · высшее педагогическое образование</a>
+            <a href="#credentials">Педагогическое образование ИТМО</a>
             <a href="#credentials">72 часа подготовки экспертов предметной комиссии</a>
             <a href="#book">Автор учебника по Python для ЕГЭ</a>
           </div>
@@ -241,6 +242,32 @@
         <div class="proof-item"><strong>81 балл</strong><span>средний результат моих учеников в 2026 году</span></div>
         <div class="proof-item"><strong>100 баллов</strong><span>лучший подтверждённый результат</span></div>
         <div class="proof-item"><strong>с 2019 года</strong><span>готовлю школьников к экзаменам</span></div>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">Результаты</span><h2>Баллы учеников, которые можно проверить</h2></div>
+          <p>Выберите результат — ниже откроется скрин подтверждения. Для нескольких учеников рядом указал, сколько длилась подготовка.</p>
+        </div>
+
+        <div class="score-intro"><span>Выберите балл</span><p>Скрин откроется под списком.</p></div>
+        <div class="score-row" aria-label="Подтверждённые результаты учеников">
+          <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="90" data-image="assets/results/result-90.png" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="78" data-image="assets/results/result-78.png" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
+          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
+        </div>
+
+        <div class="score-proof" id="score-proof" hidden aria-live="polite">
+          <div class="proof-copy"><span class="proof-eyebrow">Подтверждение</span><div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div><p id="proof-note">Подготовка с сентября до экзамена.</p></div>
+          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
+        </div>
+
+        <div class="goal-note"><strong>Как ставим цель</strong><p>Сначала смотрим стартовый уровень и балл, который нужен для поступления. Подготовка на уверенные 75–80 и подготовка на 90+ требуют разного объёма работы — это учитываем с самого начала.</p></div>
       </div>
     </section>
 
@@ -292,32 +319,6 @@
             </button>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section results-section" id="results">
-      <div class="container">
-        <div class="section-heading">
-          <div><span class="section-kicker">Результаты</span><h2>Баллы учеников, которые можно проверить</h2></div>
-          <p>Выберите результат — ниже откроется скрин подтверждения. Для нескольких учеников рядом указал, сколько длилась подготовка.</p>
-        </div>
-
-        <div class="score-intro"><span>Выберите балл</span><p>Скрин откроется под списком.</p></div>
-        <div class="score-row" aria-label="Подтверждённые результаты учеников">
-          <button class="score score-primary" type="button" data-score="100" data-image="assets/results/result-100.png" data-note="Подготовка с сентября до экзамена." aria-controls="score-proof" aria-expanded="false"><strong>100</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="90" data-image="assets/results/result-90.png" data-note="Подготовка с сентября." aria-controls="score-proof" aria-expanded="false"><strong>90</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="88" data-image="assets/results/result-88.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>88</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="78" data-image="assets/results/result-78.png" data-note="Результат после двух месяцев подготовки." aria-controls="score-proof" aria-expanded="false"><strong>78</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="75" data-image="assets/results/result-75.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>75</strong><span>баллов</span></button>
-          <button class="score" type="button" data-score="72" data-image="assets/results/result-72.png" data-note="Подтверждённый результат ученика." aria-controls="score-proof" aria-expanded="false"><strong>72</strong><span>балла</span></button>
-        </div>
-
-        <div class="score-proof" id="score-proof" hidden aria-live="polite">
-          <div class="proof-copy"><span class="proof-eyebrow">Подтверждение</span><div class="proof-score-line"><strong id="proof-score">100</strong><span>баллов по ЕГЭ</span></div><p id="proof-note">Подготовка с сентября до экзамена.</p></div>
-          <div><img class="proof-image" id="proof-image" src="assets/results/result-100.png" alt="Подтверждение результата 100 баллов"></div>
-        </div>
-
-        <div class="goal-note"><strong>Как ставим цель</strong><p>Сначала смотрим стартовый уровень и балл, который нужен для поступления. Подготовка на уверенные 75–80 и подготовка на 90+ требуют разного объёма работы — это учитываем с самого начала.</p></div>
       </div>
     </section>
 
